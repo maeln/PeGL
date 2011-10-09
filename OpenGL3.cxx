@@ -89,7 +89,6 @@ int main(int argc, char **argv)
 	GLuint light_dirLoc = glGetUniformLocation(program, "light_dir");
 	GLuint vertLoopLoc = glGetUniformLocation(program, "vertLoop");
 	GLuint fragLoopLoc = glGetUniformLocation(program, "fragLoop");
-	GLuint modelviewLoc = glGetUniformLocation(program, "modelview");
 	GLuint addr(0);
 	GLuint MatLoc = glGetUniformBlockIndex(program, "GlobalMatrices");
 	glUniformBlockBinding(program, MatLoc, addr);
@@ -250,7 +249,7 @@ int main(int argc, char **argv)
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-		vec4 light = { sin(tclock.GetElapsedTime()), cos(tclock.GetElapsedTime()), 1, 1 };
+		vec4 light = { sin(tclock.GetElapsedTime()), cos(tclock.GetElapsedTime()), 3, 2 };
 		
 		float scaleIT = (1/M_PI)*atan(tan((tclock.GetElapsedTime()*10-M_PI)/2))*3;
 		
@@ -273,15 +272,9 @@ int main(int argc, char **argv)
 		matrix.init(&world);
 		matrix.lookAt(&world, camera, lookPt, vertical);
 		matrix.rotate(&world, -90.0f, 1.0f, 0.0f, 0.0f);
-		matrix.rotate(&world, actt*100, 0.0f, 0.0f, 1.0f);
-		//matrix.rotate(&world, event.MouseMove.X, 0.0f, 0.0f, 1.0f);
-		//matrix.rotate(&world, event.MouseMove.Y, 0.0f, 1.0f, 0.0f);
-		
-		matrix.init(&modelview);
-		//matrix.translate(&modelview, 0.f, 0.f, -1.f);
-		//matrix.rotate(&modelview, -90, 1.f, 0.f, 0.f);
-		//matrix.rotate(&modelview, tclock.GetElapsedTime()*100, 0.0f, 0.0f, 1.0f);
-		matrix.scale(&modelview, pdef-pdef/2.f, pdef-pdef/2.f, pdef-pdef/2.f);
+		//matrix.rotate(&world, actt*100, 0.0f, 0.0f, 1.0f);
+		matrix.rotate(&world, event.MouseMove.X, 0.0f, 0.0f, 1.0f);
+		matrix.rotate(&world, event.MouseMove.Y, 0.0f, 1.0f, 0.0f);
 		
 		glBindBuffer(GL_UNIFORM_BUFFER, GlobalMatricesUBO);
 		glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(mat4), world.val);
@@ -291,8 +284,6 @@ int main(int argc, char **argv)
 		glUseProgram(axesProg);
 		
 		glBindVertexArray(vaoAxes);
-		//glUniformMatrix4fv(axesPLoc, 1, GL_TRUE, projection.val);
-		//glUniformMatrix4fv(axesWLoc, 1, GL_TRUE, world.val);
 		glDrawArrays(GL_LINES, 0, 6);
 		glBindVertexArray(0);
 		
@@ -302,18 +293,12 @@ int main(int argc, char **argv)
 		glUniform4f(light_dirLoc, light.x, light.y, light.z, light.w);
 		glUniform1f(vertLoopLoc, 5.f);
 		glUniform1f(fragLoopLoc, 5.f);
-		//glUniformMatrix4fv(perspectiveLoc, 1, GL_TRUE, projection.val);
-		glUniformMatrix4fv(modelviewLoc, 1, GL_TRUE, modelview.val);
-		//glUniformMatrix4fv(worldLoc, 1, GL_TRUE, world.val);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		
 		glBindVertexArray(vao2);
 		glUniform4f(light_dirLoc, light.x, light.y, light.z, light.w);
 		glUniform1f(vertLoopLoc, 5.f);
 		glUniform1f(fragLoopLoc, 5.f);
-		//glUniformMatrix4fv(perspectiveLoc, 1, GL_TRUE, projection.val);
-		glUniformMatrix4fv(modelviewLoc, 1, GL_TRUE, modelview.val);
-		//glUniformMatrix4fv(worldLoc, 1, GL_TRUE, world.val);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		
 		

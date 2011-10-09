@@ -203,3 +203,14 @@ void Matrix::lookAt(mat4 *matrix, vec3 camera, vec3 lookPt, vec3 vertical)
 	Matrix::translate(matrix, -camera.x, -camera.y, -camera.z);
 	
 }
+
+vec3 Matrix::makeNormal(vec4 vert1, vec4 vert2, vec4 vert3)
+{
+	vec3 normale;
+	normale.x = (vert2.y-vert1.y)*(vert3.z-vert1.z) - (vert2.z-vert1.z)*(vert3.y-vert1.y);
+	normale.y = (vert2.z-vert1.z)*(vert3.x-vert1.x) - (vert2.x-vert1.x)*(vert3.z-vert1.z);
+	normale.z = (vert2.x-vert1.x)*(vert3.y-vert1.y) - (vert2.y-vert1.y)*(vert3.x-vert1.x);
+	Matrix::normalizeVector(&normale);
+	
+	return normale;
+}

@@ -34,6 +34,7 @@ class Matrix
 	void normalizeVector(vec3 *vecteur);
 	vec3 cross(vec3 vector1, vec3 vector2);
 	void lookAt(mat4 *matrix, vec3 camera, vec3 lookPt, vec3 vertical);
+	vec3 makeNormal(vec4 vert1, vec4 vert2, vec4 vert3);
 	
 	private:
 };

@@ -1,6 +1,6 @@
 CC = g++
 
-CFLAGS = -Wall
+CFLAGS = -Wall -O2
 DEBUGFLAG = -g -Wall
 
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lGL -lGLU -lGLEW
@@ -8,11 +8,11 @@ LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lGL -lGLU -lGLEW
 TARGET = OpenGL3
 TARGETDBG = dbgOpenGL3
 
-#SRC = 	dem.cxx
 SRC = OpenGL3.cxx \
 		Shader.cxx \
 		Matrix.cxx \
-		VBHandler.cxx
+		VBHandler.cxx \
+		OBJLoader.cxx
 
 OBJ = $(SRC:.cxx=.o)
 
