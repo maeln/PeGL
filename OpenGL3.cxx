@@ -182,6 +182,10 @@ int main(int argc, char **argv)
 	//Main Loop.
 	bool aKey(false);
 	bool zKey(false);
+	float zoom_accel(0);
+	float zoom(0);
+	float mouse_x(0);
+	float mouse_y(0);
 	
 	while(window.IsOpened())
 	{
@@ -222,6 +226,21 @@ int main(int argc, char **argv)
 			{
 				glViewport(0, 0, event.Size.Width, event.Size.Height);
 			}
+			
+			if(event.Type == sf::Event::MouseWheelMoved)
+			{
+				zoom_accel += (float)event.MouseWheel.Delta/4.f;
+			}
+			
+			if(event.Type == sf::Event::MouseMoved)
+			{
+				mouse_x = event.MouseMove.X;
+			}
+			
+			if(event.Type == sf::Event::MouseMoved)
+			{
+				mouse_y = event.MouseMove.Y;
+			}
 		}
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -236,6 +255,14 @@ int main(int argc, char **argv)
 		if(scaleIT > 0 && !aKey) {
 			pdef = pdef - 0.02;
 		}
+		if(zoom > zoom_accel)
+		{
+			zoom -= 0.02;
+		}
+		if(zoom < zoom_accel)
+		{
+			zoom += 0.02;
+		}
 		
 		if(zKey)
 		{
@@ -248,11 +275,11 @@ int main(int argc, char **argv)
 		
 		matrix.init(&world);
 		matrix.lookAt(&world, camera, lookPt, vertical);
-		matrix.translate(&world, -0.5, -0.5, -0.5);
+		matrix.translate(&world, zoom, zoom, zoom);
 		matrix.rotate(&world, -90.0f, 1.0f, 0.0f, 0.0f);
 		//matrix.rotate(&world, actt*100, 0.0f, 0.0f, 1.0f);
-		matrix.rotate(&world, event.MouseMove.X, 0.0f, 0.0f, 1.0f);
-		matrix.rotate(&world, event.MouseMove.Y, 0.0f, 1.0f, 0.0f);
+		matrix.rotate(&world, mouse_x, 1.0f, 0.0f, 1.0f);
+		matrix.rotate(&world, mouse_y, 0.0f, 1.0f, 0.0f);
 		
 		glBindBuffer(GL_UNIFORM_BUFFER, GlobalMatricesUBO);
 		glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(mat4), world.val);
