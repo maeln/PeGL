@@ -19,6 +19,7 @@
 
 
 #include <iostream>
+#include <vector>
 #include <math.h>
 #include "Matrix.hxx"
 
@@ -204,7 +205,7 @@ void Matrix::lookAt(mat4 *matrix, vec3 camera, vec3 lookPt, vec3 vertical)
 	
 }
 
-vec3 Matrix::makeNormal(vec4 vert1, vec4 vert2, vec4 vert3)
+vec3 Matrix::calcNormal(vec4 vert1, vec4 vert2, vec4 vert3)
 {
 	vec3 normale;
 	normale.x = (vert2.y-vert1.y)*(vert3.z-vert1.z) - (vert2.z-vert1.z)*(vert3.y-vert1.y);
@@ -213,4 +214,63 @@ vec3 Matrix::makeNormal(vec4 vert1, vec4 vert2, vec4 vert3)
 	Matrix::normalizeVector(&normale);
 	
 	return normale;
+}
+
+void Matrix::makeNormal(float *obj, int size, int dimension, vec3 *normArray)
+{
+	int i(0);
+	int n(0);
+	int pos(0);
+	float arr[12];
+	vec4 vert1;
+	vec4 vert2;
+	vec4 vert3;
+	while(n<size)
+	{
+		for(i=0; i<11; i++)
+		{
+			arr[i] = obj[n+i];
+		}
+		vert1.x = arr[0];
+		vert1.y = arr[1];
+		vert1.z = arr[2];
+		vert1.w = arr[3];
+		
+		vert2.x = arr[4];
+		vert2.y = arr[5];
+		vert2.z = arr[6];
+		vert2.w = arr[7];
+		
+		vert3.x = arr[8];
+		vert3.y = arr[9];
+		vert3.z = arr[10];
+		vert3.w = arr[11];
+		
+		normArray[pos] = Matrix::calcNormal(vert1, vert2, vert3);
+		normArray[pos+1] = Matrix::calcNormal(vert1, vert2, vert3);
+		normArray[pos+2] = Matrix::calcNormal(vert1, vert2, vert3);
+		
+		pos += 3;
+		n += 12;
+	}
+}
+
+vec3 Matrix::minus(vec3 in1, vec3 in2)
+{
+	vec3 res;
+	res.x = in1.x - in2.x;
+	res.y = in1.y - in2.y;
+	res.z = in1.z - in2.z;
+	
+	return res;
+}
+
+void Matrix::arrayVec3toArrayFloat(vector<vec3> arrayVec, float* arrayFloat)
+{
+	for(unsigned int i = 0; i < arrayVec.size(); i++)
+	{
+		arrayFloat[i*3] = arrayVec[i].x;
+		arrayFloat[i*3+1] = arrayVec[i].y;
+		arrayFloat[i*3+2] = arrayVec[i].z;
+	}
 }

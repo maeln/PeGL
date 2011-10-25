@@ -28,6 +28,7 @@
 #include "Shader.hxx"
 #include "Matrix.hxx"
 #include "VBHandler.hxx"
+#include "OBJLoader.hxx"
 
 using namespace std;
 
@@ -104,64 +105,6 @@ int main(int argc, char **argv)
 	glBindBufferRange(GL_UNIFORM_BUFFER, addr, GlobalMatricesUBO, 0, sizeof(mat4) * 2);
 	
 	//Vertex.
-	float cube[] = {
-		 0.25f,  0.25f, 0.25f, 1.0f,
-		 0.25f, -0.25f, 0.25f, 1.0f,
-		-0.25f,  0.25f, 0.25f, 1.0f,
-
-		 0.25f, -0.25f, 0.25f, 1.0f,
-		-0.25f, -0.25f, 0.25f, 1.0f,
-		-0.25f,  0.25f, 0.25f, 1.0f,
-
-		 0.25f,  0.25f, -0.25f, 1.0f,
-		-0.25f,  0.25f, -0.25f, 1.0f,
-		 0.25f, -0.25f, -0.25f, 1.0f,
-
-		 0.25f, -0.25f, -0.25f, 1.0f,
-		-0.25f,  0.25f, -0.25f, 1.0f,
-		-0.25f, -0.25f, -0.25f, 1.0f,
-
-		-0.25f,  0.25f,  0.25f, 1.0f,
-		-0.25f, -0.25f,  0.25f, 1.0f,
-		-0.25f, -0.25f, -0.25f, 1.0f,
-
-		-0.25f,  0.25f,  0.25f, 1.0f,
-		-0.25f, -0.25f, -0.25f, 1.0f,
-		-0.25f,  0.25f, -0.25f, 1.0f,
-
-		 0.25f,  0.25f,  0.25f, 1.0f,
-		 0.25f, -0.25f, -0.25f, 1.0f,
-		 0.25f, -0.25f,  0.25f, 1.0f,
-
-		 0.25f,  0.25f,  0.25f, 1.0f,
-		 0.25f,  0.25f, -0.25f, 1.0f,
-		 0.25f, -0.25f, -0.25f, 1.0f,
-
-		 0.25f,  0.25f, -0.25f, 1.0f,
-		 0.25f,  0.25f,  0.25f, 1.0f,
-		-0.25f,  0.25f,  0.25f, 1.0f,
-
-		 0.25f,  0.25f, -0.25f, 1.0f,
-		-0.25f,  0.25f,  0.25f, 1.0f,
-		-0.25f,  0.25f, -0.25f, 1.0f,
-
-		 0.25f, -0.25f, -0.25f, 1.0f,
-		-0.25f, -0.25f,  0.25f, 1.0f,
-		 0.25f, -0.25f,  0.25f, 1.0f,
-
-		 0.25f, -0.25f, -0.25f, 1.0f,
-		-0.25f, -0.25f, -0.25f, 1.0f,
-		-0.25f, -0.25f,  0.25f, 1.0f,
-		/* Plane */
-		-0.50f,	-0.50,	-0.30,	1.0,
-		-0.50f,	 0.50,	-0.30,	1.0,
-		 0.50f,	 0.50,	-0.30,	1.0,
-		
-		 0.50f,	-0.50f,	-0.30f,	1.0f,
-		-0.50f,	-0.50f,	-0.30f,	1.0f,
-		 0.50f,	 0.50f,	-0.30f,	1.0f
-	};
-	
 	float axes[] = {
 		0.0,	0.0,	0.0,	1.0,
 		1.0,	0.0,	0.0,	1.0,
@@ -182,17 +125,51 @@ int main(int argc, char **argv)
 		0.0,	0.0,	1.0,	1.0
 	};
 	
-	//VB
+	//Load suzanne.
+	Obj obj;
+	vector<vec3> s_vertices;
+	vector<vec3> s_normals;
+	vector<GLushort> s_indices;
+	obj.load("suzanne.obj", s_vertices, s_normals, s_indices);
+	float sf_vertices[s_vertices.size()*3];
+	float sf_normals[s_vertices.size()*3];
+	matrix.arrayVec3toArrayFloat(s_vertices, sf_vertices);
+	matrix.arrayVec3toArrayFloat(s_normals, sf_normals);
 	
+	
+	GLuint s_vertices_vbo;
+	glGenBuffers(1, &s_vertices_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, s_vertices_vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(sf_vertices), sf_vertices, GL_STREAM_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
+	GLuint s_normals_vbo;
+	glGenBuffers(1, &s_normals_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, s_normals_vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(sf_normals), sf_normals, GL_STREAM_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
+	GLuint s_indices_vbo;
+	glGenBuffers(1, &s_indices_vbo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_indices_vbo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (sizeof(s_indices[0])*s_indices.size()), s_indices.data(), GL_STREAM_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	
+	GLuint i_vao;
+	glGenVertexArrays(1, &i_vao);
+	glBindVertexArray(i_vao);
+	glBindBuffer(GL_ARRAY_BUFFER, s_vertices_vbo);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_indices_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+	
+	//VB
 	VBHandler vbHandler;
-	GLuint Vbo = vbHandler.makeVBO(cube, sizeof(cube), GL_STREAM_DRAW);
-	GLuint vboAxes = vbHandler.makeVBO(axes, sizeof(cube), GL_STREAM_DRAW);
+	GLuint vboAxes = vbHandler.makeVBO(axes, sizeof(axes), GL_STREAM_DRAW);
 	
 	int nbDimension[] = { 4, 4, 4 };
-	void* Offset0[] = { 0 };
-	GLuint vao1 = vbHandler.makeVAO(Vbo, 1, nbDimension, Offset0);
-	void* Offset1[] = { (void*)(sizeof(float)*4*36) };
-	GLuint vao2 = vbHandler.makeVAO(Vbo, 1, nbDimension, Offset1);
 	void* Offset2[] = { 0, (void*)(sizeof(float)*4*6) };
 	GLuint vaoAxes = vbHandler.makeVAO(vboAxes, 2, nbDimension, Offset2);
 	
@@ -271,6 +248,7 @@ int main(int argc, char **argv)
 		
 		matrix.init(&world);
 		matrix.lookAt(&world, camera, lookPt, vertical);
+		matrix.translate(&world, -0.5, -0.5, -0.5);
 		matrix.rotate(&world, -90.0f, 1.0f, 0.0f, 0.0f);
 		//matrix.rotate(&world, actt*100, 0.0f, 0.0f, 1.0f);
 		matrix.rotate(&world, event.MouseMove.X, 0.0f, 0.0f, 1.0f);
@@ -289,20 +267,13 @@ int main(int argc, char **argv)
 		
 		glUseProgram(program);
 		
-		glBindVertexArray(vao1);
+		glBindVertexArray(i_vao);
 		glUniform4f(light_dirLoc, light.x, light.y, light.z, light.w);
 		glUniform1f(vertLoopLoc, 5.f);
 		glUniform1f(fragLoopLoc, 5.f);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		
-		glBindVertexArray(vao2);
-		glUniform4f(light_dirLoc, light.x, light.y, light.z, light.w);
-		glUniform1f(vertLoopLoc, 5.f);
-		glUniform1f(fragLoopLoc, 5.f);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-		
-		
+		glDrawElements(GL_TRIANGLES, (sizeof(s_indices[0])*s_indices.size()), GL_UNSIGNED_SHORT, 0);
 		glBindVertexArray(0);
+		
 		glUseProgram(0);
 		
 		window.Display();

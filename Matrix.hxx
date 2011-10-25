@@ -1,5 +1,6 @@
 #ifndef MATRIX_HXX_INCLUDED
 #define MATRIX_HXX_INCLUDED
+#include <vector>
 
 typedef struct 
 {
@@ -34,7 +35,10 @@ class Matrix
 	void normalizeVector(vec3 *vecteur);
 	vec3 cross(vec3 vector1, vec3 vector2);
 	void lookAt(mat4 *matrix, vec3 camera, vec3 lookPt, vec3 vertical);
-	vec3 makeNormal(vec4 vert1, vec4 vert2, vec4 vert3);
+	vec3 calcNormal(vec4 vert1, vec4 vert2, vec4 vert3);
+	void makeNormal(float *obj, int size, int dimension, vec3 *normArray);
+	vec3 minus(vec3, vec3);
+	void arrayVec3toArrayFloat(std::vector<vec3>, float*);
 	
 	private:
 };
