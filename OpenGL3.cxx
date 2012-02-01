@@ -55,9 +55,9 @@ int main(int argc, char **argv)
 
 	cout << "Info: Glew " << glewGetString(GLEW_VERSION) << " en cours d'utilisation." << endl;
 
-	if (!glewIsSupported("GL_VERSION_4_0")) // On vérifie que OpenGL 3.3 est bien disponible sinon on ferme le programme.
+	if (!glewIsSupported("GL_VERSION_3_3")) // On vérifie que OpenGL 3.3 est bien disponible sinon on ferme le programme.
 	{
-		cerr << "Erreur: OpenGL 4.0 n'est pas disponible sur votre système.";
+		cerr << "Erreur: OpenGL 3.3 n'est pas disponible sur votre système.";
 		exit(EXIT_FAILURE);
 	}
 

@@ -1,4 +1,4 @@
-#version 400
+#version 330
 
 in vec4 WCVertex;
 in vec3 WCNormal;
