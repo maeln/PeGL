@@ -45,7 +45,7 @@ char* Shader::LoadShader(string filename)
 	
 	if(error == false)
 	{
-		cout << "Info: Shader en cours de lecture." << endl;
+		cout << "Info: Shader " << filename << " en cours de lecture." << endl;
 	}
 	
 	mfile.seekg(0, ios::end);
@@ -65,11 +65,6 @@ char* Shader::LoadShader(string filename)
 		i++;
 	}
 	source[size] = '\0';
-	
-	if(error == false)
-	{
-		cout << "Info: Fin de la lecture." << endl;
-	}
 	
 	mfile.close();
 	

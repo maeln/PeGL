@@ -1,14 +1,24 @@
 CC = g++
 
-CFLAGS = -Wall -O2
+CFLAGS = -Wall -g
+RELEASEFLAG = -Wall -O3 -s
 DEBUGFLAG = -g -Wall
 
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lGL -lGLU -lGLEW
 
 TARGET = OpenGL3
 TARGETDBG = dbgOpenGL3
+TARGETR = TeenSy
+TARGETP = Particle
 
 SRC = OpenGL3.cxx \
+		Shader.cxx \
+		Matrix.cxx \
+		VBHandler.cxx \
+		OBJLoader.cxx \
+		Particle.cxx
+		
+SRCP = Particle.cxx \
 		Shader.cxx \
 		Matrix.cxx \
 		VBHandler.cxx \
@@ -27,6 +37,12 @@ build:
 
 debug:
 	$(CC) $(DEBUGFLAG) $(SRC) $(LDFLAGS) -o $(TARGETDBG)
+	
+particle:
+	$(CC) $(DEBUGFLAG) $(SRCP) $(LDFLAGS) -o $(TARGETP)
+	
+release:
+	$(CC) $(RELEASEFLAG) $(SRC) $(LDFLAGS) -o $(TARGETR)
 
 clean:
 	rm *.o

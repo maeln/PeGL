@@ -1,4 +1,4 @@
-#version 330
+#version 400
 
 layout(row_major) uniform;
 layout (location = 0) in vec4 position;

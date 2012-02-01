@@ -110,7 +110,7 @@ void Matrix::Perspective(mat4 *matrix, float angle, float ratio, float near, flo
 	}
 	
 	angle = angle * (M_PI*2.f / 360.f);
-	f = 1.f / (tanf(angle/2.f));
+	f = 1.f / (tan(angle/2.f));
 	
 	project.val[0] = f / ratio;
 	project.val[5] = f;
@@ -274,3 +274,20 @@ void Matrix::arrayVec3toArrayFloat(vector<vec3> arrayVec, float* arrayFloat)
 		arrayFloat[i*3+2] = arrayVec[i].z;
 	}
 }
+
+mat3 Matrix::normalTransposition(mat4 modelview)
+{
+	mat3 result;
+	result.val[0] = modelview.val[0];
+	result.val[3] = modelview.val[1];
+	result.val[6] = modelview.val[2];
+	result.val[1] = modelview.val[4];
+	result.val[4] = modelview.val[5];
+	result.val[7] = modelview.val[6];
+	result.val[2] = modelview.val[8];
+	result.val[5] = modelview.val[9];
+	result.val[8] = modelview.val[10];
+	
+	return result;
+}
+		

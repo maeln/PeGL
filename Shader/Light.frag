@@ -1,17 +1,15 @@
-#version 330
+#version 400
 
-in vec4 pos_calc;
-in vec4 light_calc;
+in vec2 pos_calc;
+in float light_calc;
 
-out vec4 outputColor;
+out vec3 outputColor;
 
 uniform vec4 light_dir;
 
 void main()
 {
-	float comp = dot(light_calc, pos_calc);
-	comp = clamp(comp, 0, 1);
-	vec4 light_comp = vec4(comp, comp, comp, 1.0);
-	
-    outputColor = light_comp;
+	vec3 color = vec3(0.2, 0.3, 0.8);
+	color *= light_calc;
+    outputColor = color;
 }

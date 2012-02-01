@@ -9,6 +9,11 @@ typedef struct
 
 typedef struct
 {
+	float val[9];
+} mat3;
+
+typedef struct
+{
 	float x;
 	float y;
 	float z;
@@ -39,6 +44,7 @@ class Matrix
 	void makeNormal(float *obj, int size, int dimension, vec3 *normArray);
 	vec3 minus(vec3, vec3);
 	void arrayVec3toArrayFloat(std::vector<vec3>, float*);
+	mat3 normalTransposition(mat4);
 	
 	private:
 };

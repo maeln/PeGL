@@ -13,12 +13,8 @@ class Obj
 {
 	public:
 	Obj();
-	//void load(std::string filename);
 	void load(std::string filename, std::vector<vec3> &vertices, std::vector<vec3> &normals, std::vector<GLushort> &elements);
-	std::string dealWithSlash(std::string);
-	std::vector<std::string> splitSpace(std::string);
-	float* vectorToFloatArray(std::vector<float>& array);
-	
+
 	private:
 };
 
