@@ -37,6 +37,7 @@
 #include "Shader.hxx"
 #include "VBHandler.hxx"
 #include "Particle.hxx"
+#include "OBJLoader.hxx"
 
 using namespace std;
 
@@ -44,7 +45,7 @@ int main(int argc, char **argv)
 {
 	// Créer la fenêtre.
 	sf::Window window(sf::VideoMode(800, 600), "Générateur de particule.");
-	window.UseVerticalSync(true); // VSync activé.
+	window.EnableVerticalSync(true); // VSync activé.
 
 	// On initialise Glew :
 	GLenum err = glewInit();
@@ -85,21 +86,29 @@ int main(int argc, char **argv)
 
 	// On initialise les particules :
 	ParticleGenerator GenPart(glm::vec3(0, 0, 0), 1000, 100, 100, glm::vec3(0, 1, 0), (M_PI/4.0), glm::vec3(255,255,255));
+	
+	// On charge un model OBJ.
+	Obj objloader;
+	vector<glm::vec3> vertices;	float vertices_f;
+	vector<glm::vec3> normals;	float normals_f;
+	vector<GLushort> elements;
+	objloader.load("suzanne.obj", vertices, normals, elements);
+	
 
 	// Temps & évenements :
 	sf::Clock tclock;
 	float mouse_x(0);
 	float mouse_y(0);
 
-	while(window.IsOpened())
+	while(window.IsOpen())
 	{
 		sf::Event event;
-		while(window.GetEvent(event))
+		while(window.PollEvent(event))
 		{
 			if(event.Type == sf::Event::Closed)
 				window.Close();
 
-			if((event.Type == sf::Event::KeyPressed) && (event.Key.Code == sf::Key::Escape))
+			if((event.Type == sf::Event::KeyPressed) && (event.Key.Code == sf::Keyboard::Escape))
 				window.Close();
 
 			if(event.Type == sf::Event::Resized)
@@ -118,7 +127,7 @@ int main(int argc, char **argv)
 		
 		//On met à jour les particules.
 		GenPart.update();
-		glm::vec3 rot_vec(cos(tclock.GetElapsedTime()*10.f), sin(tclock.GetElapsedTime()*10.f), 0);
+		glm::vec3 rot_vec(cos(tclock.GetElapsedTime().AsMilliseconds()), sin(tclock.GetElapsedTime().AsMilliseconds()), 0);
 		GenPart.U_InitVector(rot_vec);
 		GenPart.updateVBO();
 		//~ cout << GenPart.SendOffset() << endl;
