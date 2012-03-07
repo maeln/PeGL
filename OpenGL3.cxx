@@ -72,7 +72,7 @@ int main(int argc, char **argv)
 	glEnable(GL_DEPTH_CLAMP);
 
 	// Création d'un objet Matrix et initialisation des différentes matrices nécessaire au programme.
-	glm::mat4 projection = glm::perspective(80.f, 4.f/3.f, 1.f, 10.f);
+	glm::mat4 projection = glm::perspective(90.f, 800.f/600.f, 1.f, 10.f);
 	glm::mat4 camera = glm::lookAt(glm::vec3(1.f, 1.f, 1.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 1.f, 0.f));
 	glm::mat4 transformation;
 
@@ -83,18 +83,72 @@ int main(int argc, char **argv)
 	GLuint Program(shader.MakeProgram(VShader, FShader));
 	shader.Remove_s(VShader);
 	shader.Remove_s(FShader);
+	
+	// Création du shader pour Suzanne.
+	GLuint Suzanne_vertex_shader(shader.CompileShader(GL_VERTEX_SHADER, "Shader/Light.vert"));
+	GLuint Suzanne_frag_shader(shader.CompileShader(GL_FRAGMENT_SHADER, "Shader/Light.frag"));
+	GLuint Suzanne_prog(shader.MakeProgram(Suzanne_vertex_shader, Suzanne_frag_shader));
+	shader.Remove_s(Suzanne_vertex_shader);
+	shader.Remove_s(Suzanne_vertex_shader);
+	
+	// Gestion de Uniform pour les shader Suzannes.
+	GLuint SuWorld(glGetUniformLocation(Suzanne_prog, "world"));
+	GLuint SuPersp(glGetUniformLocation(Suzanne_prog, "perspective"));
+	GLuint SuNormM(glGetUniformLocation(Suzanne_prog, "normalMatrix"));
+	GLuint SuLight(glGetUniformLocation(Suzanne_prog, "light_dir"));
 
 	// On initialise les particules :
 	ParticleGenerator GenPart(glm::vec3(0, 0, 0), 1000, 100, 100, glm::vec3(0, 1, 0), (M_PI/4.0), glm::vec3(255,255,255));
 	
 	// On charge un model OBJ.
 	Obj objloader;
-	vector<glm::vec3> vertices;	float vertices_f;
-	vector<glm::vec3> normals;	float normals_f;
+	
+	// Stockage des vertices et normales.
+	vector<glm::vec3> vertices;	
+	vector<glm::vec3> normals;	
 	vector<GLushort> elements;
 	objloader.load("suzanne.obj", vertices, normals, elements);
 	
-
+	// Transformation en tableaux de Float.
+	float vertices_f[vertices.size()*3];
+	float normals_f[normals.size()*3];
+	objloader.arrayVec3toArrayFloat(vertices, vertices_f);
+	objloader.arrayVec3toArrayFloat(normals, normals_f);
+	
+	// Création des VBO.
+	GLuint s_vertices_vbo;
+	glGenBuffers(1, &s_vertices_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, s_vertices_vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices_f), vertices_f, GL_STREAM_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
+	GLuint s_normals_vbo;
+	glGenBuffers(1, &s_normals_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, s_normals_vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(normals_f), normals_f, GL_STREAM_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
+	GLuint s_indices_vbo;
+	glGenBuffers(1, &s_indices_vbo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_indices_vbo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (sizeof(elements[0])*elements.size()), elements.data(), GL_STREAM_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	
+	// Création du VAO pour «Suzanne».
+	GLuint i_vao;
+	glGenVertexArrays(1, &i_vao);
+	glBindVertexArray(i_vao);
+	glBindBuffer(GL_ARRAY_BUFFER, s_vertices_vbo);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, s_normals_vbo);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_indices_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+	
+	
 	// Temps & évenements :
 	sf::Clock tclock;
 	float mouse_x(0);
@@ -157,6 +211,22 @@ int main(int argc, char **argv)
 		glDisableVertexAttribArray(1);
 
 		glUseProgram(0);
+		
+		// On initialise les données nécessaires à l'affichage du Suzanne.
+		glm::mat4 normm(glm::transpose(projection));
+		glm::vec4 light(0, 2, 1, 1);
+		
+		glUseProgram(Suzanne_prog);
+		
+		// On affiche suzanne.
+		glBindVertexArray(i_vao);
+		glUniformMatrix4fv(SuWorld, 1, GL_FALSE, glm::value_ptr(camera));
+		glUniformMatrix4fv(SuPersp, 1, GL_FALSE, glm::value_ptr(projection));
+		glUniformMatrix3fv(SuNormM, 1, GL_FALSE, glm::value_ptr(normm));
+		glUniform4fv(SuLight, 1, glm::value_ptr(light));
+		glDrawElements(GL_TRIANGLES, (sizeof(elements[0])*elements.size()), GL_UNSIGNED_SHORT, 0);
+		glBindVertexArray(0);
+		
 
 		// On affiche la fenêtre :
 		window.Display();
