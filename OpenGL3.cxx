@@ -166,7 +166,10 @@ int main(int argc, char **argv)
 				window.Close();
 
 			if(event.Type == sf::Event::Resized)
+			{
 				glViewport(0, 0, (float)event.Size.Width, (float)event.Size.Height);
+				projection = glm::perspective(90.f, (float)event.Size.Width/(float)event.Size.Height, 1.f, 10.f);
+			}
 
 			if(event.Type == sf::Event::MouseMoved)
 			{

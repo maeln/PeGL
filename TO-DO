@@ -6,4 +6,7 @@ TO-DO:
 	- Gestion automatique des VBO/VAO
 	- Ajouter un meilleur loader Blender/Collada ( lib' externe possible ).
 	
+	* Debug
+	- Pouvoir changer des données ( ex: FOV ) pendant ue l'appli' tourne.
+	
 	
