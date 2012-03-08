@@ -1,0 +1,9 @@
+TO-DO:
+	* Shader
+	- Extraire et stocker automatiquement dans une table de hachage les Uniforms Location.
+	
+	* Loader
+	- Gestion automatique des VBO/VAO
+	- Ajouter un meilleur loader Blender/Collada ( lib' externe possible ).
+	
+	

@@ -1,0 +1,26 @@
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃   ____                               ┃ - Maeln.
+┃  |    \            ______            ┃ - GPL
+┃  |  /\ \          /  ____|           ┃
+┃  |   __/  ___    /  /       _        ┃
+┃  |  |    |  _|  |   |____  | |       ┃
+┃  |  |    | -_    \      /  | |_      ┃
+┃  |__|    |___|    \____/   |___|     ┃
+┃                                      ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ 
+
+=====================================================
+|
+| PeGl est un petit projet personnel ayant pour but
+| l'apprentissage de OpenGL.
+| C'est plus ou moins un moteur 3D / Framework / whateverthefuck
+| qui me sert de base à mes divers projets graphiques.
+| 
+| La partie événement / fenêtre / son est géré par la
+| magnifique librairie SFML ( v2.0 en développement | http://www.sfml-dev.org/index-fr.php ).
+| La partie mathématique matriciel/vectoriel est géré par
+| GLM ( http://glm.g-truc.net/ ), mon implémentation
+| étant peu flexible et pénible à développer.
+|
+=====================================================
+""""""""""""""""""""""""""""""""""""""""""""""""""""
