@@ -16,13 +16,15 @@ SRC = OpenGL3.cxx \
 		Matrix.cxx \
 		VBHandler.cxx \
 		OBJLoader.cxx \
-		Particle.cxx
+		Particle.cxx \
+		meshmanager.cxx
 		
 SRCP = Particle.cxx \
 		Shader.cxx \
 		Matrix.cxx \
 		VBHandler.cxx \
-		OBJLoader.cxx
+		OBJLoader.cxx \
+		meshmanager.cxx
 
 OBJ = $(SRC:.cxx=.o)
 

@@ -66,7 +66,7 @@ void Obj::load(string filename, vector<glm::vec3> &vertices, vector<glm::vec3> &
 		}
 		else
 		{
-			/* NOTHJING, yeah, nothJing. */
+			/* LES FRAPPES DE FRAPPES CAY RIGOLO */
 		}
 	}
 		

@@ -17,6 +17,7 @@ class Obj
 	Obj();
 	void load(std::string filename, std::vector<glm::vec3> &vertices, std::vector<glm::vec3> &normals, std::vector<GLushort> &elements);
 	void arrayVec3toArrayFloat(std::vector<glm::vec3> arrayVec, float* arrayFloat);
+	
 
 	private:
 };
