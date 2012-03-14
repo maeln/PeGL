@@ -18,17 +18,68 @@
 // MA 02110-1301, USA.
 
 
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <stdlib.h>
+#include <GL/glew.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "meshmanager.hxx"
 
+using namespace std;
+
+Mesh::Mesh(vector<glm::vec3> &vert, vector<glm::vec3> &norm, vector<GLushort> &ele)
+{
+	vertices = vert;
+	normals = norm;
+	elements = ele;
+}
+
+Mesh::~Mesh()
+{
+	delete &vertices;
+	delete &normals;
+	delete &elements;
+}
+
+vector<glm::vec3> Mesh::s_vertices()
+{
+	return vertices;
+}
+
+vector<glm::vec3> Mesh::s_normals()
+{
+	return normals;
+}
+
+vector<GLushort> Mesh::s_elements()
+{
+	return elements;
+}
 
 MeshManager::MeshManager()
 {
-	
+	vector<Mesh> meshdb;
 }
 
 
 MeshManager::~MeshManager()
 {
-	
+	while(meshdb.size()>0)
+	{
+		meshdb[0].~Mesh();
+		meshdb.erase(meshdb.begin());
+	}
 }
 
+int MeshManager::add_mesh(vector<glm::vec3> &vertices, vector<glm::vec3> &normals, vector<GLushort> &elements)
+{
+	Mesh mesh(vertices, normals, elements);
+	 meshdb.push_back(mesh);
+	 return meshdb.size();
+}

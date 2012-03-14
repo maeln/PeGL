@@ -31,24 +31,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-class MeshManager
-{
-	public:
-		MeshManager();
-		virtual ~MeshManager();
-		// Ajoute le mesh à la table de hashage et créer VBO/VAO.
-		void add_mesh(std::vector<glm::vec3> &vertices, std::vector<glm::vec3> &normals, std::vector<GLushort> &elments);
-		
-	
-	private:
-		std::map<int,Mesh> Meshs;
-		/* add your private declarations */
-};
-
 class Mesh
 {
 	public:
-		Mesh(std::vector<glm::vec3> &vert, std::vector<glm::vec3> &norm, std::vector<GLushort> &ele);
+		Mesh(std::vector<glm::vec3> &vertices, std::vector<glm::vec3> &normals, std::vector<GLushort> &elements);
 		virtual ~Mesh();
 		// Accessor.
 		std::vector<glm::vec3> s_vertices();
@@ -59,6 +45,20 @@ class Mesh
 		std::vector<glm::vec3> vertices;
 		std::vector<glm::vec3> normals;
 		std::vector<GLushort> elements;
+};
+
+class MeshManager
+{
+	public:
+		MeshManager();
+		virtual ~MeshManager();
+		// Ajoute le mesh à la table de hashage et créer VBO/VAO.
+		int add_mesh(std::vector<glm::vec3> &vertices, std::vector<glm::vec3> &normals, std::vector<GLushort> &elments);
+		
+	
+	private:
+		std::vector<Mesh> meshdb;
+		/* add your private declarations */
 };
 
 #endif /* MESHMANAGER_HXX */ 
