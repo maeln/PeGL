@@ -1,5 +1,7 @@
 #ifndef VBHANDLER_HXX_INCLUDED
 #define VBHANDLER_HXX_INCLUDED
+
+#include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 

@@ -20,9 +20,11 @@
 
 #ifndef MESHMANAGER_HXX
 #define MESHMANAGER_HXX
+
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <map>
 #include <stdlib.h>
 #include <GL/glew.h>
 #include <GL/gl.h>
@@ -30,22 +32,12 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "OBJLoader.hxx"
 
-class Mesh
+typedef struct
 {
-	public:
-		Mesh(std::vector<glm::vec3> &vertices, std::vector<glm::vec3> &normals, std::vector<GLushort> &elements);
-		virtual ~Mesh();
-		// Accessor.
-		std::vector<glm::vec3> s_vertices();
-		std::vector<glm::vec3> s_normals();
-		std::vector<GLushort> s_elements();
-		
-	private:
-		std::vector<glm::vec3> vertices;
-		std::vector<glm::vec3> normals;
-		std::vector<GLushort> elements;
-};
+	GLuint vao_loc;
+} MeshVAO;
 
 class MeshManager
 {
@@ -57,7 +49,7 @@ class MeshManager
 		
 	
 	private:
-		std::vector<Mesh> meshdb;
+		std::map<int, MeshVAO> meshdb;
 		/* add your private declarations */
 };
 

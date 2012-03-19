@@ -3,7 +3,7 @@ TO-DO:
 	- Extraire et stocker automatiquement dans une table de hachage les Uniforms Location.
 	
 	* Loader
-	- Gestion automatique des VBO/VAO -> création d'une classe "manager" d'objet 3D ?
+	- Gestion automatique des VBO/VAO -> création d'une classe "manager" d'objet 3D ? -> Premier jet fonctionnel finis ( 19.03.2012 )
 	- Ajouter un meilleur loader Blender/Collada ( lib' externe possible ).
 	
 	* Debug

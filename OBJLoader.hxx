@@ -1,7 +1,9 @@
 #ifndef OBJLOADER_HXX_INCLUDED
 #define OBJLOADER_HXX_INCLUDED
+
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include <vector>
 #include <stdlib.h>
 #include <GL/glew.h>

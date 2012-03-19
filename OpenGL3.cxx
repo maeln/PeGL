@@ -38,6 +38,7 @@
 #include "VBHandler.hxx"
 #include "Particle.hxx"
 #include "OBJLoader.hxx"
+#include "meshmanager.hxx"
 
 using namespace std;
 
@@ -45,7 +46,7 @@ int main(int argc, char **argv)
 {
 	// Créer la fenêtre.
 	sf::Window window(sf::VideoMode(800, 600), "Générateur de particule.");
-	window.EnableVerticalSync(true); // VSync activé.
+	window.setVerticalSyncEnabled(true); // VSync activé.
 
 	// On initialise Glew :
 	GLenum err = glewInit();
@@ -102,51 +103,14 @@ int main(int argc, char **argv)
 	
 	// On charge un model OBJ.
 	Obj objloader;
+	MeshManager meshmanager;
 	
 	// Stockage des vertices et normales.
 	vector<glm::vec3> vertices;	
 	vector<glm::vec3> normals;	
 	vector<GLushort> elements;
 	objloader.load("suzanne.obj", vertices, normals, elements);
-	
-	// Transformation en tableaux de Float.
-	float vertices_f[vertices.size()*3];
-	float normals_f[normals.size()*3];
-	objloader.arrayVec3toArrayFloat(vertices, vertices_f);
-	objloader.arrayVec3toArrayFloat(normals, normals_f);
-	
-	// Création des VBO.
-	GLuint s_vertices_vbo;
-	glGenBuffers(1, &s_vertices_vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, s_vertices_vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices_f), vertices_f, GL_STREAM_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	
-	GLuint s_normals_vbo;
-	glGenBuffers(1, &s_normals_vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, s_normals_vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(normals_f), normals_f, GL_STREAM_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	
-	GLuint s_indices_vbo;
-	glGenBuffers(1, &s_indices_vbo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_indices_vbo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (sizeof(elements[0])*elements.size()), elements.data(), GL_STREAM_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	
-	// Création du VAO pour «Suzanne».
-	GLuint i_vao;
-	glGenVertexArrays(1, &i_vao);
-	glBindVertexArray(i_vao);
-	glBindBuffer(GL_ARRAY_BUFFER, s_vertices_vbo);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glBindBuffer(GL_ARRAY_BUFFER, s_normals_vbo);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_indices_vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+	int suzanne_id(meshmanager.add_mesh(vertices, normals, elements));
 	
 	
 	// Temps & évenements :
@@ -154,27 +118,27 @@ int main(int argc, char **argv)
 	float mouse_x(0);
 	float mouse_y(0);
 
-	while(window.IsOpen())
+	while(window.isOpen())
 	{
 		sf::Event event;
-		while(window.PollEvent(event))
+		while(window.pollEvent(event))
 		{
-			if(event.Type == sf::Event::Closed)
-				window.Close();
+			if(event.type == sf::Event::Closed)
+				window.close();
 
-			if((event.Type == sf::Event::KeyPressed) && (event.Key.Code == sf::Keyboard::Escape))
-				window.Close();
+			if((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
+				window.close();
 
-			if(event.Type == sf::Event::Resized)
+			if(event.type == sf::Event::Resized)
 			{
-				glViewport(0, 0, (float)event.Size.Width, (float)event.Size.Height);
-				projection = glm::perspective(90.f, (float)event.Size.Width/(float)event.Size.Height, 1.f, 10.f);
+				glViewport(0, 0, (float)event.size.width, (float)event.size.height);
+				projection = glm::perspective(90.f, (float)event.size.width/(float)event.size.height, 1.f, 10.f);
 			}
 
-			if(event.Type == sf::Event::MouseMoved)
+			if(event.type == sf::Event::MouseMoved)
 			{
-				mouse_x = event.MouseMove.X;
-				mouse_y = event.MouseMove.Y;
+				mouse_x = event.mouseMove.x;
+				mouse_y = event.mouseMove.y;
 			}
 		}
 
@@ -184,7 +148,7 @@ int main(int argc, char **argv)
 		
 		//On met à jour les particules.
 		GenPart.update();
-		glm::vec3 rot_vec(cos(tclock.GetElapsedTime().AsMilliseconds()), sin(tclock.GetElapsedTime().AsMilliseconds()), 0);
+		glm::vec3 rot_vec(cos(tclock.getElapsedTime().asMilliseconds()), sin(tclock.getElapsedTime().asMilliseconds()), 0);
 		GenPart.U_InitVector(rot_vec);
 		GenPart.updateVBO();
 		//~ cout << GenPart.SendOffset() << endl;
@@ -222,7 +186,7 @@ int main(int argc, char **argv)
 		glUseProgram(Suzanne_prog);
 		
 		// On affiche suzanne.
-		glBindVertexArray(i_vao);
+		glBindVertexArray(suzanne_id);
 		glUniformMatrix4fv(SuWorld, 1, GL_FALSE, glm::value_ptr(camera));
 		glUniformMatrix4fv(SuPersp, 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix3fv(SuNormM, 1, GL_FALSE, glm::value_ptr(normm));
@@ -232,7 +196,7 @@ int main(int argc, char **argv)
 		
 
 		// On affiche la fenêtre :
-		window.Display();
+		window.display();
 	}
 
 	return EXIT_SUCCESS;
