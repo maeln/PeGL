@@ -27,7 +27,7 @@ Obj::Obj() {}
 void Obj::load(string filename, vector<glm::vec3> &vertices, vector<glm::vec3> &normals, vector<GLushort> &elements)
 {
 	ifstream file(filename.c_str(), ios::in);
-	if (!file) { cerr << "Erreur: Impossible d'ouvrir : " << filename << endl; exit(1); }
+	if (!file) { cerr << "Erreur: Impossible d'ouvrir : " << filename << endl; exit(EXIT_FAILURE); }
 	string line;
 	
 	while(getline(file, line))
@@ -52,10 +52,6 @@ void Obj::load(string filename, vector<glm::vec3> &vertices, vector<glm::vec3> &
 			elements.push_back(a);
 			elements.push_back(b);
 			elements.push_back(c);
-		}
-		else
-		{
-			/* LES FRAPPES DE FRAPPES CAY RIGOLO */
 		}
 	}
 		

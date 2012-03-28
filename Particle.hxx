@@ -1,8 +1,16 @@
 #ifndef PARTICLE_HXX_INCLUDED
 #define PARTICLE_HXX_INCLUDED
 
-#include <glm/glm.hpp>
 #include <iostream>
+#include <GL/glew.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <cmath>
+#include <cstdlib>
+#include <time.h>
 #include <vector>
 
 typedef struct

@@ -22,16 +22,6 @@
 #define MAX_PARTICLES 1000
 #define GRAVITY 9.81
 
-#include <iostream>
-#include <GL/glew.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <cmath>
-#include <cstdlib>
-#include <time.h>
 #include "Shader.hxx"
 #include "VBHandler.hxx"
 #include "Particle.hxx"
@@ -59,6 +49,7 @@ ParticleGenerator::ParticleGenerator(glm::vec3 position, unsigned int maxpart, u
 
 ParticleGenerator::~ParticleGenerator()
 {
+	
 }
 
 void ParticleGenerator::update()

@@ -7,6 +7,12 @@ TO-DO:
 	- Ajouter un meilleur loader Blender/Collada ( lib' externe possible ).
 	
 	* Debug
-	- Pouvoir changer des données ( ex: FOV ) pendant ue l'appli' tourne.
+	- Pouvoir changer des données ( ex: FOV ) pendant que l'appli' tourne.
+	
+	* Code
+	- Décharger proprement les classes, variables, etc, avant la fermeture du logiciel.
+	
+	* Divers
+	- Triangle de sierpinski en 3D, parce que, franchement, c'est la classe.
 	
 	

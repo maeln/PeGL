@@ -124,10 +124,22 @@ int main(int argc, char **argv)
 		while(window.pollEvent(event))
 		{
 			if(event.type == sf::Event::Closed)
+			{
+				objloader.~Obj();
+				meshmanager.~MeshManager();
+				GenPart.~ParticleGenerator();
+				
 				window.close();
+			}
 
 			if((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
+			{
+				objloader.~Obj();
+				meshmanager.~MeshManager();
+				GenPart.~ParticleGenerator();
+				
 				window.close();
+			}
 
 			if(event.type == sf::Event::Resized)
 			{

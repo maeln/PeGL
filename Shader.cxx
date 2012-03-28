@@ -18,60 +18,82 @@
 //      MA 02110-1301, USA.
 
 
-#include <iostream>
-#include <fstream>
-#include <GL/glew.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <cmath>
 #include "Shader.hxx"
 
 using namespace std;
 
 Shader::Shader() {}
 
-char* Shader::LoadShader(string filename)
+const char* Shader::LoadShader(string filename, vector<string> &uniform)
 {
-	bool error(false);
-	char *source(NULL);
+	string source;
 	long size;
-	long i(0);
-	ifstream mfile(filename.c_str());
-	if(mfile == NULL)
+	
+	ifstream source_file(filename.c_str());
+	if(!source_file) { cerr << "Erreur: Impossible de lire le fichier : " << filename << endl; exit(EXIT_FAILURE); }
+	string line;
+	while(getline(source_file, line))
 	{
-		cerr << "Erreur: Impossible de lire le fichier ( " << filename << " )." << endl;
-		error = true;
+		source += line;
+		if(line.substr(0, 7) == "uniform")
+		{
+			istringstream str(line.substr(7));
+			string type; string name;
+			str >> type;
+			str >> name;
+			name.erase(name.find(";"), 1);
+			uniform.push_back(name);
+			delete(&type);
+			delete(&name);
+		}
 	}
 	
-	if(error == false)
-	{
-		cout << "Info: Shader " << filename << " en cours de lecture." << endl;
-	}
+	return source.c_str();
 	
-	mfile.seekg(0, ios::end);
-	size = mfile.tellg();
-	mfile.seekg(0, ios::beg);
-	
-	source = new char[size+1];
-	
-	if(source == NULL) {
-		cerr << "Erreur: Probléme lors de l'allocation mémoire ou de la lecture du fichier." << endl;
-		error = true;
-	}
-	
-	while(i < size)
-	{
-		mfile.get(source[i]);
-		i++;
-	}
-	source[size] = '\0';
-	
-	mfile.close();
-	
-	return source;
 }
 
-GLuint Shader::CompileShader(GLenum shaderType, string shaderPath)
+//~ char* Shader::LoadShader(string filename)
+//~ {
+	//~ bool error(false);
+	//~ char *source(NULL);
+	//~ long size;
+	//~ long i(0);
+	//~ ifstream mfile(filename.c_str());
+	//~ if(mfile == NULL)
+	//~ {
+		//~ cerr << "Erreur: Impossible de lire le fichier ( " << filename << " )." << endl;
+		//~ error = true;
+	//~ }
+	//~ 
+	//~ if(error == false)
+	//~ {
+		//~ cout << "Info: Shader " << filename << " en cours de lecture." << endl;
+	//~ }
+	//~ 
+	//~ mfile.seekg(0, ios::end);
+	//~ size = mfile.tellg();
+	//~ mfile.seekg(0, ios::beg);
+	//~ 
+	//~ source = new char[size+1];
+	//~ 
+	//~ if(source == NULL) {
+		//~ cerr << "Erreur: Probléme lors de l'allocation mémoire ou de la lecture du fichier." << endl;
+		//~ error = true;
+	//~ }
+	//~ 
+	//~ while(i < size)
+	//~ {
+		//~ mfile.get(source[i]);
+		//~ i++;
+	//~ }
+	//~ source[size] = '\0';
+	//~ 
+	//~ mfile.close();
+	//~ 
+	//~ return source;
+//~ }
+
+GLuint Shader::CompileShader(GLenum shaderType, string shaderPath, vector<string> &unifrom)
 {
 	bool error(false);
 	GLenum shader(glCreateShader(shaderType));
@@ -83,7 +105,7 @@ GLuint Shader::CompileShader(GLenum shaderType, string shaderPath)
 	GLint state_s(GL_TRUE);
 	GLint logSize(0);
 	char *log(NULL);
-	const char *src(Shader::LoadShader(shaderPath));
+	const char *src(Shader::LoadShader(shaderPath, uniform));
 	glShaderSource(shader, 1, &src, NULL);
 	glCompileShader(shader);
 	delete(src);
@@ -169,4 +191,12 @@ void Shader::Remove_s(GLuint shader)
 void Shader::Remove_p(GLuint program)
 {
 	glDeleteProgram(program);
+}
+
+void Shader::InitUniformLocation(GLuint program, vector<string> &uniform_name, map<string,GLuint> &uniform)
+{
+	for(unsigned int i(0); i < uniform_name.size(); i++)
+	{
+		map[uniform_name[i]] = glGetUniformLocation(program, uniform_name[i]);
+	}
 }
