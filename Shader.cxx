@@ -27,7 +27,6 @@ Shader::Shader() {}
 const char* Shader::LoadShader(string filename, vector<string> &uniform)
 {
 	string source;
-	long size;
 	
 	ifstream source_file(filename.c_str());
 	if(!source_file) { cerr << "Erreur: Impossible de lire le fichier : " << filename << endl; exit(EXIT_FAILURE); }
@@ -43,8 +42,6 @@ const char* Shader::LoadShader(string filename, vector<string> &uniform)
 			str >> name;
 			name.erase(name.find(";"), 1);
 			uniform.push_back(name);
-			delete(&type);
-			delete(&name);
 		}
 	}
 	
@@ -93,7 +90,7 @@ const char* Shader::LoadShader(string filename, vector<string> &uniform)
 	//~ return source;
 //~ }
 
-GLuint Shader::CompileShader(GLenum shaderType, string shaderPath, vector<string> &unifrom)
+GLuint Shader::CompileShader(GLenum shaderType, string shaderPath, vector<string> &uniform)
 {
 	bool error(false);
 	GLenum shader(glCreateShader(shaderType));
