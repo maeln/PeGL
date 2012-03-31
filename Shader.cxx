@@ -24,7 +24,7 @@ using namespace std;
 
 Shader::Shader() {}
 
-const char* Shader::LoadShader(string filename, vector<string> &uniform)
+string Shader::LoadShader(string filename, vector<string> &uniform)
 {
 	string source;
 	
@@ -33,8 +33,8 @@ const char* Shader::LoadShader(string filename, vector<string> &uniform)
 	string line;
 	while(getline(source_file, line))
 	{
-		source += line;
-		if(line.substr(0, 7) == "uniform")
+		source += (line + '\n');
+		if(line.substr(0, 8) == "uniform ")
 		{
 			istringstream str(line.substr(7));
 			string type; string name;
@@ -45,67 +45,28 @@ const char* Shader::LoadShader(string filename, vector<string> &uniform)
 		}
 	}
 	
-	return source.c_str();
+	// À ce stade source.c_str() renvoie correctement le code source de Shader/Light.vert
+	
+	return source;
 	
 }
-
-//~ char* Shader::LoadShader(string filename)
-//~ {
-	//~ bool error(false);
-	//~ char *source(NULL);
-	//~ long size;
-	//~ long i(0);
-	//~ ifstream mfile(filename.c_str());
-	//~ if(mfile == NULL)
-	//~ {
-		//~ cerr << "Erreur: Impossible de lire le fichier ( " << filename << " )." << endl;
-		//~ error = true;
-	//~ }
-	//~ 
-	//~ if(error == false)
-	//~ {
-		//~ cout << "Info: Shader " << filename << " en cours de lecture." << endl;
-	//~ }
-	//~ 
-	//~ mfile.seekg(0, ios::end);
-	//~ size = mfile.tellg();
-	//~ mfile.seekg(0, ios::beg);
-	//~ 
-	//~ source = new char[size+1];
-	//~ 
-	//~ if(source == NULL) {
-		//~ cerr << "Erreur: Probléme lors de l'allocation mémoire ou de la lecture du fichier." << endl;
-		//~ error = true;
-	//~ }
-	//~ 
-	//~ while(i < size)
-	//~ {
-		//~ mfile.get(source[i]);
-		//~ i++;
-	//~ }
-	//~ source[size] = '\0';
-	//~ 
-	//~ mfile.close();
-	//~ 
-	//~ return source;
-//~ }
 
 GLuint Shader::CompileShader(GLenum shaderType, string shaderPath, vector<string> &uniform)
 {
 	bool error(false);
 	GLenum shader(glCreateShader(shaderType));
 	if(shader == 0) {
-		cerr << "Erreur: Problème lors de la création d'un vertex shader." << endl;
+		cerr << "Erreur: Problème lors de la création d'un shader : " << shaderPath << endl;
 		error = true;
 	}
 	
 	GLint state_s(GL_TRUE);
 	GLint logSize(0);
 	char *log(NULL);
-	const char *src(Shader::LoadShader(shaderPath, uniform));
-	glShaderSource(shader, 1, &src, NULL);
+	string src(Shader::LoadShader(shaderPath, uniform)); // Le probléme est ici je pense. Src contient bien le code source du shader pour tout les autres shaders mais reste vide pour Shader/Light.vert
+	const char* src_char = src.c_str();
+	glShaderSource(shader, 1, &src_char, NULL);
 	glCompileShader(shader);
-	delete(src);
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &state_s);
 	if(state_s != GL_TRUE)
 	{
@@ -118,7 +79,7 @@ GLuint Shader::CompileShader(GLenum shaderType, string shaderPath, vector<string
 		}
 		glGetShaderInfoLog(shader, logSize, &logSize, log);
 		log[logSize] = '\0';
-		cerr << "Erreur: Impossible de compiler le Shader : " << log << endl;
+		cerr << "Erreur: Impossible de compiler le Shader : " << shaderPath << " : " << endl << log << endl;
 		delete(log);
 		glDeleteShader(shader);
 		error = true;
@@ -194,6 +155,6 @@ void Shader::InitUniformLocation(GLuint program, vector<string> &uniform_name, m
 {
 	for(unsigned int i(0); i < uniform_name.size(); i++)
 	{
-		map[uniform_name[i]] = glGetUniformLocation(program, uniform_name[i]);
+		uniform[uniform_name[i]] = glGetUniformLocation(program, uniform_name[i].c_str());
 	}
 }

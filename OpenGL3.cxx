@@ -24,6 +24,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <locale>
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -44,6 +45,9 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+	// Locale pour les caractéres français.
+	setlocale(LC_ALL, "");
+	
 	// Créer la fenêtre.
 	sf::Window window(sf::VideoMode(800, 600), "Générateur de particule.");
 	window.setVerticalSyncEnabled(true); // VSync activé.
@@ -79,27 +83,27 @@ int main(int argc, char **argv)
 
 	// On créer un objet Shader et on créer les programs nécessaires.
 	Shader shader;
-	GLuint VShader(shader.CompileShader(GL_VERTEX_SHADER, "Shader/Particles.vert"));
-	GLuint FShader(shader.CompileShader(GL_FRAGMENT_SHADER, "Shader/Particles.frag"));
-	GLuint Program(shader.MakeProgram(VShader, FShader));
-	shader.Remove_s(VShader);
-	shader.Remove_s(FShader);
+	//~ vector<string> PartUniName;
+	//~ GLuint VShader(shader.CompileShader(GL_VERTEX_SHADER, "Shader/Particles.vert", PartUniName));
+	//~ GLuint FShader(shader.CompileShader(GL_FRAGMENT_SHADER, "Shader/Particles.frag", PartUniName));
+	//~ GLuint Program(shader.MakeProgram(VShader, FShader));
+	//~ shader.Remove_s(VShader);
+	//~ shader.Remove_s(FShader);
 	
 	// Création du shader pour Suzanne.
-	GLuint Suzanne_vertex_shader(shader.CompileShader(GL_VERTEX_SHADER, "Shader/Light.vert"));
-	GLuint Suzanne_frag_shader(shader.CompileShader(GL_FRAGMENT_SHADER, "Shader/Light.frag"));
+	vector<string> SuzaUniName;
+	map<string,GLuint> SuzaUni;
+	GLuint Suzanne_vertex_shader(shader.CompileShader(GL_VERTEX_SHADER, "Shader/Light.vert", SuzaUniName));
+	GLuint Suzanne_frag_shader(shader.CompileShader(GL_FRAGMENT_SHADER, "Shader/Light.frag", SuzaUniName));
 	GLuint Suzanne_prog(shader.MakeProgram(Suzanne_vertex_shader, Suzanne_frag_shader));
 	shader.Remove_s(Suzanne_vertex_shader);
 	shader.Remove_s(Suzanne_vertex_shader);
 	
 	// Gestion de Uniform pour les shader Suzannes.
-	GLuint SuWorld(glGetUniformLocation(Suzanne_prog, "world"));
-	GLuint SuPersp(glGetUniformLocation(Suzanne_prog, "perspective"));
-	GLuint SuNormM(glGetUniformLocation(Suzanne_prog, "normalMatrix"));
-	GLuint SuLight(glGetUniformLocation(Suzanne_prog, "light_dir"));
-
+	shader.InitUniformLocation(Suzanne_prog, SuzaUniName, SuzaUni);
+	
 	// On initialise les particules :
-	ParticleGenerator GenPart(glm::vec3(0, 0, 0), 1000, 100, 100, glm::vec3(0, 1, 0), (M_PI/4.0), glm::vec3(255,255,255));
+	//~ ParticleGenerator GenPart(glm::vec3(0, 0, 0), 1000, 100, 100, glm::vec3(0, 1, 0), (M_PI/4.0), glm::vec3(255,255,255));
 	
 	// On charge un model OBJ.
 	Obj objloader;
@@ -127,7 +131,7 @@ int main(int argc, char **argv)
 			{
 				objloader.~Obj();
 				meshmanager.~MeshManager();
-				GenPart.~ParticleGenerator();
+				//~ GenPart.~ParticleGenerator();
 				
 				window.close();
 			}
@@ -136,7 +140,7 @@ int main(int argc, char **argv)
 			{
 				objloader.~Obj();
 				meshmanager.~MeshManager();
-				GenPart.~ParticleGenerator();
+				//~ GenPart.~ParticleGenerator();
 				
 				window.close();
 			}
@@ -159,37 +163,37 @@ int main(int argc, char **argv)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		//On met à jour les particules.
-		GenPart.update();
+		//~ GenPart.update();
 		glm::vec3 rot_vec(cos(tclock.getElapsedTime().asMilliseconds()), sin(tclock.getElapsedTime().asMilliseconds()), 0);
-		GenPart.U_InitVector(rot_vec);
-		GenPart.updateVBO();
+		//~ GenPart.U_InitVector(rot_vec);
+		//~ GenPart.updateVBO();
 		//~ cout << GenPart.SendOffset() << endl;
 		//~ cout << GenPart.ArrPartSize() << endl;
 		
 		//On créer les tableaux;
-		int size = GenPart.ArrPartSize();
-		float part_position[size*3];
-		float part_color[size*3];
+		//~ int size = GenPart.ArrPartSize();
+		//~ float part_position[size*3];
+		//~ float part_color[size*3];
 		
 		//Et on les remplies :
-		GenPart.SendVertexArray(part_position);
-		GenPart.SendColorArray(part_color);
+		//~ GenPart.SendVertexArray(part_position);
+		//~ GenPart.SendColorArray(part_color);
 
 		// On affiche tout le bordel.
-		glUseProgram(Program);
-
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, part_position);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, part_color);
-
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-
-		glDrawArrays(GL_POINTS, 0, size);
-
-		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(1);
-
-		glUseProgram(0);
+		//~ glUseProgram(Program);
+//~ 
+		//~ glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, part_position);
+		//~ glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, part_color);
+//~ 
+		//~ glEnableVertexAttribArray(0);
+		//~ glEnableVertexAttribArray(1);
+//~ 
+		//~ glDrawArrays(GL_POINTS, 0, size);
+//~ 
+		//~ glDisableVertexAttribArray(0);
+		//~ glDisableVertexAttribArray(1);
+//~ 
+		//~ glUseProgram(0);
 		
 		// On initialise les données nécessaires à l'affichage du Suzanne.
 		glm::mat4 normm(glm::transpose(projection));
@@ -199,10 +203,10 @@ int main(int argc, char **argv)
 		
 		// On affiche suzanne.
 		glBindVertexArray(suzanne_id);
-		glUniformMatrix4fv(SuWorld, 1, GL_FALSE, glm::value_ptr(camera));
-		glUniformMatrix4fv(SuPersp, 1, GL_FALSE, glm::value_ptr(projection));
-		glUniformMatrix3fv(SuNormM, 1, GL_FALSE, glm::value_ptr(normm));
-		glUniform4fv(SuLight, 1, glm::value_ptr(light));
+		glUniformMatrix4fv(SuzaUni["world"], 1, GL_FALSE, glm::value_ptr(camera));
+		glUniformMatrix4fv(SuzaUni["perspective"], 1, GL_FALSE, glm::value_ptr(projection));
+		glUniformMatrix3fv(SuzaUni["normalMatrix"], 1, GL_FALSE, glm::value_ptr(normm));
+		glUniform4fv(SuzaUni["light_dir"], 1, glm::value_ptr(light));
 		glDrawElements(GL_TRIANGLES, (sizeof(elements[0])*elements.size()), GL_UNSIGNED_SHORT, 0);
 		glBindVertexArray(0);
 		

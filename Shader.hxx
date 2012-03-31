@@ -17,7 +17,7 @@ class Shader
 {
 	public:
 	Shader();
-	const char* LoadShader(std::string filename, std::vector<std::string> &uniform);
+	std::string LoadShader(std::string filename, std::vector<std::string> &uniform);
 	GLuint CompileShader(GLenum shaderType, std::string shaderPath, std::vector<std::string> &unifrom);
 	GLuint MakeProgram(GLuint vertexshader, GLuint pixelshader);
 	void Remove_s(GLuint shader);
