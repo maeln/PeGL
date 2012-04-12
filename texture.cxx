@@ -44,8 +44,33 @@ sf::Image* Texture::LoadToMemory(string filename)
 
 GLuint Texture::UploadToVidMem(sf::Image *image)
 {
-	float width = image->getSize().x;
-	float height = image->getSize().y;
+	unsigned int width = (unsigned int)image->getSize().x;
+	unsigned int height = (unsigned int)image->getSize().y;
+	const unsigned int resolution = width * height;
+	GLubyte img_array[resolution*4]; // On utilise du RGBA, donc 1 pixel = 4 cases de données.
+	unsigned int n(0);
+	
+	for(unsigned int y(0); y < height; ++y)
+	{
+		for(unsigned int x(0); x < width; ++x)
+		{
+			img_array[n*4] 		= (GLubyte)image->getPixel(x,y).r;
+			img_array[n*4+1]	= (GLubyte)image->getPixel(x,y).g;
+			img_array[n*4+2]	= (GLubyte)image->getPixel(x,y).b;
+			img_array[n*4+3]	= (GLubyte)image->getPixel(x,y).a;
+			++n;
+		}
+	}
 	
 	delete image;
+	
+	GLuint texture;
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img_array);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	
+	return texture;
 }

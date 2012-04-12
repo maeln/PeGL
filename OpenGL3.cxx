@@ -24,6 +24,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <locale>
 #include <GL/glew.h>
 #include <GL/gl.h>
@@ -49,8 +50,8 @@ int main(int argc, char **argv)
 	setlocale(LC_ALL, "");
 	
 	// Créer la fenêtre.
-	sf::Window window(sf::VideoMode(800, 600), "Générateur de particule.");
-	window.setVerticalSyncEnabled(true); // VSync activé.
+	sf::Window window(sf::VideoMode(800, 600), "PeGL. FPS: 0");
+	//window.setVerticalSyncEnabled(true); // VSync activé.
 
 	// On initialise Glew :
 	GLenum err = glewInit();
@@ -117,6 +118,11 @@ int main(int argc, char **argv)
 	sf::Clock tclock;
 	float mouse_x(0);
 	float mouse_y(0);
+	sf::Clock Time;
+	unsigned int delta_frame(0);
+	float delta_time(Time.getElapsedTime().asSeconds());
+	float current_time(0);
+	float fps(0);
 
 	while(window.isOpen())
 	{
@@ -156,6 +162,20 @@ int main(int argc, char **argv)
 				mouse_x = event.mouseMove.x;
 				mouse_y = event.mouseMove.y;
 			}
+		}
+		
+		//Compteur de fps.
+		++delta_frame;
+		current_time = Time.getElapsedTime().asSeconds();
+		if(current_time > (delta_time+1))
+		{
+			delta_time = current_time - delta_time;
+			fps = delta_frame / delta_time;
+			ostringstream os;
+			os << fps;
+			static string framerate = "PeGL. FPS: " + os.str();
+			window.setTitle(framerate);
+			delta_time = Time.getElapsedTime().asSeconds();
 		}
 
 		// On lave la fenêtre :
