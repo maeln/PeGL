@@ -111,13 +111,11 @@ void ParticleGenerator::update()
 void ParticleGenerator::updateVBO()
 {
 	const int Offset = ArrPart.size();
-	//~ float part_position[Offset*3];
-	//~ float part_color[Offset*3];
 	float part[Offset*3+Offset*3];
 	
 	if(ArrPart.size() > 0)
 	{
-		for(int i=0; i<Offset; i++)
+		for(int i=0; i<Offset; ++i)
 		{
 			part[i*3]	= ArrPart[i].position.x;
 			part[i*3+1]	= ArrPart[i].position.y;
@@ -129,7 +127,7 @@ void ParticleGenerator::updateVBO()
 	
 	if(ArrPart.size() > 0)
 	{
-		for(int i=Offset; i<(Offset*2); i++)
+		for(int i=Offset; i<(Offset*2); ++i)
 		{
 			part[i*3]	= ArrPart[i].couleur.x;
 			part[i*3+1]	= ArrPart[i].couleur.y;

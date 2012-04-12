@@ -11,5 +11,5 @@ void main()
 {
 	vec3 color = vec3(0.2, 0.3, 0.8);
 	color *= light_calc;
-    outputColor = color;
+    outputColor = sqrt(color);
 }

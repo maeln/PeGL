@@ -1,4 +1,5 @@
 CC = g++
+CLANG = clang++
 
 CFLAGS = -Wall -g
 RELEASEFLAG = -Wall -O3 -s
@@ -17,15 +18,9 @@ SRC = OpenGL3.cxx \
 		VBHandler.cxx \
 		OBJLoader.cxx \
 		Particle.cxx \
-		meshmanager.cxx
+		meshmanager.cxx \
+		texture.cxx
 		
-SRCP = Particle.cxx \
-		Shader.cxx \
-		Matrix.cxx \
-		VBHandler.cxx \
-		OBJLoader.cxx \
-		meshmanager.cxx
-
 OBJ = $(SRC:.cxx=.o)
 
 all:
@@ -40,11 +35,10 @@ build:
 debug:
 	$(CC) $(DEBUGFLAG) $(SRC) $(LDFLAGS) -o $(TARGETDBG)
 	
-particle:
-	$(CC) $(DEBUGFLAG) $(SRCP) $(LDFLAGS) -o $(TARGETP)
-	
 release:
 	$(CC) $(RELEASEFLAG) $(SRC) $(LDFLAGS) -o $(TARGETR)
 
 clean:
 	rm *.o
+clang:
+	$(CLANG) $(CFLAGS) $(SRC) $(LDFLAGS) -o $(TARGET)

@@ -48,7 +48,7 @@ void Obj::load(string filename, vector<glm::vec3> &vertices, vector<glm::vec3> &
 			str >> a;
 			str >> b;
 			str >> c;
-			a--; b--; c--;
+			--a; --b; --c;
 			elements.push_back(a);
 			elements.push_back(b);
 			elements.push_back(c);
@@ -73,7 +73,7 @@ void Obj::load(string filename, vector<glm::vec3> &vertices, vector<glm::vec3> &
 
 void Obj::arrayVec3toArrayFloat(vector<glm::vec3> arrayVec, float* arrayFloat)
 {
-	for(unsigned int i = 0; i < arrayVec.size(); i++)
+	for(unsigned int i = 0; i < arrayVec.size(); ++i)
 	{
 		arrayFloat[i*3] = arrayVec[i].x;
 		arrayFloat[i*3+1] = arrayVec[i].y;

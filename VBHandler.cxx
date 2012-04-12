@@ -41,11 +41,11 @@ GLuint VBHandler::makeVAO(GLuint Vbo, int nbArray, int nbDimension[], void* Offs
 	glBindBuffer(GL_ARRAY_BUFFER, Vbo);
 	
 	int i;
-	for(i = 0; i < nbArray; i++)
+	for(i = 0; i < nbArray; ++i)
 	{
 		glEnableVertexAttribArray(i);
 	}
-	for(i = 0; i < nbArray; i++)
+	for(i = 0; i < nbArray; ++i)
 	{
 		glVertexAttribPointer(i, nbDimension[i], GL_FLOAT, GL_FALSE, 0, Offset[i]);
 	}

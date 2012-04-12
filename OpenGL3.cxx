@@ -83,12 +83,6 @@ int main(int argc, char **argv)
 
 	// On créer un objet Shader et on créer les programs nécessaires.
 	Shader shader;
-	//~ vector<string> PartUniName;
-	//~ GLuint VShader(shader.CompileShader(GL_VERTEX_SHADER, "Shader/Particles.vert", PartUniName));
-	//~ GLuint FShader(shader.CompileShader(GL_FRAGMENT_SHADER, "Shader/Particles.frag", PartUniName));
-	//~ GLuint Program(shader.MakeProgram(VShader, FShader));
-	//~ shader.Remove_s(VShader);
-	//~ shader.Remove_s(FShader);
 	
 	// Création du shader pour Suzanne.
 	vector<string> SuzaUniName;
@@ -115,6 +109,8 @@ int main(int argc, char **argv)
 	vector<GLushort> elements;
 	objloader.load("suzanne.obj", vertices, normals, elements);
 	int suzanne_id(meshmanager.add_mesh(vertices, normals, elements));
+	//vertices.clear(); normals.clear(); elements.clear();
+	
 	
 	
 	// Temps & évenements :
@@ -129,18 +125,22 @@ int main(int argc, char **argv)
 		{
 			if(event.type == sf::Event::Closed)
 			{
+				glClearColor(13.f/255.f, 37.f/255.f, 78.f/255.f, 0.f);
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+				vertices.clear(); normals.clear(); elements.clear();
 				objloader.~Obj();
 				meshmanager.~MeshManager();
-				//~ GenPart.~ParticleGenerator();
 				
 				window.close();
 			}
 
 			if((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
 			{
+				glClearColor(13.f/255.f, 37.f/255.f, 78.f/255.f, 0.f);
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+				vertices.clear(); normals.clear(); elements.clear();
 				objloader.~Obj();
 				meshmanager.~MeshManager();
-				//~ GenPart.~ParticleGenerator();
 				
 				window.close();
 			}
@@ -161,39 +161,6 @@ int main(int argc, char **argv)
 		// On lave la fenêtre :
 		glClearColor(13.f/255.f, 37.f/255.f, 78.f/255.f, 0.f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-		//On met à jour les particules.
-		//~ GenPart.update();
-		glm::vec3 rot_vec(cos(tclock.getElapsedTime().asMilliseconds()), sin(tclock.getElapsedTime().asMilliseconds()), 0);
-		//~ GenPart.U_InitVector(rot_vec);
-		//~ GenPart.updateVBO();
-		//~ cout << GenPart.SendOffset() << endl;
-		//~ cout << GenPart.ArrPartSize() << endl;
-		
-		//On créer les tableaux;
-		//~ int size = GenPart.ArrPartSize();
-		//~ float part_position[size*3];
-		//~ float part_color[size*3];
-		
-		//Et on les remplies :
-		//~ GenPart.SendVertexArray(part_position);
-		//~ GenPart.SendColorArray(part_color);
-
-		// On affiche tout le bordel.
-		//~ glUseProgram(Program);
-//~ 
-		//~ glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, part_position);
-		//~ glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, part_color);
-//~ 
-		//~ glEnableVertexAttribArray(0);
-		//~ glEnableVertexAttribArray(1);
-//~ 
-		//~ glDrawArrays(GL_POINTS, 0, size);
-//~ 
-		//~ glDisableVertexAttribArray(0);
-		//~ glDisableVertexAttribArray(1);
-//~ 
-		//~ glUseProgram(0);
 		
 		// On initialise les données nécessaires à l'affichage du Suzanne.
 		glm::mat4 normm(glm::transpose(projection));

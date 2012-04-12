@@ -29,10 +29,7 @@ MeshManager::MeshManager()
 
 MeshManager::~MeshManager()
 {
-	while(meshdb.size()>0)
-	{
-		meshdb.erase(meshdb.begin());
-	}
+	meshdb.clear();
 }
 
 int MeshManager::add_mesh(vector<glm::vec3> &vertices, vector<glm::vec3> &normals, vector<GLushort> &elements)

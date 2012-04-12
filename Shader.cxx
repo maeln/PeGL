@@ -31,21 +31,19 @@ string Shader::LoadShader(string filename, vector<string> &uniform)
 	ifstream source_file(filename.c_str());
 	if(!source_file) { cerr << "Erreur: Impossible de lire le fichier : " << filename << endl; exit(EXIT_FAILURE); }
 	string line;
-	while(getline(source_file, line))
+	while(getline(source_file, line)) // On lit le shader ligne par ligne.
 	{
 		source += (line + '\n');
-		if(line.substr(0, 8) == "uniform ")
-		{
+		if(line.substr(0, 8) == "uniform ") // Si la ligne commence par «uniform», on note le nom de l'uniform dans un tableau
+		{									// pour faciliter l'utilisation des shaders plus tard.
 			istringstream str(line.substr(7));
 			string type; string name;
 			str >> type;
 			str >> name;
-			name.erase(name.find(";"), 1);
+			name.erase(name.find(";"), 1);  // La déclaration d'un uniform finit toujours par «;» comme une déclaration en C. Il n'est pas utile de le garder dans le nom de l'uniform.
 			uniform.push_back(name);
 		}
 	}
-	
-	// À ce stade source.c_str() renvoie correctement le code source de Shader/Light.vert
 	
 	return source;
 	
@@ -63,7 +61,7 @@ GLuint Shader::CompileShader(GLenum shaderType, string shaderPath, vector<string
 	GLint state_s(GL_TRUE);
 	GLint logSize(0);
 	char *log(NULL);
-	string src(Shader::LoadShader(shaderPath, uniform)); // Le probléme est ici je pense. Src contient bien le code source du shader pour tout les autres shaders mais reste vide pour Shader/Light.vert
+	string src(Shader::LoadShader(shaderPath, uniform));
 	const char* src_char = src.c_str();
 	glShaderSource(shader, 1, &src_char, NULL);
 	glCompileShader(shader);
