@@ -41,6 +41,7 @@
 #include "Particle.hxx"
 #include "OBJLoader.hxx"
 #include "meshmanager.hxx"
+#include "texture.hxx"
 
 using namespace std;
 
@@ -81,6 +82,13 @@ int main(int argc, char **argv)
 	glm::mat4 projection = glm::perspective(90.f, 800.f/600.f, 1.f, 10.f);
 	glm::mat4 camera = glm::lookAt(glm::vec3(1.f, 1.f, 1.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 1.f, 0.f));
 	glm::mat4 transformation;
+	
+	// On charge les textures.
+	Texture tex;
+	sf::Image *cloud_img;
+	cloud_img = tex.LoadToMemory("Ressources/cloud.png");
+	int textureID = tex.UploadToVidMem(cloud_img);
+	int textureNumber = tex.texture_nb(textureID);
 
 	// On créer un objet Shader et on créer les programs nécessaires.
 	Shader shader;
@@ -94,11 +102,12 @@ int main(int argc, char **argv)
 	shader.Remove_s(Suzanne_vertex_shader);
 	shader.Remove_s(Suzanne_vertex_shader);
 	
+	glUseProgram(Suzanne_prog);
+	glUniform1i(SuzaUni["cloud_texture"], textureNumber);
+	glUseProgram(0);
+	
 	// Gestion de Uniform pour les shader Suzannes.
 	shader.InitUniformLocation(Suzanne_prog, SuzaUniName, SuzaUni);
-	
-	// On initialise les particules :
-	//~ ParticleGenerator GenPart(glm::vec3(0, 0, 0), 1000, 100, 100, glm::vec3(0, 1, 0), (M_PI/4.0), glm::vec3(255,255,255));
 	
 	// On charge un model OBJ.
 	Obj objloader;
@@ -176,6 +185,7 @@ int main(int argc, char **argv)
 			static string framerate = "PeGL. FPS: " + os.str();
 			window.setTitle(framerate);
 			delta_time = Time.getElapsedTime().asSeconds();
+			delta_frame = 0;
 		}
 
 		// On lave la fenêtre :
@@ -185,16 +195,23 @@ int main(int argc, char **argv)
 		// On initialise les données nécessaires à l'affichage du Suzanne.
 		glm::mat4 normm(glm::transpose(projection));
 		glm::vec4 light(0, 2, 1, 1);
+		camera = glm::rotate(camera, (float)(M_PI/180.f)*Time.getElapsedTime().asSeconds(), glm::vec3(0,1,0));
 		
 		glUseProgram(Suzanne_prog);
 		
 		// On affiche suzanne.
 		glBindVertexArray(suzanne_id);
+		
+		glActiveTexture(GL_TEXTURE0 + textureNumber);
+		glBindTexture(GL_TEXTURE_2D, textureID);
+		
 		glUniformMatrix4fv(SuzaUni["world"], 1, GL_FALSE, glm::value_ptr(camera));
 		glUniformMatrix4fv(SuzaUni["perspective"], 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix3fv(SuzaUni["normalMatrix"], 1, GL_FALSE, glm::value_ptr(normm));
 		glUniform4fv(SuzaUni["light_dir"], 1, glm::value_ptr(light));
+		
 		glDrawElements(GL_TRIANGLES, (sizeof(elements[0])*elements.size()), GL_UNSIGNED_SHORT, 0);
+		
 		glBindVertexArray(0);
 		
 

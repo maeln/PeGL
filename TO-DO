@@ -15,4 +15,7 @@ TO-DO:
 	* Divers
 	- Triangle de sierpinski en 3D, parce que, franchement, c'est la classe.
 	
+	* OO
+	- Transformer les classes "textures", "mesh" et autres en manager et créer de vrais objets "texture", "mesh", ... (contenant les données et info de ceux-ci)
+	
 	

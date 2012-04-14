@@ -25,6 +25,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <SFML/Graphics.hpp>
+#include <map>
 
 class Texture
 {
@@ -33,9 +34,10 @@ class Texture
 		virtual ~Texture();
 		sf::Image* LoadToMemory(std::string filename);
 		GLuint UploadToVidMem(sf::Image*);
+		int texture_nb(GLuint);
 	
 	private:
-		/* add your private declarations */
+		std::map<GLuint, int> texture_position;
 };
 
 #endif /* TEXTURE_HXX */ 

@@ -24,7 +24,7 @@ using namespace std;
 
 Texture::Texture()
 {
-	
+	texture_position.clear();
 }
 
 
@@ -72,5 +72,12 @@ GLuint Texture::UploadToVidMem(sf::Image *image)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	
+	texture_position[texture] = texture_position.size()-1;
+	
 	return texture;
+}
+
+int Texture::texture_nb(GLuint texture_id)
+{
+	return texture_position[texture_id];
 }
