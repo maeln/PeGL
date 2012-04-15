@@ -21,21 +21,11 @@
 #ifndef OBJECTMANAGER_HXX
 #define OBJECTMANAGER_HXX
 
-/*
- * Cette classe s'occupe de stocker l'adresse des mesh, vbo, textures ...
- * de les redistribuer si besoin et surtout
- * de les décharger proprement.
-*/
-
 class ObjectManager
 {
 	public:
 		ObjectManager();
 		virtual ~ObjectManager();
-		void add_texture(GLuint id);
-		void add_vbo(GLuint id);
-		void add_vao(GLuint id);
-		void add_mesh(
 	
 	private:
 		/* add your private declarations */
