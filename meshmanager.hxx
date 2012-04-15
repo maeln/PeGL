@@ -24,7 +24,6 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <map>
 #include <stdlib.h>
 #include <GL/glew.h>
 #include <GL/gl.h>
@@ -37,6 +36,8 @@
 typedef struct
 {
 	GLuint vao_loc;
+	GLuint vbo_loc[3];
+	size_t elements_size;
 } MeshVAO;
 
 class MeshManager
@@ -46,10 +47,11 @@ class MeshManager
 		virtual ~MeshManager();
 		// Ajoute le mesh à la table de hashage et créer VBO/VAO.
 		int add_mesh(std::vector<glm::vec3> &vertices, std::vector<glm::vec3> &normals, std::vector<GLushort> &elments);
+		MeshVAO r_mesh(int id);
 		
 	
 	private:
-		std::map<int, MeshVAO> meshdb;
+		std::vector<MeshVAO> meshdb;
 		/* add your private declarations */
 };
 

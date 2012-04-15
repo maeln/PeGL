@@ -9,13 +9,10 @@ TO-DO:
 	* Debug
 	- Pouvoir changer des données ( ex: FOV ) pendant que l'appli' tourne.
 	
-	* Code
-	- Décharger proprement les classes, variables, etc, avant la fermeture du logiciel.
-	
 	* Divers
 	- Triangle de sierpinski en 3D, parce que, franchement, c'est la classe.
 	
-	* OO
-	- Transformer les classes "textures", "mesh" et autres en manager et créer de vrais objets "texture", "mesh", ... (contenant les données et info de ceux-ci)
+	* Mémoire
+	- Une classe qui gére tout les meshs/shader/etc et les effaces proprements quand nécessaire. /!\ IMPORTANT
 	
 	

@@ -81,3 +81,10 @@ void Obj::arrayVec3toArrayFloat(vector<glm::vec3> arrayVec, float* arrayFloat)
 	}
 }
 
+void Obj::arrayGLushort(vector<GLushort> arrayGLushort, GLushort* output)
+{
+	for(unsigned int i=0; i < arrayGLushort.size(); ++i)
+	{
+		output[i] = arrayGLushort[i];
+	}
+}

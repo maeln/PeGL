@@ -50,17 +50,23 @@ int MeshManager::add_mesh(vector<glm::vec3> &vertices, vector<glm::vec3> &normal
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices_f), vertices_f, GL_STREAM_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	
+	meshVAO.vbo_loc[0] = s_vertices_vbo;
+	
 	GLuint s_normals_vbo;
 	glGenBuffers(1, &s_normals_vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, s_normals_vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(normals_f), normals_f, GL_STREAM_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	
+	meshVAO.vbo_loc[1] = s_normals_vbo;
+	
 	GLuint s_indices_vbo;
 	glGenBuffers(1, &s_indices_vbo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_indices_vbo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (sizeof(elements[0])*elements.size()), elements.data(), GL_STREAM_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	
+	meshVAO.vbo_loc[2] = s_indices_vbo;
 	
 	GLuint i_vao;
 	glGenVertexArrays(1, &i_vao);
@@ -74,10 +80,17 @@ int MeshManager::add_mesh(vector<glm::vec3> &vertices, vector<glm::vec3> &normal
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_indices_vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+	
 	meshVAO.vao_loc = i_vao;
+	meshVAO.elements_size = sizeof(elements[0])*elements.size();
 	
 	int id(meshdb.size());
-	meshdb[id] = meshVAO;
+	meshdb.push_back(meshVAO);
 	
-	return meshdb.size();
+	return id;
+}
+
+MeshVAO MeshManager::r_mesh(int id)
+{
+	return meshdb[id];
 }

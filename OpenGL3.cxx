@@ -86,8 +86,8 @@ int main(int argc, char **argv)
 	// On charge les textures.
 	Texture tex;
 	sf::Image *cloud_img;
-	cloud_img = tex.LoadToMemory("Ressources/cloud.png");
-	int textureID = tex.UploadToVidMem(cloud_img);
+	cloud_img = tex.LoadToMemory("Ressources/udlr.png");
+	GLuint textureID = tex.UploadToVidMem(cloud_img);
 	int textureNumber = tex.texture_nb(textureID);
 
 	// On créer un objet Shader et on créer les programs nécessaires.
@@ -119,7 +119,8 @@ int main(int argc, char **argv)
 	vector<GLushort> elements;
 	objloader.load("suzanne.obj", vertices, normals, elements);
 	int suzanne_id(meshmanager.add_mesh(vertices, normals, elements));
-	//vertices.clear(); normals.clear(); elements.clear();
+	vertices.clear(); normals.clear(); elements.clear();
+	MeshVAO suzanne = meshmanager.r_mesh(suzanne_id);
 	
 	
 	
@@ -132,34 +133,25 @@ int main(int argc, char **argv)
 	float delta_time(Time.getElapsedTime().asSeconds());
 	float current_time(0);
 	float fps(0);
+	float rot_time(Time.getElapsedTime().asSeconds());
 
 	while(window.isOpen())
 	{
 		sf::Event event;
 		while(window.pollEvent(event))
 		{
-			if(event.type == sf::Event::Closed)
+			if((event.type == sf::Event::Closed) || ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape)))
 			{
-				glClearColor(13.f/255.f, 37.f/255.f, 78.f/255.f, 0.f);
-				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-				vertices.clear(); normals.clear(); elements.clear();
+				glDeleteTextures(1, &textureID);
+				glDeleteProgram(Suzanne_prog);
+				glDeleteBuffers(3, suzanne.vbo_loc);
+				glDeleteVertexArrays(1, &suzanne.vao_loc);
 				objloader.~Obj();
 				meshmanager.~MeshManager();
 				
 				window.close();
 			}
-
-			if((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
-			{
-				glClearColor(13.f/255.f, 37.f/255.f, 78.f/255.f, 0.f);
-				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-				vertices.clear(); normals.clear(); elements.clear();
-				objloader.~Obj();
-				meshmanager.~MeshManager();
-				
-				window.close();
-			}
-
+			
 			if(event.type == sf::Event::Resized)
 			{
 				glViewport(0, 0, (float)event.size.width, (float)event.size.height);
@@ -176,7 +168,7 @@ int main(int argc, char **argv)
 		//Compteur de fps.
 		++delta_frame;
 		current_time = Time.getElapsedTime().asSeconds();
-		if(current_time > (delta_time+1))
+		if(current_time > (delta_time+0.1))
 		{
 			delta_time = current_time - delta_time;
 			fps = delta_frame / delta_time;
@@ -195,12 +187,17 @@ int main(int argc, char **argv)
 		// On initialise les données nécessaires à l'affichage du Suzanne.
 		glm::mat4 normm(glm::transpose(projection));
 		glm::vec4 light(0, 2, 1, 1);
-		camera = glm::rotate(camera, (float)(M_PI/180.f)*Time.getElapsedTime().asSeconds(), glm::vec3(0,1,0));
+		
+		if(rot_time+0.0001 < Time.getElapsedTime().asSeconds())
+		{
+			camera = glm::rotate(camera, (float)(M_PI/180.f)*5, glm::vec3(0,1,0));
+			rot_time = Time.getElapsedTime().asSeconds();
+		}
 		
 		glUseProgram(Suzanne_prog);
 		
 		// On affiche suzanne.
-		glBindVertexArray(suzanne_id);
+		glBindVertexArray(suzanne.vao_loc);
 		
 		glActiveTexture(GL_TEXTURE0 + textureNumber);
 		glBindTexture(GL_TEXTURE_2D, textureID);
@@ -210,7 +207,7 @@ int main(int argc, char **argv)
 		glUniformMatrix3fv(SuzaUni["normalMatrix"], 1, GL_FALSE, glm::value_ptr(normm));
 		glUniform4fv(SuzaUni["light_dir"], 1, glm::value_ptr(light));
 		
-		glDrawElements(GL_TRIANGLES, (sizeof(elements[0])*elements.size()), GL_UNSIGNED_SHORT, 0);
+		glDrawElements(GL_TRIANGLES, suzanne.elements_size, GL_UNSIGNED_SHORT, 0);
 		
 		glBindVertexArray(0);
 		
