@@ -37,7 +37,6 @@
 #include <cstdlib>
 #include <time.h>
 #include "Shader.hxx"
-#include "VBHandler.hxx"
 #include "Particle.hxx"
 #include "OBJLoader.hxx"
 #include "meshmanager.hxx"

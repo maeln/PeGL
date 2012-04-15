@@ -2,7 +2,7 @@ CC = g++
 CLANG = clang++
 
 CFLAGS = -Wall -g
-RELEASEFLAG = -Wall -O3 -s
+RELEASEFLAG = -Wall -O3 -Os -s
 DEBUGFLAG = -g -Wall
 
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lGL -lGLU -lGLEW
@@ -14,8 +14,6 @@ TARGETP = Particle
 
 SRC = OpenGL3.cxx \
 		Shader.cxx \
-		Matrix.cxx \
-		VBHandler.cxx \
 		OBJLoader.cxx \
 		Particle.cxx \
 		meshmanager.cxx \
