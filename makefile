@@ -3,21 +3,17 @@ CLANG = clang++
 
 CFLAGS = -Wall -g
 RELEASEFLAG = -Wall -O3 -Os -s
-DEBUGFLAG = -g -Wall
 
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lGL -lGLU -lGLEW
 
-TARGET = OpenGL3
-TARGETDBG = dbgOpenGL3
+TARGET = PeGL
 TARGETR = TeenSy
-TARGETP = Particle
 
-SRC = OpenGL3.cxx \
-		Shader.cxx \
-		OBJLoader.cxx \
-		Particle.cxx \
-		meshmanager.cxx \
-		texture.cxx
+SRC = PeGL.cxx \
+		shaderloader.cxx \
+		imageloader.cxx \
+		meshloader.cxx \
+		objectmanager.cxx \
 		
 OBJ = $(SRC:.cxx=.o)
 

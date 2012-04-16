@@ -21,14 +21,17 @@
 #ifndef IMAGELOADER_HXX
 #define IMAGELOADER_HXX
 
-class ImageLoader
+namespace PeGL
 {
-	public:
-		ImageLoader();
-		virtual ~ImageLoader();
-	
-	private:
-		/* add your private declarations */
-};
+	class ImageLoader
+	{
+		public:
+			ImageLoader();
+			virtual ~ImageLoader();
+		
+		private:
+			/* add your private declarations */
+	};
+}
 
 #endif /* IMAGELOADER_HXX */ 

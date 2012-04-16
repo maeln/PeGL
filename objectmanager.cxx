@@ -20,6 +20,8 @@
 
 #include "objectmanager.hxx"
 
+namespace PeGL
+{
 
 ObjectManager::ObjectManager()
 {
@@ -32,3 +34,4 @@ ObjectManager::~ObjectManager()
 	
 }
 
+}

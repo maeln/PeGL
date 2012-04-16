@@ -20,6 +20,8 @@
 
 #include "imageloader.hxx"
 
+namespace PeGL
+{
 
 ImageLoader::ImageLoader()
 {
@@ -32,3 +34,4 @@ ImageLoader::~ImageLoader()
 	
 }
 
+}

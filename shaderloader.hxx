@@ -21,14 +21,43 @@
 #ifndef SHADERLOADER_HXX
 #define SHADERLOADER_HXX
 
-class ShaderLoader
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <GL/glew.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <vector>
+#include <string>
+#include <map>
+#include <stdlib.h>
+
+namespace PeGL
 {
-	public:
-		ShaderLoader();
-		virtual ~ShaderLoader();
+	typedef struct
+	{
+		GLuint addr;
+		std::vector<std::string> uniform;
+	} shader;
 	
-	private:
-		/* add your private declarations */
-};
+	typedef struct
+	{
+		GLuint addr;
+		std::vector<GLuint> shader;
+		std::map<std::string, GLuint> uniform;
+	} program;
+	
+	class ShaderLoader
+	{
+		public:
+			ShaderLoader();
+			virtual ~ShaderLoader();
+			shader 	loadShader(std::string filename, GLenum shader_type); // charge et compile le shader.
+			program	createProgram(std::vector<shader> pshader);
+		
+		private:
+			/* add your private declarations */
+	};
+}
 
 #endif /* SHADERLOADER_HXX */ 

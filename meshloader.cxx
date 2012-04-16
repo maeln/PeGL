@@ -20,6 +20,8 @@
 
 #include "meshloader.hxx"
 
+namespace PeGL
+{
 
 MeshLoader::MeshLoader()
 {
@@ -32,3 +34,4 @@ MeshLoader::~MeshLoader()
 	
 }
 
+}

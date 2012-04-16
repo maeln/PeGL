@@ -21,14 +21,17 @@
 #ifndef MESHLOADER_HXX
 #define MESHLOADER_HXX
 
-class MeshLoader
+namespace PeGL
 {
-	public:
-		MeshLoader();
-		virtual ~MeshLoader();
-	
-	private:
-		/* add your private declarations */
-};
+	class MeshLoader
+	{
+		public:
+			MeshLoader();
+			virtual ~MeshLoader();
+		
+		private:
+			/* add your private declarations */
+	};
+}
 
 #endif /* MESHLOADER_HXX */ 

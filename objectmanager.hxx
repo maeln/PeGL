@@ -21,14 +21,17 @@
 #ifndef OBJECTMANAGER_HXX
 #define OBJECTMANAGER_HXX
 
-class ObjectManager
+namespace PeGL
 {
-	public:
-		ObjectManager();
-		virtual ~ObjectManager();
-	
-	private:
-		/* add your private declarations */
-};
+	class ObjectManager
+	{
+		public:
+			ObjectManager();
+			virtual ~ObjectManager();
+		
+		private:
+			/* add your private declarations */
+	};
+}
 
 #endif /* OBJECTMANAGER_HXX */ 
