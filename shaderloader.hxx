@@ -21,16 +21,7 @@
 #ifndef SHADERLOADER_HXX
 #define SHADERLOADER_HXX
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <GL/glew.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <vector>
-#include <string>
-#include <map>
-#include <stdlib.h>
+#include "deps.hxx"
 
 namespace PeGL
 {

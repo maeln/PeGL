@@ -21,13 +21,24 @@
 #ifndef MESHLOADER_HXX
 #define MESHLOADER_HXX
 
+#include "deps.hxx"
+
 namespace PeGL
 {
+	typedef struct
+	{
+		std::vector<GLuint> vbo;
+		GLuint vao;
+		size_t elements_size;
+	} mesh;
+	
 	class MeshLoader
 	{
 		public:
 			MeshLoader();
 			virtual ~MeshLoader();
+			mesh loadMesh(std::string filename);
+			void vec3float(std::vector<glm::vec3> vec3, float* output);
 		
 		private:
 			/* add your private declarations */
