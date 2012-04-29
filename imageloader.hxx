@@ -21,13 +21,22 @@
 #ifndef IMAGELOADER_HXX
 #define IMAGELOADER_HXX
 
+#include "deps.hxx"
+
 namespace PeGL
 {
+	typedef struct
+	{
+		int id;
+		GLuint addr;
+	} texture;
+	
 	class ImageLoader
 	{
 		public:
 			ImageLoader();
 			virtual ~ImageLoader();
+			texture loadImage(std::string filename);
 		
 		private:
 			/* add your private declarations */
