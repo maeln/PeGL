@@ -19,6 +19,7 @@ extern "C"
 	#include <GL/glu.h>
 	#include <png.h>
 	#include <zlib.h>
+	#include <SOIL.h>
 }
 
 #endif 

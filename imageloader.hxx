@@ -27,7 +27,6 @@ namespace PeGL
 {
 	typedef struct
 	{
-		int id;
 		GLuint addr;
 	} texture;
 	
@@ -37,6 +36,7 @@ namespace PeGL
 			ImageLoader();
 			virtual ~ImageLoader();
 			texture loadImage(std::string filename);
+			void readPNG(png_structp pngPtr, png_bytep pixelData, png_size_t length);
 		
 		private:
 			/* add your private declarations */
