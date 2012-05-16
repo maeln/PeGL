@@ -34,10 +34,10 @@ ShaderLoader::~ShaderLoader()
 	
 }
 
-shader ShaderLoader::loadShader(std::string filename, GLenum shader_type)
+PeShader ShaderLoader::loadShader(std::string filename, GLenum shader_type)
 {
 	std::string source;
-	shader pshader;
+	PeShader pshader;
 	
 	std::ifstream source_file(filename.c_str());
 	if(!source_file) { std::cerr << "Erreur: Impossible de lire le fichier : " << filename << std::endl; exit(EXIT_FAILURE); }
@@ -96,9 +96,9 @@ shader ShaderLoader::loadShader(std::string filename, GLenum shader_type)
 	return pshader;
 }
 
-program ShaderLoader::createProgram(std::vector<shader> pshader)
+PeProgram ShaderLoader::createProgram(std::vector<PeShader> pshader)
 {
-	program oprogram;
+	PeProgram oprogram;
 	GLuint tmpProg(glCreateProgram());
 	GLint logSize(0);
 	GLint state_p(GL_TRUE);

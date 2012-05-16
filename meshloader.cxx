@@ -34,7 +34,7 @@ MeshLoader::~MeshLoader()
 	
 }
 
-mesh MeshLoader::loadMesh(std::string filename)
+PeMesh MeshLoader::loadMesh(std::string filename)
 {
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec3> normals;
@@ -89,7 +89,7 @@ mesh MeshLoader::loadMesh(std::string filename)
 	vec3float(vertices, vertices_f);
 	vec3float(normals, normals_f);
 	
-	mesh output_mesh;
+	PeMesh output_mesh;
 	
 	// Création des VBO.
 	GLuint s_vertices_vbo;

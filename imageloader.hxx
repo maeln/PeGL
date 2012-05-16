@@ -27,18 +27,19 @@ namespace PeGL
 {
 	typedef struct
 	{
+		int id;
 		GLuint addr;
-	} texture;
+	} PeTexture;
 	
 	class ImageLoader
 	{
 		public:
 			ImageLoader();
 			virtual ~ImageLoader();
-			texture loadImage(std::string filename);
-			void readPNG(png_structp pngPtr, png_bytep pixelData, png_size_t length);
+			PeTexture loadImage(std::string filename);
 		
 		private:
+			int tex_nb;
 			/* add your private declarations */
 	};
 }

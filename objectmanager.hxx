@@ -30,8 +30,21 @@
 // d'erreur ( pointeur = NULL -> erreur durent le chargement ).       //
 ////////////////////////////////////////////////////////////////////////
 
+#include "shaderloader.hxx"
+#include "meshloader.hxx"
+#include "imageloader.hxx"
+
 namespace PeGL
 {
+	class PeDW
+	{
+		public:
+		PeDW(mesh wire, texture image, program shading);
+		
+		private:
+		mesh 
+	};
+	
 	class ObjectManager
 	{
 		public:

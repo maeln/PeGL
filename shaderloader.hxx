@@ -29,22 +29,22 @@ namespace PeGL
 	{
 		GLuint addr;
 		std::vector<std::string> uniform;
-	} shader;
+	} PeShader;
 	
 	typedef struct
 	{
 		GLuint addr;
 		std::vector<GLuint> shader;
 		std::map<std::string, GLuint> uniform;
-	} program;
+	} PeProgram;
 	
 	class ShaderLoader
 	{
 		public:
 			ShaderLoader();
 			virtual ~ShaderLoader();
-			shader 	loadShader(std::string filename, GLenum shader_type); // charge et compile le shader.
-			program	createProgram(std::vector<shader> pshader);
+			PeShader 	loadShader(std::string filename, GLenum shader_type); // charge et compile le shader.
+			PeProgram	createProgram(std::vector<PeShader> pshader);
 		
 		private:
 			/* add your private declarations */

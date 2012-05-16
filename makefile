@@ -4,7 +4,7 @@ CLANG = clang++
 CFLAGS = -Wall -g
 RELEASEFLAG = -Wall -O3 -Os -s
 
-LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lGL -lGLU -lGLEW -lil
+LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lGL -lGLU -lGLEW -lSOIL
 
 TARGET = PeGL
 TARGETR = TeenSy

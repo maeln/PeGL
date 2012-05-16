@@ -20,14 +20,12 @@
 
 #include "imageloader.hxx"
 
-#define PNGSIGSIZE 8
-
 namespace PeGL
 {
 
 ImageLoader::ImageLoader()
 {
-	
+	tex_nb = 0;
 }
 
 
@@ -36,11 +34,15 @@ ImageLoader::~ImageLoader()
 	
 }
 
-texture ImageLoader::loadImage(std::string filename)
+PeTexture ImageLoader::loadImage(std::string filename)
 {
 	GLuint oglimg = SOIL_load_OGL_texture(filename.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
-	texture tex2d;
+	PeTexture tex2d;
+	
+	tex2d.id = tex_nb;
 	tex2d.addr = oglimg;
+	
+	++tex_nb;
 	
 	return tex2d;
 }
