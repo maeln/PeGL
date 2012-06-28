@@ -71,4 +71,44 @@ int ObjectManager::draw_PeDW(PeDW obj, glm::vec4 light_position, glm::mat4 world
 	return 0; // O -> pas d'erreurs.
 }
 
+void ObjectManager::clean_shader(PeShader shader)
+{
+	glDeleteShader(shader.addr);
+	shader.uniform.clear();
+	
+	delete(&shader);
+}
+
+void ObjectManager::clean_program(PeProgram program)
+{
+	glDeleteProgram(program.addr);
+	program.uniform.clear();
+	
+	delete(&program);
+}
+
+void ObjectManager::clean_mesh(PeMesh mesh)
+{
+	glDeleteBuffers(mesh.vbo.size(), mesh.vbo.get_allocator().allocate(mesh.vbo.size()));
+	glDeleteVertexArrays(1, &mesh.vao);
+	
+	delete(&mesh);
+}
+
+void ObjectManager::clean_image(PeTexture texture)
+{
+	glDeleteTextures(1, &texture.addr);
+	
+	delete(&texture);
+}
+
+void ObjectManager::clean_PeDW(PeDW obj)
+{
+	ObjectManager::clean_image(obj.texture);
+	ObjectManager::clean_program(obj.shaders);
+	ObjectManager::clean_mesh(obj.mesh);
+	
+	delete(&obj);
+}
+
 }

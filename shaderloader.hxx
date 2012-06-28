@@ -31,6 +31,10 @@ namespace PeGL
 		std::vector<std::string> uniform;
 	} PeShader;
 	
+	// Note : 
+	// Les shaders ne sont pas effacé après création du Program afin de pouvoir être utilisé plusieurs fois
+	// sans avoir à être recharger manuellement ( évite trop d'I/O ).
+	
 	typedef struct
 	{
 		GLuint addr;

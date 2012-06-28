@@ -48,10 +48,13 @@ namespace PeGL
 		public:
 			ObjectManager();
 			virtual ~ObjectManager();
+			
 			int draw_PeDW(PeDW obj, glm::vec4 light_position, glm::mat4 world, glm::mat4 perspective, glm::mat4 normal);
 			
 			void clean_PeDW(PeDW);
+			
 			void clean_program(PeProgram);
+			void clean_shader(PeShader);
 			void clean_mesh(PeMesh);
 			void clean_image(PeTexture);
 		
