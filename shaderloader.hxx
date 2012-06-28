@@ -29,6 +29,7 @@ namespace PeGL
 	{
 		GLuint addr;
 		std::vector<std::string> uniform;
+		GLenum type;
 	} PeShader;
 	
 	// Note : 

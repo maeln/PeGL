@@ -34,6 +34,32 @@ ObjectManager::~ObjectManager()
 	
 }
 
+PeDW ObjectManager::load_PeDW(std::string meshfile, std::string imgfile, std::string vshadfile, std::string pshadfile)
+{
+	PeMesh mesh;
+	PeTexture texture;
+	std::vector<PeShader> shaders;
+	PeProgram program;
+	
+	ShaderLoader shdl;
+	shaders.push_back(shdl.loadShader(vshadfile, GL_VERTEX_SHADER));
+	shaders.push_back(shdl.loadShader(pshadfile, GL_FRAGMENT_SHADER));
+	program = shdl.createProgram(shaders);
+	
+	MeshLoader mshl;
+	mesh = mshl.loadMesh(meshfile);
+	
+	ImageLoader imgl;
+	texture = imgl.loadImage(imgfile);
+	
+	PeDW dw;
+	dw.mesh = mesh;
+	dw.texture = texture;
+	dw.shaders = program;
+	
+	return dw;
+}
+
 int ObjectManager::draw_PeDW(PeDW obj, glm::vec4 light_position, glm::mat4 world, glm::mat4 perspective, glm::mat4 normal) 
 // devrait prendre en argument le nom des uniforms a utiliser et leurs valeurs ( via tableaux ? ).
 // Ou alors : Filer la map des uniform AVANT et renvoyer un tableaux associatif "uniform"->"valeur" à la fonction ? ( + différent type a gérer = fait chier).
@@ -89,7 +115,7 @@ void ObjectManager::clean_program(PeProgram program)
 
 void ObjectManager::clean_mesh(PeMesh mesh)
 {
-	glDeleteBuffers(mesh.vbo.size(), mesh.vbo.get_allocator().allocate(mesh.vbo.size()));
+	glDeleteBuffers(mesh.vbo.size(), mesh.vbo.data());
 	glDeleteVertexArrays(1, &mesh.vao);
 	
 	delete(&mesh);

@@ -91,6 +91,7 @@ PeShader ShaderLoader::loadShader(std::string filename, GLenum shader_type)
 	{
 		std::cout << "Info: Shader créer avec succès." << std::endl;
 		pshader.addr = tmp;
+		pshader.type = shader_type;
 	}
 	
 	return pshader;
@@ -136,7 +137,7 @@ PeProgram ShaderLoader::createProgram(std::vector<PeShader> pshader)
 		oprogram.addr = tmpProg;
 		for(unsigned int i=0; i < pshader.size(); ++i)
 		{
-			for(unsigned int n=0; i < pshader[i].uniform.size(); ++n)
+			for(unsigned int n=0; n < pshader[i].uniform.size(); ++n)
 			{
 				oprogram.uniform[pshader[i].uniform[n]] = glGetUniformLocation(oprogram.addr, pshader[i].uniform[n].c_str());
 			}

@@ -49,6 +49,8 @@ namespace PeGL
 			ObjectManager();
 			virtual ~ObjectManager();
 			
+			PeDW load_PeDW(std::string meshfile, std::string imgfile, std::string vshadfile, std::string pshadfile);
+			
 			int draw_PeDW(PeDW obj, glm::vec4 light_position, glm::mat4 world, glm::mat4 perspective, glm::mat4 normal);
 			
 			void clean_PeDW(PeDW);
