@@ -1,18 +1,58 @@
 \hypertarget{classPeGL_1_1ImageLoader}{\section{Pe\-G\-L\-:\-:Image\-Loader Class Reference}
 \label{classPeGL_1_1ImageLoader}\index{Pe\-G\-L\-::\-Image\-Loader@{Pe\-G\-L\-::\-Image\-Loader}}
 }
+
+
+Utilise S\-O\-I\-L pour charger des images et les uploader en mémoire vidéo.  
+
+
+
+
+{\ttfamily \#include $<$imageloader.\-hxx$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classPeGL_1_1ImageLoader_aeb528e3bc635d7817fc477326e0d1e4a}{\hyperlink{structPeGL_1_1PeTexture}{Pe\-Texture} {\bfseries load\-Image} (std\-::string filename)}\label{classPeGL_1_1ImageLoader_aeb528e3bc635d7817fc477326e0d1e4a}
+\hypertarget{classPeGL_1_1ImageLoader_a57358d754ff70ad64036dfd98ae72aab}{\hyperlink{classPeGL_1_1ImageLoader_a57358d754ff70ad64036dfd98ae72aab}{Image\-Loader} ()}\label{classPeGL_1_1ImageLoader_a57358d754ff70ad64036dfd98ae72aab}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructeur de la classe \hyperlink{classPeGL_1_1ImageLoader}{Image\-Loader}. \end{DoxyCompactList}\item 
+\hypertarget{classPeGL_1_1ImageLoader_a1a9cdaf8fb35d6abc8c11deb3ee9c54f}{virtual \hyperlink{classPeGL_1_1ImageLoader_a1a9cdaf8fb35d6abc8c11deb3ee9c54f}{$\sim$\-Image\-Loader} ()}\label{classPeGL_1_1ImageLoader_a1a9cdaf8fb35d6abc8c11deb3ee9c54f}
+
+\begin{DoxyCompactList}\small\item\em Destructeur de la classe \hyperlink{classPeGL_1_1ImageLoader}{Image\-Loader}. \end{DoxyCompactList}\item 
+\hyperlink{structPeGL_1_1PeTexture}{Pe\-Texture} \hyperlink{classPeGL_1_1ImageLoader_aeb528e3bc635d7817fc477326e0d1e4a}{load\-Image} (std\-::string filename)
+\begin{DoxyCompactList}\small\item\em Charge une image dans la mémoire vidéo. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
+Utilise S\-O\-I\-L pour charger des images et les uploader en mémoire vidéo. 
+
+Definition at line 50 of file imageloader.\-hxx.
 
 
-Definition at line 42 of file imageloader.\-hxx.
+
+\subsection{Member Function Documentation}
+\hypertarget{classPeGL_1_1ImageLoader_aeb528e3bc635d7817fc477326e0d1e4a}{\index{Pe\-G\-L\-::\-Image\-Loader@{Pe\-G\-L\-::\-Image\-Loader}!load\-Image@{load\-Image}}
+\index{load\-Image@{load\-Image}!PeGL::ImageLoader@{Pe\-G\-L\-::\-Image\-Loader}}
+\subsubsection[{load\-Image}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Pe\-Texture} Pe\-G\-L\-::\-Image\-Loader\-::load\-Image (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{filename}
+\end{DoxyParamCaption}
+)}}\label{classPeGL_1_1ImageLoader_aeb528e3bc635d7817fc477326e0d1e4a}
+
+
+Charge une image dans la mémoire vidéo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & \-: Chemin de l'image à charger. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Retourne un objet \hyperlink{structPeGL_1_1PeTexture}{Pe\-Texture} utilisable. 
+\end{DoxyReturn}
+
+
+Definition at line 37 of file imageloader.\-cxx.
 
 
 

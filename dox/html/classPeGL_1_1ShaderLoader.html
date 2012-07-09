@@ -70,7 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -92,26 +92,104 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
+<p>Gère le chargement et la création des shaders.  
+ <a href="classPeGL_1_1ShaderLoader.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="shaderloader_8hxx_source.html">shaderloader.hxx</a>&gt;</code></p>
+
 <p><a href="classPeGL_1_1ShaderLoader-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a74c1e46b5637ef5a22544cee5947201f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a74c1e46b5637ef5a22544cee5947201f"></a>
-<a class="el" href="structPeGL_1_1PeShader.html">PeShader</a>&#160;</td><td class="memItemRight" valign="bottom"><b>loadShader</b> (std::string filename, GLenum shader_type)</td></tr>
-<tr class="memitem:a0570f0dd3e3e87a5016b41684b54bd0a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0570f0dd3e3e87a5016b41684b54bd0a"></a>
-<a class="el" href="structPeGL_1_1PeProgram.html">PeProgram</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createProgram</b> (std::vector&lt; <a class="el" href="structPeGL_1_1PeShader.html">PeShader</a> &gt; pshader)</td></tr>
+<tr class="memitem:a0a5819c67a0b8c67e527cc08f9b84801"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0a5819c67a0b8c67e527cc08f9b84801"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeGL_1_1ShaderLoader.html#a0a5819c67a0b8c67e527cc08f9b84801">ShaderLoader</a> ()</td></tr>
+<tr class="memdesc:a0a5819c67a0b8c67e527cc08f9b84801"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur de la classe <a class="el" href="classPeGL_1_1ShaderLoader.html" title="Gère le chargement et la création des shaders.">ShaderLoader</a>. <br/></td></tr>
+<tr class="memitem:a9756797fe15fc10a8616e1e1984f46ea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9756797fe15fc10a8616e1e1984f46ea"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeGL_1_1ShaderLoader.html#a9756797fe15fc10a8616e1e1984f46ea">~ShaderLoader</a> ()</td></tr>
+<tr class="memdesc:a9756797fe15fc10a8616e1e1984f46ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructeur de la classe <a class="el" href="classPeGL_1_1ShaderLoader.html" title="Gère le chargement et la création des shaders.">ShaderLoader</a>. <br/></td></tr>
+<tr class="memitem:a74c1e46b5637ef5a22544cee5947201f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPeGL_1_1PeShader.html">PeShader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeGL_1_1ShaderLoader.html#a74c1e46b5637ef5a22544cee5947201f">loadShader</a> (std::string filename, GLenum shader_type)</td></tr>
+<tr class="memdesc:a74c1e46b5637ef5a22544cee5947201f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Charge un shader.  <a href="#a74c1e46b5637ef5a22544cee5947201f"></a><br/></td></tr>
+<tr class="memitem:a0570f0dd3e3e87a5016b41684b54bd0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPeGL_1_1PeProgram.html">PeProgram</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPeGL_1_1ShaderLoader.html#a0570f0dd3e3e87a5016b41684b54bd0a">createProgram</a> (std::vector&lt; <a class="el" href="structPeGL_1_1PeShader.html">PeShader</a> &gt; pshader)</td></tr>
+<tr class="memdesc:a0570f0dd3e3e87a5016b41684b54bd0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Créer un program.  <a href="#a0570f0dd3e3e87a5016b41684b54bd0a"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="shaderloader_8hxx_source.html#l00054">54</a> of file <a class="el" href="shaderloader_8hxx_source.html">shaderloader.hxx</a>.</p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+<div class="textblock"><p>Gère le chargement et la création des shaders. </p>
+
+<p>Definition at line <a class="el" href="shaderloader_8hxx_source.html#l00062">62</a> of file <a class="el" href="shaderloader_8hxx_source.html">shaderloader.hxx</a>.</p>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a0570f0dd3e3e87a5016b41684b54bd0a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPeGL_1_1PeProgram.html">PeProgram</a> PeGL::ShaderLoader::createProgram </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structPeGL_1_1PeShader.html">PeShader</a> &gt;&#160;</td>
+          <td class="paramname"><em>pshader</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Créer un program. </p>
+<dl class="params"><dt>Parameters:</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pshader</td><td>: Tableau dynamique ( vector ) d'objet <a class="el" href="structPeGL_1_1PeShader.html" title="Variable contenant l&#39;adresse du shader, un tableau de ses uniforms et le type de shader.">PeShader</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>Retourne un objet <a class="el" href="structPeGL_1_1PeProgram.html" title="Variable contenant l&#39;adresse d&#39;un programme, l&#39;adresse de ses shaders et un tableau de ses uniforms...">PeProgram</a> utilisable. </dd></dl>
+
+<p>Definition at line <a class="el" href="shaderloader_8cxx_source.html#l00100">100</a> of file <a class="el" href="shaderloader_8cxx_source.html">shaderloader.cxx</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a74c1e46b5637ef5a22544cee5947201f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPeGL_1_1PeShader.html">PeShader</a> PeGL::ShaderLoader::loadShader </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GLenum&#160;</td>
+          <td class="paramname"><em>shader_type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Charge un shader. </p>
+<dl class="params"><dt>Parameters:</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>: Chemin vers le shader à charger. </td></tr>
+    <tr><td class="paramname">shader_type</td><td>: Type de Shader ( GL_VERTEX_SHADER ou GL_FRAGMENT_SHADER ). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>Retourne un objet <a class="el" href="structPeGL_1_1PeShader.html" title="Variable contenant l&#39;adresse du shader, un tableau de ses uniforms et le type de shader.">PeShader</a> utilisable. </dd></dl>
+
+<p>Definition at line <a class="el" href="shaderloader_8cxx_source.html#l00037">37</a> of file <a class="el" href="shaderloader_8cxx_source.html">shaderloader.cxx</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="shaderloader_8hxx_source.html">shaderloader.hxx</a></li>
 <li><a class="el" href="shaderloader_8cxx_source.html">shaderloader.cxx</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 9 2012 17:16:48 for PeGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 9 2012 19:00:55 for PeGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>

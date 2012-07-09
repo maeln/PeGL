@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -110,30 +110,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">namespace </span>PeGL</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="structPeGL_1_1PeTexture.html">   36</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structPeGL_1_1PeTexture.html">PeTexture</a></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                <span class="keywordtype">int</span> id;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                GLuint addr;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        };</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="code" href="classPeGL_1_1ImageLoader.html">   42</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classPeGL_1_1ImageLoader.html">ImageLoader</a></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                        <a class="code" href="classPeGL_1_1ImageLoader.html">ImageLoader</a>();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                        <span class="keyword">virtual</span> ~<a class="code" href="classPeGL_1_1ImageLoader.html">ImageLoader</a>();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                        <a class="code" href="structPeGL_1_1PeTexture.html">PeTexture</a> loadImage(std::string filename);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                        <span class="keywordtype">int</span> tex_nb;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                        <span class="comment">/* add your private declarations */</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        };</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* IMAGELOADER_HXX */</span><span class="preprocessor"> </span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="structPeGL_1_1PeTexture.html">   40</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structPeGL_1_1PeTexture.html" title="Variable contenant ID et l&#39;adresse d&#39;une texture.">PeTexture</a></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        {</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="code" href="structPeGL_1_1PeTexture.html#a7295aa38a0fb0db3a6a77c592fb3e868">   42</a></span>&#160;                <span class="keywordtype">int</span> <a class="code" href="structPeGL_1_1PeTexture.html#a7295aa38a0fb0db3a6a77c592fb3e868">id</a>; </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="code" href="structPeGL_1_1PeTexture.html#a09f655f6deb304d201dd2b894cabe0f3">   43</a></span>&#160;                GLuint <a class="code" href="structPeGL_1_1PeTexture.html#a09f655f6deb304d201dd2b894cabe0f3">addr</a>; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        };</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        </div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="code" href="classPeGL_1_1ImageLoader.html">   50</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classPeGL_1_1ImageLoader.html" title="Utilise SOIL pour charger des images et les uploader en mémoire vidéo.">ImageLoader</a></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                        <a class="code" href="classPeGL_1_1ImageLoader.html#a57358d754ff70ad64036dfd98ae72aab" title="Constructeur de la classe ImageLoader.">ImageLoader</a>();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                        <span class="keyword">virtual</span> <a class="code" href="classPeGL_1_1ImageLoader.html#a1a9cdaf8fb35d6abc8c11deb3ee9c54f" title="Destructeur de la classe ImageLoader.">~ImageLoader</a>();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                        <a class="code" href="structPeGL_1_1PeTexture.html" title="Variable contenant ID et l&#39;adresse d&#39;une texture.">PeTexture</a> <a class="code" href="classPeGL_1_1ImageLoader.html#aeb528e3bc635d7817fc477326e0d1e4a" title="Charge une image dans la mémoire vidéo.">loadImage</a>(std::string filename);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                        <span class="keywordtype">int</span> tex_nb; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        };</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* IMAGELOADER_HXX */</span><span class="preprocessor"> </span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 9 2012 17:16:48 for PeGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 9 2012 19:00:55 for PeGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>

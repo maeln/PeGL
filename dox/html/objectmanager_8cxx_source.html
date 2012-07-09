@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -121,21 +121,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
 <div class="line"><a name="l00037"></a><span class="lineno"><a class="code" href="classPeGL_1_1ObjectManager.html#a00f736993fcc5e3fb9cf94f86c220f5b">   37</a></span>&#160;<a class="code" href="structPeGL_1_1PeDW.html" title="Objet affichable.">PeDW</a> <a class="code" href="classPeGL_1_1ObjectManager.html#a00f736993fcc5e3fb9cf94f86c220f5b" title="Créer un objets PeDW.">ObjectManager::load_PeDW</a>(std::string meshfile, std::string imgfile, std::string vshadfile, std::string pshadfile)</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="structPeGL_1_1PeMesh.html">PeMesh</a> mesh;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="structPeGL_1_1PeTexture.html">PeTexture</a> texture;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="structPeGL_1_1PeMesh.html" title="Variable contenant l&#39;adresse des VBO, du VAO et la taille du tableau d&#39;éléments.">PeMesh</a> mesh;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="structPeGL_1_1PeTexture.html" title="Variable contenant ID et l&#39;adresse d&#39;une texture.">PeTexture</a> texture;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        std::vector&lt;PeShader&gt; shaders;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="structPeGL_1_1PeProgram.html">PeProgram</a> program;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="structPeGL_1_1PeProgram.html" title="Variable contenant l&#39;adresse d&#39;un programme, l&#39;adresse de ses shaders et un tableau de ses uniforms...">PeProgram</a> program;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="classPeGL_1_1ShaderLoader.html">ShaderLoader</a> shdl;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        shaders.push_back(shdl.loadShader(vshadfile, GL_VERTEX_SHADER));</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        shaders.push_back(shdl.loadShader(pshadfile, GL_FRAGMENT_SHADER));</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        program = shdl.createProgram(shaders);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="classPeGL_1_1ShaderLoader.html" title="Gère le chargement et la création des shaders.">ShaderLoader</a> shdl;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        shaders.push_back(shdl.<a class="code" href="classPeGL_1_1ShaderLoader.html#a74c1e46b5637ef5a22544cee5947201f" title="Charge un shader.">loadShader</a>(vshadfile, GL_VERTEX_SHADER));</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        shaders.push_back(shdl.<a class="code" href="classPeGL_1_1ShaderLoader.html#a74c1e46b5637ef5a22544cee5947201f" title="Charge un shader.">loadShader</a>(pshadfile, GL_FRAGMENT_SHADER));</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        program = shdl.<a class="code" href="classPeGL_1_1ShaderLoader.html#a0570f0dd3e3e87a5016b41684b54bd0a" title="Créer un program.">createProgram</a>(shaders);</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="classPeGL_1_1MeshLoader.html">MeshLoader</a> mshl;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        mesh = mshl.loadMesh(meshfile);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="classPeGL_1_1MeshLoader.html" title="Gère le chargement de fichier OBJ et la création des VBOs/VAOs d&#39;un mesh.">MeshLoader</a> mshl;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        mesh = mshl.<a class="code" href="classPeGL_1_1MeshLoader.html#a5c1171a87a55e65b3c0e64af9997c6ea" title="Charge un mesh et créer les VBO/VAO nécessaire.">loadMesh</a>(meshfile);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="classPeGL_1_1ImageLoader.html">ImageLoader</a> imgl;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        texture = imgl.loadImage(imgfile);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="classPeGL_1_1ImageLoader.html" title="Utilise SOIL pour charger des images et les uploader en mémoire vidéo.">ImageLoader</a> imgl;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        texture = imgl.<a class="code" href="classPeGL_1_1ImageLoader.html#aeb528e3bc635d7817fc477326e0d1e4a" title="Charge une image dans la mémoire vidéo.">loadImage</a>(imgfile);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        </div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="structPeGL_1_1PeDW.html" title="Objet affichable.">PeDW</a> dw;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        dw.mesh = mesh;</div>
@@ -151,8 +151,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        glBindVertexArray(obj.mesh.vao);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        glActiveTexture(GL_TEXTURE0 + obj.texture.id);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        glBindTexture(GL_TEXTURE_2D, obj.texture.addr);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        glActiveTexture(GL_TEXTURE0 + obj.texture.<a class="code" href="structPeGL_1_1PeTexture.html#a7295aa38a0fb0db3a6a77c592fb3e868">id</a>);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        glBindTexture(GL_TEXTURE_2D, obj.texture.<a class="code" href="structPeGL_1_1PeTexture.html#a09f655f6deb304d201dd2b894cabe0f3">addr</a>);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        </div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="comment">// S&#39;occuper des uniforms ici.</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">if</span>      (       obj.shaders.uniform.find(<span class="stringliteral">&quot;world&quot;</span>) == obj.shaders.uniform.end()</div>
@@ -178,27 +178,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">return</span> 0; <span class="comment">// O -&gt; pas d&#39;erreurs.</span></div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="code" href="classPeGL_1_1ObjectManager.html#a9051bff6bb3fe5f2c686b31ce60eb13f">   96</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a9051bff6bb3fe5f2c686b31ce60eb13f" title="Supprime un shader de la mémoire vidéo.">ObjectManager::clean_shader</a>(<a class="code" href="structPeGL_1_1PeShader.html">PeShader</a> shader)</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="code" href="classPeGL_1_1ObjectManager.html#a9051bff6bb3fe5f2c686b31ce60eb13f">   96</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a9051bff6bb3fe5f2c686b31ce60eb13f" title="Supprime un shader de la mémoire vidéo.">ObjectManager::clean_shader</a>(<a class="code" href="structPeGL_1_1PeShader.html" title="Variable contenant l&#39;adresse du shader, un tableau de ses uniforms et le type de shader.">PeShader</a> shader)</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;{</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        glDeleteShader(shader.addr);</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        shader.uniform.clear();</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="code" href="classPeGL_1_1ObjectManager.html#a4fbd4059906375274afccdbc5632183e">  102</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a4fbd4059906375274afccdbc5632183e" title="Supprime un program.">ObjectManager::clean_program</a>(<a class="code" href="structPeGL_1_1PeProgram.html">PeProgram</a> program)</div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="code" href="classPeGL_1_1ObjectManager.html#a4fbd4059906375274afccdbc5632183e">  102</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a4fbd4059906375274afccdbc5632183e" title="Supprime un program.">ObjectManager::clean_program</a>(<a class="code" href="structPeGL_1_1PeProgram.html" title="Variable contenant l&#39;adresse d&#39;un programme, l&#39;adresse de ses shaders et un tableau de ses uniforms...">PeProgram</a> program)</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        glDeleteProgram(program.addr);</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        program.uniform.clear();</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno"><a class="code" href="classPeGL_1_1ObjectManager.html#a443b802d78fd1dfc6312fbbaaac7b3ba">  108</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a443b802d78fd1dfc6312fbbaaac7b3ba" title="Supprime un objet PeMesh ( VBO/VAO ).">ObjectManager::clean_mesh</a>(<a class="code" href="structPeGL_1_1PeMesh.html">PeMesh</a> mesh)</div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="code" href="classPeGL_1_1ObjectManager.html#a443b802d78fd1dfc6312fbbaaac7b3ba">  108</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a443b802d78fd1dfc6312fbbaaac7b3ba" title="Supprime un objet PeMesh ( VBO/VAO ).">ObjectManager::clean_mesh</a>(<a class="code" href="structPeGL_1_1PeMesh.html" title="Variable contenant l&#39;adresse des VBO, du VAO et la taille du tableau d&#39;éléments.">PeMesh</a> mesh)</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;{</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        glDeleteBuffers(mesh.vbo.size(), mesh.vbo.data());</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        glDeleteVertexArrays(1, &amp;mesh.vao);</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;}</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
-<div class="line"><a name="l00114"></a><span class="lineno"><a class="code" href="classPeGL_1_1ObjectManager.html#a5efbc2f6a096156258030a18ccff717d">  114</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a5efbc2f6a096156258030a18ccff717d" title="Supprime une texture de la mémoire vidéo.">ObjectManager::clean_image</a>(<a class="code" href="structPeGL_1_1PeTexture.html">PeTexture</a> texture)</div>
+<div class="line"><a name="l00114"></a><span class="lineno"><a class="code" href="classPeGL_1_1ObjectManager.html#a5efbc2f6a096156258030a18ccff717d">  114</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a5efbc2f6a096156258030a18ccff717d" title="Supprime une texture de la mémoire vidéo.">ObjectManager::clean_image</a>(<a class="code" href="structPeGL_1_1PeTexture.html" title="Variable contenant ID et l&#39;adresse d&#39;une texture.">PeTexture</a> texture)</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;{</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        glDeleteTextures(1, &amp;texture.addr);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        glDeleteTextures(1, &amp;texture.<a class="code" href="structPeGL_1_1PeTexture.html#a09f655f6deb304d201dd2b894cabe0f3">addr</a>);</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
 <div class="line"><a name="l00119"></a><span class="lineno"><a class="code" href="classPeGL_1_1ObjectManager.html#a096237714383acd0e374b9d809f1b371">  119</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a096237714383acd0e374b9d809f1b371" title="Supprime un objet PeDW.">ObjectManager::clean_PeDW</a>(<a class="code" href="structPeGL_1_1PeDW.html" title="Objet affichable.">PeDW</a> obj)</div>
@@ -212,7 +212,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 9 2012 17:16:48 for PeGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 9 2012 19:00:55 for PeGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>

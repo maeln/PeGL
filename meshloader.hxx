@@ -33,6 +33,10 @@
 
 namespace PeGL
 {
+	/*!
+	 * \struct PeMesh
+	 * \brief Variable contenant l'adresse des VBO, du VAO et la taille du tableau d'éléments.
+	 */
 	struct PeMesh
 	{
 		std::vector<GLuint> vbo;
@@ -40,12 +44,32 @@ namespace PeGL
 		size_t elements_size;
 	};
 	
+	/*!
+	 * \class MeshLoader
+	 * \brief Gère le chargement de fichier OBJ et la création des VBOs/VAOs d'un mesh.
+	 */
 	class MeshLoader
 	{
 		public:
+			/*!
+			 * \brief Constructeur de la classe MeshLoader.
+			 */
 			MeshLoader();
+			/*!
+			 * \brief Destructeur de la classe Meshloader.
+			 */
 			virtual ~MeshLoader();
+			/*!
+			 * \brief Charge un mesh et créer les VBO/VAO nécessaire.
+			 * \param filename : Chemin vers le fichier obj à charger.
+			 * \return Retourne un objet PeMesh utilisable.
+			 */
 			PeMesh loadMesh(std::string filename);
+			/*!
+			 * \brief Transforme un tableau de glm::vec3 en tableau C de float.
+			 * \param vec3 : Tableau dynamique ( Vector ) de glm::vec3.
+			 * \param output : Tableau de Float qui contiendra les données.
+			 */
 			void vec3float(std::vector<glm::vec3> vec3, float* output);
 		
 		private:

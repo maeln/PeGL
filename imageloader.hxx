@@ -33,22 +33,40 @@
 
 namespace PeGL
 {
+	/*!
+	 * \struct PeTexture
+	 * \brief Variable contenant ID et l'adresse d'une texture.
+	 */
 	struct PeTexture
 	{
-		int id;
-		GLuint addr;
+		int id; /*!< ID de la texture */
+		GLuint addr; /*!< Adresse de la texture. */
 	};
 	
+	/*!
+	 * \class ImageLoader
+	 * \brief Utilise SOIL pour charger des images et les uploader en mémoire vidéo.
+	 */
 	class ImageLoader
 	{
 		public:
+			/*!
+			 * \brief Constructeur de la classe ImageLoader.
+			 */
 			ImageLoader();
+			/*!
+			 * \brief Destructeur de la classe ImageLoader.
+			 */
 			virtual ~ImageLoader();
+			/*!
+			 * \brief Charge une image dans la mémoire vidéo.
+			 * \param filename : Chemin de l'image à charger.
+			 * \return Retourne un objet PeTexture utilisable.
+			 */
 			PeTexture loadImage(std::string filename);
 		
 		private:
-			int tex_nb;
-			/* add your private declarations */
+			int tex_nb; /*!< Nombre d'image chargé afin de leur attribuer un ID. NB: Devrait subir une itération négative avec la fonction ObjectManager::clean_image(PeTexture) */
 	};
 }
 

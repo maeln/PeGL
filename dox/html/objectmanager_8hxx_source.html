@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -114,9 +114,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
 <div class="line"><a name="l00051"></a><span class="lineno"><a class="code" href="structPeGL_1_1PeDW.html">   51</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structPeGL_1_1PeDW.html" title="Objet affichable.">PeDW</a></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <a class="code" href="structPeGL_1_1PeMesh.html">PeMesh</a> mesh;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <a class="code" href="structPeGL_1_1PeTexture.html">PeTexture</a> texture;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <a class="code" href="structPeGL_1_1PeProgram.html">PeProgram</a> shaders; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <a class="code" href="structPeGL_1_1PeMesh.html" title="Variable contenant l&#39;adresse des VBO, du VAO et la taille du tableau d&#39;éléments.">PeMesh</a> mesh;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <a class="code" href="structPeGL_1_1PeTexture.html" title="Variable contenant ID et l&#39;adresse d&#39;une texture.">PeTexture</a> texture;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <a class="code" href="structPeGL_1_1PeProgram.html" title="Variable contenant l&#39;adresse d&#39;un programme, l&#39;adresse de ses shaders et un tableau de ses uniforms...">PeProgram</a> shaders; </div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        };</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        </div>
 <div class="line"><a name="l00062"></a><span class="lineno"><a class="code" href="classPeGL_1_1ObjectManager.html">   62</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classPeGL_1_1ObjectManager.html" title="gère les objets et les affiches.">ObjectManager</a></div>
@@ -131,13 +131,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                        </div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                        <span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a096237714383acd0e374b9d809f1b371" title="Supprime un objet PeDW.">clean_PeDW</a>(<a class="code" href="structPeGL_1_1PeDW.html" title="Objet affichable.">PeDW</a> obj);</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                        </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                        <span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a4fbd4059906375274afccdbc5632183e" title="Supprime un program.">clean_program</a>(<a class="code" href="structPeGL_1_1PeProgram.html">PeProgram</a> prog);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                        <span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a4fbd4059906375274afccdbc5632183e" title="Supprime un program.">clean_program</a>(<a class="code" href="structPeGL_1_1PeProgram.html" title="Variable contenant l&#39;adresse d&#39;un programme, l&#39;adresse de ses shaders et un tableau de ses uniforms...">PeProgram</a> prog);</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                        </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                        <span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a9051bff6bb3fe5f2c686b31ce60eb13f" title="Supprime un shader de la mémoire vidéo.">clean_shader</a>(<a class="code" href="structPeGL_1_1PeShader.html">PeShader</a> shad);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                        <span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a9051bff6bb3fe5f2c686b31ce60eb13f" title="Supprime un shader de la mémoire vidéo.">clean_shader</a>(<a class="code" href="structPeGL_1_1PeShader.html" title="Variable contenant l&#39;adresse du shader, un tableau de ses uniforms et le type de shader.">PeShader</a> shad);</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                        </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                        <span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a443b802d78fd1dfc6312fbbaaac7b3ba" title="Supprime un objet PeMesh ( VBO/VAO ).">clean_mesh</a>(<a class="code" href="structPeGL_1_1PeMesh.html">PeMesh</a> mesh);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                        <span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a443b802d78fd1dfc6312fbbaaac7b3ba" title="Supprime un objet PeMesh ( VBO/VAO ).">clean_mesh</a>(<a class="code" href="structPeGL_1_1PeMesh.html" title="Variable contenant l&#39;adresse des VBO, du VAO et la taille du tableau d&#39;éléments.">PeMesh</a> mesh);</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                        </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                        <span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a5efbc2f6a096156258030a18ccff717d" title="Supprime une texture de la mémoire vidéo.">clean_image</a>(<a class="code" href="structPeGL_1_1PeTexture.html">PeTexture</a> texture);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                        <span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1ObjectManager.html#a5efbc2f6a096156258030a18ccff717d" title="Supprime une texture de la mémoire vidéo.">clean_image</a>(<a class="code" href="structPeGL_1_1PeTexture.html" title="Variable contenant ID et l&#39;adresse d&#39;une texture.">PeTexture</a> texture);</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                </div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                        <span class="comment">/* add your private declarations */</span></div>
@@ -148,7 +148,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 9 2012 17:16:48 for PeGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 9 2012 19:00:55 for PeGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>

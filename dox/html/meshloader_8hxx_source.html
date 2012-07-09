@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -110,31 +110,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">namespace </span>PeGL</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="structPeGL_1_1PeMesh.html">   36</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structPeGL_1_1PeMesh.html">PeMesh</a></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                std::vector&lt;GLuint&gt; vbo;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                GLuint vao;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                <span class="keywordtype">size_t</span> elements_size;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        };</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        </div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="code" href="classPeGL_1_1MeshLoader.html">   43</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classPeGL_1_1MeshLoader.html">MeshLoader</a></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                        <a class="code" href="classPeGL_1_1MeshLoader.html">MeshLoader</a>();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                        <span class="keyword">virtual</span> ~<a class="code" href="classPeGL_1_1MeshLoader.html">MeshLoader</a>();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                        <a class="code" href="structPeGL_1_1PeMesh.html">PeMesh</a> loadMesh(std::string filename);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                        <span class="keywordtype">void</span> vec3float(std::vector&lt;glm::vec3&gt; vec3, <span class="keywordtype">float</span>* output);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                        <span class="comment">/* add your private declarations */</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        };</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* MESHLOADER_HXX */</span><span class="preprocessor"> </span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="structPeGL_1_1PeMesh.html">   40</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structPeGL_1_1PeMesh.html" title="Variable contenant l&#39;adresse des VBO, du VAO et la taille du tableau d&#39;éléments.">PeMesh</a></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                std::vector&lt;GLuint&gt; vbo;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                GLuint vao;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                <span class="keywordtype">size_t</span> elements_size;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        };</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        </div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="code" href="classPeGL_1_1MeshLoader.html">   51</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classPeGL_1_1MeshLoader.html" title="Gère le chargement de fichier OBJ et la création des VBOs/VAOs d&#39;un mesh.">MeshLoader</a></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                        <a class="code" href="classPeGL_1_1MeshLoader.html#a4a5134c3c4a3cf8e195171b78aa80052" title="Constructeur de la classe MeshLoader.">MeshLoader</a>();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                        <span class="keyword">virtual</span> <a class="code" href="classPeGL_1_1MeshLoader.html#a6f6b61fb3b6f2e577fb30be057e65030" title="Destructeur de la classe Meshloader.">~MeshLoader</a>();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                        <a class="code" href="structPeGL_1_1PeMesh.html" title="Variable contenant l&#39;adresse des VBO, du VAO et la taille du tableau d&#39;éléments.">PeMesh</a> <a class="code" href="classPeGL_1_1MeshLoader.html#a5c1171a87a55e65b3c0e64af9997c6ea" title="Charge un mesh et créer les VBO/VAO nécessaire.">loadMesh</a>(std::string filename);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                        <span class="keywordtype">void</span> <a class="code" href="classPeGL_1_1MeshLoader.html#afd4272a84e7e7943b314d451b00d996d" title="Transforme un tableau de glm::vec3 en tableau C de float.">vec3float</a>(std::vector&lt;glm::vec3&gt; vec3, <span class="keywordtype">float</span>* output);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                        <span class="comment">/* add your private declarations */</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        };</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* MESHLOADER_HXX */</span><span class="preprocessor"> </span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 9 2012 17:16:48 for PeGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 9 2012 19:00:55 for PeGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>

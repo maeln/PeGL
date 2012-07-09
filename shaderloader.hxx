@@ -33,6 +33,10 @@
 
 namespace PeGL
 {
+	/*!
+	 * \struct PeShader
+	 * \brief Variable contenant l'adresse du shader, un tableau de ses uniforms et le type de shader.
+	 */
 	struct PeShader
 	{
 		GLuint addr;
@@ -40,10 +44,10 @@ namespace PeGL
 		GLenum type;
 	};
 	
-	// Note : 
-	// Les shaders ne sont pas effacé après création du Program afin de pouvoir être utilisé plusieurs fois
-	// sans avoir à être recharger manuellement ( évite trop d'I/O ).
-	
+	/*!
+	 * \struct PeProgram
+	 * \brief Variable contenant l'adresse d'un programme, l'adresse de ses shaders et un tableau de ses uniforms.
+	 */
 	struct PeProgram
 	{
 		GLuint addr;
@@ -51,12 +55,33 @@ namespace PeGL
 		std::map<std::string, GLuint> uniform;
 	};
 	
+	/*!
+	 * \class ShaderLoader
+	 * \brief Gère le chargement et la création des shaders.
+	 */
 	class ShaderLoader
 	{
 		public:
+			/*!
+			 * \brief Constructeur de la classe ShaderLoader.
+			 */
 			ShaderLoader();
+			/*!
+			 * \brief Destructeur de la classe ShaderLoader.
+			 */
 			virtual ~ShaderLoader();
-			PeShader 	loadShader(std::string filename, GLenum shader_type); // charge et compile le shader.
+			/*!
+			 * \brief Charge un shader.
+			 * \param filename : Chemin vers le shader à charger.
+			 * \param shader_type : Type de Shader ( GL_VERTEX_SHADER ou GL_FRAGMENT_SHADER ).
+			 * \return Retourne un objet PeShader utilisable.
+			 */
+			PeShader 	loadShader(std::string filename, GLenum shader_type);
+			/*!
+			 * \brief Créer un program.
+			 * \param pshader : Tableau dynamique ( vector ) d'objet PeShader.
+			 * \return Retourne un objet PeProgram utilisable.
+			 */
 			PeProgram	createProgram(std::vector<PeShader> pshader);
 		
 		private:

@@ -70,7 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -92,25 +92,60 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
+<p>Variable contenant ID et l'adresse d'une texture.  
+ <a href="structPeGL_1_1PeTexture.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="imageloader_8hxx_source.html">imageloader.hxx</a>&gt;</code></p>
+
 <p><a href="structPeGL_1_1PeTexture-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a7295aa38a0fb0db3a6a77c592fb3e868"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7295aa38a0fb0db3a6a77c592fb3e868"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
-<tr class="memitem:a09f655f6deb304d201dd2b894cabe0f3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a09f655f6deb304d201dd2b894cabe0f3"></a>
-GLuint&#160;</td><td class="memItemRight" valign="bottom"><b>addr</b></td></tr>
+<tr class="memitem:a7295aa38a0fb0db3a6a77c592fb3e868"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPeGL_1_1PeTexture.html#a7295aa38a0fb0db3a6a77c592fb3e868">id</a></td></tr>
+<tr class="memitem:a09f655f6deb304d201dd2b894cabe0f3"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPeGL_1_1PeTexture.html#a09f655f6deb304d201dd2b894cabe0f3">addr</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="imageloader_8hxx_source.html#l00036">36</a> of file <a class="el" href="imageloader_8hxx_source.html">imageloader.hxx</a>.</p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<div class="textblock"><p>Variable contenant ID et l'adresse d'une texture. </p>
+
+<p>Definition at line <a class="el" href="imageloader_8hxx_source.html#l00040">40</a> of file <a class="el" href="imageloader_8hxx_source.html">imageloader.hxx</a>.</p>
+</div><hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a09f655f6deb304d201dd2b894cabe0f3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GLuint PeGL::PeTexture::addr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adresse de la texture. </p>
+
+<p>Definition at line <a class="el" href="imageloader_8hxx_source.html#l00043">43</a> of file <a class="el" href="imageloader_8hxx_source.html">imageloader.hxx</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7295aa38a0fb0db3a6a77c592fb3e868"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PeGL::PeTexture::id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>ID de la texture </p>
+
+<p>Definition at line <a class="el" href="imageloader_8hxx_source.html#l00042">42</a> of file <a class="el" href="imageloader_8hxx_source.html">imageloader.hxx</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li><a class="el" href="imageloader_8hxx_source.html">imageloader.hxx</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 9 2012 17:16:48 for PeGL by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jul 9 2012 19:00:55 for PeGL by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.1
 </small></address>
