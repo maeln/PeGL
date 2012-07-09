@@ -1,0 +1,224 @@
+\hypertarget{classPeGL_1_1ObjectManager}{\section{Pe\-G\-L\-:\-:Object\-Manager Class Reference}
+\label{classPeGL_1_1ObjectManager}\index{Pe\-G\-L\-::\-Object\-Manager@{Pe\-G\-L\-::\-Object\-Manager}}
+}
+
+
+gère les objets et les affiches.  
+
+
+
+
+{\ttfamily \#include $<$objectmanager.\-hxx$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classPeGL_1_1ObjectManager_aa1d9d5c3602f8e6f7a584e7d74e2d2ce}{\hyperlink{classPeGL_1_1ObjectManager_aa1d9d5c3602f8e6f7a584e7d74e2d2ce}{Object\-Manager} ()}\label{classPeGL_1_1ObjectManager_aa1d9d5c3602f8e6f7a584e7d74e2d2ce}
+
+\begin{DoxyCompactList}\small\item\em Constructeur de \hyperlink{classPeGL_1_1ObjectManager}{Object\-Manager}, n'a pas besoin de paramètres. \end{DoxyCompactList}\item 
+\hypertarget{classPeGL_1_1ObjectManager_ad0afbf963fddb7b7c77f516aba1c6e86}{virtual \hyperlink{classPeGL_1_1ObjectManager_ad0afbf963fddb7b7c77f516aba1c6e86}{$\sim$\-Object\-Manager} ()}\label{classPeGL_1_1ObjectManager_ad0afbf963fddb7b7c77f516aba1c6e86}
+
+\begin{DoxyCompactList}\small\item\em Destructeur de \hyperlink{classPeGL_1_1ObjectManager}{Object\-Manager}. \end{DoxyCompactList}\item 
+\hyperlink{structPeGL_1_1PeDW}{Pe\-D\-W} \hyperlink{classPeGL_1_1ObjectManager_a00f736993fcc5e3fb9cf94f86c220f5b}{load\-\_\-\-Pe\-D\-W} (std\-::string meshfile, std\-::string imgfile, std\-::string vshadfile, std\-::string pshadfile)
+\begin{DoxyCompactList}\small\item\em Créer un objets \hyperlink{structPeGL_1_1PeDW}{Pe\-D\-W}. \end{DoxyCompactList}\item 
+int \hyperlink{classPeGL_1_1ObjectManager_a4955f1a83f99c42df3c767e7d7d37ad6}{draw\-\_\-\-Pe\-D\-W} (\hyperlink{structPeGL_1_1PeDW}{Pe\-D\-W} obj, glm\-::vec4 light\-\_\-position, glm\-::mat4 world, glm\-::mat4 perspective, glm\-::mat4 normal)
+\begin{DoxyCompactList}\small\item\em Affiche un objet \hyperlink{structPeGL_1_1PeDW}{Pe\-D\-W}. \end{DoxyCompactList}\item 
+void \hyperlink{classPeGL_1_1ObjectManager_a096237714383acd0e374b9d809f1b371}{clean\-\_\-\-Pe\-D\-W} (\hyperlink{structPeGL_1_1PeDW}{Pe\-D\-W} obj)
+\begin{DoxyCompactList}\small\item\em Supprime un objet \hyperlink{structPeGL_1_1PeDW}{Pe\-D\-W}. \end{DoxyCompactList}\item 
+void \hyperlink{classPeGL_1_1ObjectManager_a4fbd4059906375274afccdbc5632183e}{clean\-\_\-program} (\hyperlink{structPeGL_1_1PeProgram}{Pe\-Program} prog)
+\begin{DoxyCompactList}\small\item\em Supprime un program. \end{DoxyCompactList}\item 
+void \hyperlink{classPeGL_1_1ObjectManager_a9051bff6bb3fe5f2c686b31ce60eb13f}{clean\-\_\-shader} (\hyperlink{structPeGL_1_1PeShader}{Pe\-Shader} shad)
+\begin{DoxyCompactList}\small\item\em Supprime un shader de la mémoire vidéo. \end{DoxyCompactList}\item 
+void \hyperlink{classPeGL_1_1ObjectManager_a443b802d78fd1dfc6312fbbaaac7b3ba}{clean\-\_\-mesh} (\hyperlink{structPeGL_1_1PeMesh}{Pe\-Mesh} mesh)
+\begin{DoxyCompactList}\small\item\em Supprime un objet \hyperlink{structPeGL_1_1PeMesh}{Pe\-Mesh} ( V\-B\-O/\-V\-A\-O ). \end{DoxyCompactList}\item 
+void \hyperlink{classPeGL_1_1ObjectManager_a5efbc2f6a096156258030a18ccff717d}{clean\-\_\-image} (\hyperlink{structPeGL_1_1PeTexture}{Pe\-Texture} texture)
+\begin{DoxyCompactList}\small\item\em Supprime une texture de la mémoire vidéo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+gère les objets et les affiches. 
+
+Definition at line 62 of file objectmanager.\-hxx.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classPeGL_1_1ObjectManager_a5efbc2f6a096156258030a18ccff717d}{\index{Pe\-G\-L\-::\-Object\-Manager@{Pe\-G\-L\-::\-Object\-Manager}!clean\-\_\-image@{clean\-\_\-image}}
+\index{clean\-\_\-image@{clean\-\_\-image}!PeGL::ObjectManager@{Pe\-G\-L\-::\-Object\-Manager}}
+\subsubsection[{clean\-\_\-image}]{\setlength{\rightskip}{0pt plus 5cm}void Pe\-G\-L\-::\-Object\-Manager\-::clean\-\_\-image (
+\begin{DoxyParamCaption}
+\item[{{\bf Pe\-Texture}}]{texture}
+\end{DoxyParamCaption}
+)}}\label{classPeGL_1_1ObjectManager_a5efbc2f6a096156258030a18ccff717d}
+
+
+Supprime une texture de la mémoire vidéo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em texture} & \-: Texture à supprimer. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 114 of file objectmanager.\-cxx.
+
+\hypertarget{classPeGL_1_1ObjectManager_a443b802d78fd1dfc6312fbbaaac7b3ba}{\index{Pe\-G\-L\-::\-Object\-Manager@{Pe\-G\-L\-::\-Object\-Manager}!clean\-\_\-mesh@{clean\-\_\-mesh}}
+\index{clean\-\_\-mesh@{clean\-\_\-mesh}!PeGL::ObjectManager@{Pe\-G\-L\-::\-Object\-Manager}}
+\subsubsection[{clean\-\_\-mesh}]{\setlength{\rightskip}{0pt plus 5cm}void Pe\-G\-L\-::\-Object\-Manager\-::clean\-\_\-mesh (
+\begin{DoxyParamCaption}
+\item[{{\bf Pe\-Mesh}}]{mesh}
+\end{DoxyParamCaption}
+)}}\label{classPeGL_1_1ObjectManager_a443b802d78fd1dfc6312fbbaaac7b3ba}
+
+
+Supprime un objet \hyperlink{structPeGL_1_1PeMesh}{Pe\-Mesh} ( V\-B\-O/\-V\-A\-O ). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mesh} & \-: Objet \hyperlink{structPeGL_1_1PeMesh}{Pe\-Mesh} a supprimer. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 108 of file objectmanager.\-cxx.
+
+\hypertarget{classPeGL_1_1ObjectManager_a096237714383acd0e374b9d809f1b371}{\index{Pe\-G\-L\-::\-Object\-Manager@{Pe\-G\-L\-::\-Object\-Manager}!clean\-\_\-\-Pe\-D\-W@{clean\-\_\-\-Pe\-D\-W}}
+\index{clean\-\_\-\-Pe\-D\-W@{clean\-\_\-\-Pe\-D\-W}!PeGL::ObjectManager@{Pe\-G\-L\-::\-Object\-Manager}}
+\subsubsection[{clean\-\_\-\-Pe\-D\-W}]{\setlength{\rightskip}{0pt plus 5cm}void Pe\-G\-L\-::\-Object\-Manager\-::clean\-\_\-\-Pe\-D\-W (
+\begin{DoxyParamCaption}
+\item[{{\bf Pe\-D\-W}}]{obj}
+\end{DoxyParamCaption}
+)}}\label{classPeGL_1_1ObjectManager_a096237714383acd0e374b9d809f1b371}
+
+
+Supprime un objet \hyperlink{structPeGL_1_1PeDW}{Pe\-D\-W}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & \-: L'objet \hyperlink{structPeGL_1_1PeDW}{Pe\-D\-W} à supprimer. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 119 of file objectmanager.\-cxx.
+
+\hypertarget{classPeGL_1_1ObjectManager_a4fbd4059906375274afccdbc5632183e}{\index{Pe\-G\-L\-::\-Object\-Manager@{Pe\-G\-L\-::\-Object\-Manager}!clean\-\_\-program@{clean\-\_\-program}}
+\index{clean\-\_\-program@{clean\-\_\-program}!PeGL::ObjectManager@{Pe\-G\-L\-::\-Object\-Manager}}
+\subsubsection[{clean\-\_\-program}]{\setlength{\rightskip}{0pt plus 5cm}void Pe\-G\-L\-::\-Object\-Manager\-::clean\-\_\-program (
+\begin{DoxyParamCaption}
+\item[{{\bf Pe\-Program}}]{prog}
+\end{DoxyParamCaption}
+)}}\label{classPeGL_1_1ObjectManager_a4fbd4059906375274afccdbc5632183e}
+
+
+Supprime un program. 
+
+Supprime un program de la mémoire vidéo, mais ne supprime pas les shaders qui le compose.
+
+
+\begin{DoxyParams}{Parameters}
+{\em prog} & \-: Program à supprimer. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 102 of file objectmanager.\-cxx.
+
+\hypertarget{classPeGL_1_1ObjectManager_a9051bff6bb3fe5f2c686b31ce60eb13f}{\index{Pe\-G\-L\-::\-Object\-Manager@{Pe\-G\-L\-::\-Object\-Manager}!clean\-\_\-shader@{clean\-\_\-shader}}
+\index{clean\-\_\-shader@{clean\-\_\-shader}!PeGL::ObjectManager@{Pe\-G\-L\-::\-Object\-Manager}}
+\subsubsection[{clean\-\_\-shader}]{\setlength{\rightskip}{0pt plus 5cm}void Pe\-G\-L\-::\-Object\-Manager\-::clean\-\_\-shader (
+\begin{DoxyParamCaption}
+\item[{{\bf Pe\-Shader}}]{shad}
+\end{DoxyParamCaption}
+)}}\label{classPeGL_1_1ObjectManager_a9051bff6bb3fe5f2c686b31ce60eb13f}
+
+
+Supprime un shader de la mémoire vidéo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em shad} & \-: Shader à supprimer. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 96 of file objectmanager.\-cxx.
+
+\hypertarget{classPeGL_1_1ObjectManager_a4955f1a83f99c42df3c767e7d7d37ad6}{\index{Pe\-G\-L\-::\-Object\-Manager@{Pe\-G\-L\-::\-Object\-Manager}!draw\-\_\-\-Pe\-D\-W@{draw\-\_\-\-Pe\-D\-W}}
+\index{draw\-\_\-\-Pe\-D\-W@{draw\-\_\-\-Pe\-D\-W}!PeGL::ObjectManager@{Pe\-G\-L\-::\-Object\-Manager}}
+\subsubsection[{draw\-\_\-\-Pe\-D\-W}]{\setlength{\rightskip}{0pt plus 5cm}int Pe\-G\-L\-::\-Object\-Manager\-::draw\-\_\-\-Pe\-D\-W (
+\begin{DoxyParamCaption}
+\item[{{\bf Pe\-D\-W}}]{obj, }
+\item[{glm\-::vec4}]{light\-\_\-position, }
+\item[{glm\-::mat4}]{world, }
+\item[{glm\-::mat4}]{perspective, }
+\item[{glm\-::mat4}]{normal}
+\end{DoxyParamCaption}
+)}}\label{classPeGL_1_1ObjectManager_a4955f1a83f99c42df3c767e7d7d37ad6}
+
+
+Affiche un objet \hyperlink{structPeGL_1_1PeDW}{Pe\-D\-W}. 
+
+T\-O\-\_\-\-D\-O\-: Meilleur gestion de la lumière ( plusieurs lumières, différentes couleurs / puissances ).
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & \-: L'objet \hyperlink{structPeGL_1_1PeDW}{Pe\-D\-W} à afficher. \\
+\hline
+{\em light\-\_\-position} & \-: Position de la lumière. \\
+\hline
+{\em world} & \-: Matrice «\-Camera». Sert aussi de matrice de transformation. \\
+\hline
+{\em perspective} & \-: Matrice de perspective ( frustum ). \\
+\hline
+{\em normal} & \-: Matrice normal à la matrice de perspective. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Retourne 0 si aucune erreur ne c'est produite, 1 sinon. 
+\end{DoxyReturn}
+
+
+Definition at line 63 of file objectmanager.\-cxx.
+
+\hypertarget{classPeGL_1_1ObjectManager_a00f736993fcc5e3fb9cf94f86c220f5b}{\index{Pe\-G\-L\-::\-Object\-Manager@{Pe\-G\-L\-::\-Object\-Manager}!load\-\_\-\-Pe\-D\-W@{load\-\_\-\-Pe\-D\-W}}
+\index{load\-\_\-\-Pe\-D\-W@{load\-\_\-\-Pe\-D\-W}!PeGL::ObjectManager@{Pe\-G\-L\-::\-Object\-Manager}}
+\subsubsection[{load\-\_\-\-Pe\-D\-W}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Pe\-D\-W} Pe\-G\-L\-::\-Object\-Manager\-::load\-\_\-\-Pe\-D\-W (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{meshfile, }
+\item[{std\-::string}]{imgfile, }
+\item[{std\-::string}]{vshadfile, }
+\item[{std\-::string}]{pshadfile}
+\end{DoxyParamCaption}
+)}}\label{classPeGL_1_1ObjectManager_a00f736993fcc5e3fb9cf94f86c220f5b}
+
+
+Créer un objets \hyperlink{structPeGL_1_1PeDW}{Pe\-D\-W}. 
+
+T\-O-\/\-D\-O\-: Accepter plusieurs pixel shaders et rendre la texture optionnel.
+
+
+\begin{DoxyParams}{Parameters}
+{\em meshfile} & \-: Chemin vers le fichier mesh. \\
+\hline
+{\em imgfile} & \-: Chemin vers le fichier image qui servira de texture pour le mesh. N\-B\-: devrait être optionnel ( objet sans texture ). \\
+\hline
+{\em vshadfile} & \-: Chemin vers un fichier vertex shader. \\
+\hline
+{\em pshadfile} & \-: Chemin vers un fichier pixel shader. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Retourne un objet \hyperlink{structPeGL_1_1PeDW}{Pe\-D\-W} prêt à être affiché. 
+\end{DoxyReturn}
+
+
+Definition at line 37 of file objectmanager.\-cxx.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{objectmanager_8hxx}{objectmanager.\-hxx}\item 
+objectmanager.\-cxx\end{DoxyCompactItemize}

@@ -23,25 +23,33 @@
 
 #include "deps.hxx"
 
+/*!
+ * \file shaderloader.hxx
+ * \brief Gère le chargement des Shaders.
+ * \author Maël N.
+ * \version 0.1a
+ * \date 09.07.2012
+ */
+
 namespace PeGL
 {
-	typedef struct
+	struct PeShader
 	{
 		GLuint addr;
 		std::vector<std::string> uniform;
 		GLenum type;
-	} PeShader;
+	};
 	
 	// Note : 
 	// Les shaders ne sont pas effacé après création du Program afin de pouvoir être utilisé plusieurs fois
 	// sans avoir à être recharger manuellement ( évite trop d'I/O ).
 	
-	typedef struct
+	struct PeProgram
 	{
 		GLuint addr;
 		std::vector<GLuint> shader;
 		std::map<std::string, GLuint> uniform;
-	} PeProgram;
+	};
 	
 	class ShaderLoader
 	{

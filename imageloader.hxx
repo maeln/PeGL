@@ -23,13 +23,21 @@
 
 #include "deps.hxx"
 
+/*!
+ * \file imageloader.hxx
+ * \brief S'occupe du chargement des textures.
+ * \author Maël N.
+ * \version 0.1a
+ * \date 09.07.2012
+ */
+
 namespace PeGL
 {
-	typedef struct
+	struct PeTexture
 	{
 		int id;
 		GLuint addr;
-	} PeTexture;
+	};
 	
 	class ImageLoader
 	{

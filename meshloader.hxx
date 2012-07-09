@@ -23,14 +23,22 @@
 
 #include "deps.hxx"
 
+/*!
+ * \file meshloader.hxx
+ * \brief S'occupe du chargement des Meshs.
+ * \author Maël N.
+ * \version 0.1a
+ * \date 09.07.2012
+ */
+
 namespace PeGL
 {
-	typedef struct
+	struct PeMesh
 	{
 		std::vector<GLuint> vbo;
 		GLuint vao;
 		size_t elements_size;
-	} PeMesh;
+	};
 	
 	class MeshLoader
 	{

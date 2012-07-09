@@ -1,6 +1,14 @@
 #ifndef DEPS_HXX
 #define DEPS_HXX
 
+/*!
+ * \file deps.hxx
+ * \brief Fichier qui contient les #includes commun à tout les fichiers.
+ * \author Maël N.
+ * \version 0.1a
+ * \date 09.07.2012
+ */
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
