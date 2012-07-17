@@ -19,7 +19,10 @@
 
 
 #include "deps.hxx"
+
 #include "objectmanager.hxx"
+#include "matrixstack.hxx"
+
 #include <SFML/Window.hpp>
 #include <locale>
 
@@ -59,9 +62,10 @@ int main(int argc, char **argv)
 	glEnable(GL_DEPTH_CLAMP);
 
 	// Création d'un objet Matrix et initialisation des différentes matrices nécessaire au programme.
+	PeGL::MatrixStack m_stack(sizeof(glm::mat4)*4);
 	glm::mat4 projection = glm::perspective(90.f, 800.f/600.f, 1.f, 10.f);
 	glm::mat4 camera = glm::lookAt(glm::vec3(1.f, 1.f, 1.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 1.f, 0.f));
-	glm::mat4 transformation;
+	m_stack.push(camera);
 	
 	// Charge la texture.
 	PeGL::ObjectManager objmanager;
@@ -71,7 +75,7 @@ int main(int argc, char **argv)
 	float mouse_x(0);
 	float mouse_y(0);
 	sf::Clock Time;
-	unsigned int delta_frame(0);
+	float delta_frame(0);
 	float delta_time(Time.getElapsedTime().asSeconds());
 	float current_time(0);
 	float fps(0);
@@ -87,6 +91,7 @@ int main(int argc, char **argv)
 				glDeleteShader(suzanne.shaders.shader.back());
 				glDeleteShader(suzanne.shaders.shader.front());
 				objmanager.clean_PeDW(suzanne);
+				
 				window.close();
 			}
 			
@@ -106,15 +111,15 @@ int main(int argc, char **argv)
 		//Compteur de fps.
 		++delta_frame;
 		current_time = Time.getElapsedTime().asSeconds();
-		if(current_time > (delta_time+0.1))
+		if(current_time > (delta_time+1.0))
 		{
-			delta_time = current_time - delta_time;
-			fps = delta_frame / delta_time;
-			ostringstream os;
-			os << fps;
-			static string framerate = "PeGL. FPS: " + os.str();
-			window.setTitle(framerate);
-			delta_time = Time.getElapsedTime().asSeconds();
+			delta_time = current_time;
+			
+			fps = delta_frame;
+			
+			cout << fps << endl;
+			
+			current_time = Time.getElapsedTime().asSeconds();
 			delta_frame = 0;
 		}
 
@@ -128,11 +133,11 @@ int main(int argc, char **argv)
 		
 		if(rot_time+0.0001 < Time.getElapsedTime().asSeconds())
 		{
-			camera = glm::rotate(camera, (float)(M_PI/180.f)*5, glm::vec3(0,1,0));
+			m_stack.rotate((float)(M_PI/180.f)*5, 0, 1, 0);
 			rot_time = Time.getElapsedTime().asSeconds();
 		}
 		
-		objmanager.draw_PeDW(suzanne, light, camera, projection, normm);
+		objmanager.draw_PeDW(suzanne, light, m_stack.top(), projection, normm);
 
 		// On affiche la fenêtre :
 		window.display();

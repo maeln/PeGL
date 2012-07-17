@@ -20,6 +20,8 @@
 
 #include "movementmanager.hxx"
 
+namespace PeGL
+{
 
 MovementManager::MovementManager()
 {
@@ -32,3 +34,4 @@ MovementManager::~MovementManager()
 	
 }
 
+}

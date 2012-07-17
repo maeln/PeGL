@@ -1,4 +1,4 @@
-// movementmanager.hxx
+// matrixstack.hxx
 // 
 // Copyright 2012 Mael N. <contact@maeln.com>
 // 
@@ -21,8 +21,10 @@
 #ifndef MOVEMENTMANAGER_HXX
 #define MOVEMENTMANAGER_HXX
 
+#include "deps.hxx"
+
 /*!
- * \file movementmanager.hxx
+ * \file matrixstack.hxx
  * \brief Gère les stack de Matrices et la génération de celle ci.
  * \author Maël N.
  * \version 0.1a
@@ -31,14 +33,28 @@
 
 namespace PeGL
 {
-	class MovementManager
+	class MatrixStack
 	{
 		public:
-			MovementManager();
-			virtual ~MovementManager();
-		
+			MatrixStack(size_t taille);
+			virtual ~MatrixStack();
+			
+			void pop();
+			void push();
+			void push(glm::mat4 const& matrix);
+			
+			void set_matrix(glm::mat4 const& matrix);
+			
+			void translate(float x, float y, float z);
+			void rotate(float angle, float x, float y, float z);
+			void scale(float x, float y, float z);
+			
+			glm::mat4 top();
+			glm::mat4 bottom();
+			
 		private:
-			/* add your private declarations */
+			std::vector<glm::mat4> stack;
+			int position;
 	};
 }
 

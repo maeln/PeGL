@@ -14,6 +14,7 @@ SRC = PeGL.cxx \
 		imageloader.cxx \
 		meshloader.cxx \
 		objectmanager.cxx \
+		matrixstack.cxx \
 		
 OBJ = $(SRC:.cxx=.o)
 
