@@ -50,7 +50,7 @@ PeDW ObjectManager::load_PeDW(std::string meshfile, std::string imgfile, std::st
 	mesh = mshl.loadMesh(meshfile);
 	
 	ImageLoader imgl;
-	texture = imgl.loadImage(imgfile);
+	texture = imgl.loadImage(imgfile, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS);
 	
 	PeDW dw;
 	dw.mesh = mesh;

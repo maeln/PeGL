@@ -29,14 +29,18 @@
 using namespace std;
 
 int main(int argc, char **argv)
-{
+try {
 	// Locale pour les caractéres français.
 	setlocale(LC_ALL, "");
 	
+	//Contexte de la fenêtre.
+	sf::ContextSettings context(0, 0, 0, 3, 3);
+	
 	// Créer la fenêtre.
-	sf::Window window(sf::VideoMode(800, 600), "PeGL. FPS: 0");
+	sf::Window window(sf::VideoMode(800, 600), "PeGL. FPS: 0", sf::Style::Default, sf::ContextSettings(0, 0, 0, 3, 3));
 	//window.setVerticalSyncEnabled(true); // VSync activé.
-
+	//window.setMouseCursorVisible(false);
+	
 	// On initialise Glew :
 	GLenum err = glewInit();
 	if (GLEW_OK != err) // Vérifie que Glew est bien initialisé, sinon, renvoi l'erreur.
@@ -45,13 +49,15 @@ int main(int argc, char **argv)
 	}
 
 	cout << "Info: Glew " << glewGetString(GLEW_VERSION) << " en cours d'utilisation." << endl;
-
+	
+	/*
 	if (!glewIsSupported("GL_VERSION_3_3")) // On vérifie que OpenGL 3.3 est bien disponible sinon on ferme le programme.
 	{
 		cerr << "Erreur: OpenGL 3.3 n'est pas disponible sur votre système.";
 		exit(EXIT_FAILURE);
 	}
-
+	*/
+	
 	glViewport(0, 0, 800, 600);
 
 	// Tout ce qui concerne le Depth Test ( gestion de la profondeur ).
@@ -60,16 +66,23 @@ int main(int argc, char **argv)
 		glDepthFunc(GL_LEQUAL);
 		glDepthRange(0.f, 1.f);
 	glEnable(GL_DEPTH_CLAMP);
+	
+	glEnable(GL_BLEND) ;
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Création d'un objet Matrix et initialisation des différentes matrices nécessaire au programme.
 	PeGL::MatrixStack m_stack(sizeof(glm::mat4)*4);
-	glm::mat4 projection = glm::perspective(90.f, 800.f/600.f, 1.f, 10.f);
+	PeGL::MatrixStack terrain_stack(sizeof(glm::mat4)*4);
+	glm::mat4 projection = glm::perspective(90.f, 800.f/600.f, 0.1f, 100.f);
 	glm::mat4 camera = glm::lookAt(glm::vec3(1.f, 1.f, 1.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 1.f, 0.f));
 	m_stack.push(camera);
+	terrain_stack.push(camera);
+	terrain_stack.translate(0, -2, 0);
 	
 	// Charge la texture.
 	PeGL::ObjectManager objmanager;
 	PeGL::PeDW suzanne = objmanager.load_PeDW("Ressources/suzanne.obj", "Ressources/udlr.png", "Shader/Light.vert", "Shader/Light.frag");
+	PeGL::PeDW terrain = objmanager.load_PeDW("Ressources/terrain.obj", "Ressources/grass.jpg", "Shader/Light.vert", "Shader/Light.frag");
 	
 	sf::Clock tclock;
 	float mouse_x(0);
@@ -91,6 +104,10 @@ int main(int argc, char **argv)
 				glDeleteShader(suzanne.shaders.shader.back());
 				glDeleteShader(suzanne.shaders.shader.front());
 				objmanager.clean_PeDW(suzanne);
+				
+				glDeleteShader(terrain.shaders.shader.back());
+				glDeleteShader(terrain.shaders.shader.front());
+				objmanager.clean_PeDW(terrain);
 				
 				window.close();
 			}
@@ -125,19 +142,20 @@ int main(int argc, char **argv)
 
 		// On lave la fenêtre :
 		glClearColor(13.f/255.f, 37.f/255.f, 78.f/255.f, 0.f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 		
 		// On initialise les données nécessaires à l'affichage du Suzanne.
-		glm::mat4 normm(glm::transpose(projection));
-		glm::vec4 light(0, 2, 1, sqrt(5.0));
-		
 		if(rot_time+0.0001 < Time.getElapsedTime().asSeconds())
 		{
 			m_stack.rotate((float)(M_PI/180.f)*5, 0, 1, 0);
+			terrain_stack.rotate((float)(M_PI/180.f)*5, 0, 1, 0);
 			rot_time = Time.getElapsedTime().asSeconds();
 		}
+		glm::mat4 normm(glm::transpose(projection));
+		glm::vec4 light(0, 2, 1, sqrt(5.0));
 		
 		objmanager.draw_PeDW(suzanne, light, m_stack.top(), projection, normm);
+		objmanager.draw_PeDW(terrain, light, terrain_stack.top(), projection, normm);
 
 		// On affiche la fenêtre :
 		window.display();
@@ -146,3 +164,7 @@ int main(int argc, char **argv)
 	return EXIT_SUCCESS;
 }
 
+catch(std::out_of_range& err)
+{
+	std::cerr << "[ER] Out Of Range : " << err.what() << std::endl;
+}

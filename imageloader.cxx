@@ -34,9 +34,9 @@ ImageLoader::~ImageLoader()
 	
 }
 
-PeTexture ImageLoader::loadImage(std::string filename)
+PeTexture ImageLoader::loadImage(std::string filename, unsigned int flags)
 {
-	GLuint oglimg = SOIL_load_OGL_texture(filename.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
+	GLuint oglimg = SOIL_load_OGL_texture(filename.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, flags);
 	PeTexture tex2d;
 	
 	tex2d.id = tex_nb;

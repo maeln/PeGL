@@ -63,7 +63,7 @@ namespace PeGL
 			 * \param filename : Chemin de l'image à charger.
 			 * \return Retourne un objet PeTexture utilisable.
 			 */
-			PeTexture loadImage(std::string filename);
+			PeTexture loadImage(std::string filename, unsigned int flags);
 		
 		private:
 			int tex_nb; /*!< Nombre d'image chargé afin de leur attribuer un ID. NB: Devrait subir une itération négative avec la fonction ObjectManager::clean_image(PeTexture) */

@@ -54,7 +54,7 @@ namespace PeGL
 			
 		private:
 			std::vector<glm::mat4> stack;
-			int position;
+			unsigned int position;
 	};
 }
 

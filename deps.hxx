@@ -12,9 +12,13 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+
+#include <stdexcept>
+
 #include <vector>
 #include <string>
 #include <map>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -27,7 +31,7 @@ extern "C"
 	#include <GL/glu.h>
 	#include <png.h>
 	#include <zlib.h>
-	#include <SOIL.h>
+	#include <SOIL/SOIL.h>
 }
 
 #endif
