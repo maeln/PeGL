@@ -39,7 +39,7 @@ namespace PeGL
 	 */
 	struct PeTexture
 	{
-		int id; /*!< ID de la texture */
+		GLuint unit; /*!< La texture Unit a lier à la texture. */
 		GLuint addr; /*!< Adresse de la texture. */
 	};
 	
@@ -63,10 +63,16 @@ namespace PeGL
 			 * \param filename : Chemin de l'image à charger.
 			 * \return Retourne un objet PeTexture utilisable.
 			 */
-			PeTexture loadImage(std::string filename, unsigned int flags);
+			PeTexture loadImage(std::string filename, unsigned int flags, GLuint af_unit);
+			
+			/*!
+			 * \brief libère un ID anciennement utilisé.
+			 * \param id : ID à libérer.
+			 */
+			void free_id(int fid);
 		
 		private:
-			int tex_nb; /*!< Nombre d'image chargé afin de leur attribuer un ID. NB: Devrait subir une itération négative avec la fonction ObjectManager::clean_image(PeTexture) */
+			
 	};
 }
 

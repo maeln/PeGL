@@ -50,7 +50,7 @@ PeDW ObjectManager::load_PeDW(std::string meshfile, std::string imgfile, std::st
 	mesh = mshl.loadMesh(meshfile);
 	
 	ImageLoader imgl;
-	texture = imgl.loadImage(imgfile, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS);
+	texture = imgl.loadImage(imgfile, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS, 0);
 	
 	PeDW dw;
 	dw.mesh = mesh;
@@ -66,7 +66,7 @@ int ObjectManager::draw_PeDW(PeDW obj, glm::vec4 light_position, glm::mat4 world
 	
 	glBindVertexArray(obj.mesh.vao);
 	
-	glActiveTexture(GL_TEXTURE0 + obj.texture.id);
+	glActiveTexture(GL_TEXTURE0 + obj.texture.unit);
 	glBindTexture(GL_TEXTURE_2D, obj.texture.addr);
 	
 	// S'occuper des uniforms ici.
@@ -113,6 +113,7 @@ void ObjectManager::clean_mesh(PeMesh mesh)
 
 void ObjectManager::clean_image(PeTexture texture)
 {
+	
 	glDeleteTextures(1, &texture.addr);
 }
 

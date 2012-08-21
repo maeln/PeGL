@@ -15,10 +15,10 @@ out vec4 result;
 void main()
 {
 	result = world * position;
-	
+
 	tnorm = normalize(normalMatrix * normal);
-	
+
 	pos_calc = position.xy;
-	
+
 	gl_Position = perspective * result;
 }

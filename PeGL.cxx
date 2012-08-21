@@ -22,6 +22,7 @@
 
 #include "objectmanager.hxx"
 #include "matrixstack.hxx"
+#include "postprocessing.hxx"
 
 #include <SFML/Window.hpp>
 #include <locale>
@@ -29,7 +30,7 @@
 using namespace std;
 
 int main(int argc, char **argv)
-try {
+{
 	// Locale pour les caractéres français.
 	setlocale(LC_ALL, "");
 	
@@ -59,6 +60,11 @@ try {
 	*/
 	
 	glViewport(0, 0, 800, 600);
+	
+	// Face Culling.
+	glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
 
 	// Tout ce qui concerne le Depth Test ( gestion de la profondeur ).
 	glEnable(GL_DEPTH_TEST);
@@ -82,7 +88,10 @@ try {
 	// Charge la texture.
 	PeGL::ObjectManager objmanager;
 	PeGL::PeDW suzanne = objmanager.load_PeDW("Ressources/suzanne.obj", "Ressources/udlr.png", "Shader/Light.vert", "Shader/Light.frag");
-	PeGL::PeDW terrain = objmanager.load_PeDW("Ressources/terrain.obj", "Ressources/grass.jpg", "Shader/Light.vert", "Shader/Light.frag");
+	PeGL::PeDW terrain = objmanager.load_PeDW("Ressources/terrain.obj", "Ressources/grass.png", "Shader/Light.vert", "Shader/Light.frag");
+	
+	// Framebuffer et Post Processing.
+	PeGL::PostProcessing post(800, 600, "Shader/post.vert", "Shader/post.frag");
 	
 	sf::Clock tclock;
 	float mouse_x(0);
@@ -93,6 +102,8 @@ try {
 	float current_time(0);
 	float fps(0);
 	float rot_time(Time.getElapsedTime().asSeconds());
+	
+	cout << GL_MAX_TEXTURE_UNITS << endl;
 	
 	while(window.isOpen())
 	{
@@ -116,6 +127,7 @@ try {
 			{
 				glViewport(0, 0, (float)event.size.width, (float)event.size.height);
 				projection = glm::perspective(90.f, (float)event.size.width/(float)event.size.height, 1.f, 10.f);
+				post.resize_fbo((GLsizei)event.size.width, (GLsizei)event.size.height);
 			}
 
 			if(event.type == sf::Event::MouseMoved)
@@ -140,31 +152,30 @@ try {
 			delta_frame = 0;
 		}
 
+		
 		// On lave la fenêtre :
-		glClearColor(13.f/255.f, 37.f/255.f, 78.f/255.f, 0.f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		post.bindfb();
+		glClearColor(1.f, 1.f, 1.f, 1.f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		// On initialise les données nécessaires à l'affichage du Suzanne.
-		if(rot_time+0.0001 < Time.getElapsedTime().asSeconds())
+		if(rot_time+0.01 < Time.getElapsedTime().asSeconds())
 		{
 			m_stack.rotate((float)(M_PI/180.f)*5, 0, 1, 0);
-			terrain_stack.rotate((float)(M_PI/180.f)*5, 0, 1, 0);
 			rot_time = Time.getElapsedTime().asSeconds();
 		}
 		glm::mat4 normm(glm::transpose(projection));
-		glm::vec4 light(0, 2, 1, sqrt(5.0));
+		glm::vec4 light(1, 1, 1, 1);
 		
 		objmanager.draw_PeDW(suzanne, light, m_stack.top(), projection, normm);
 		objmanager.draw_PeDW(terrain, light, terrain_stack.top(), projection, normm);
+		post.unbindfb();
+		
+		post.drawfb();
 
 		// On affiche la fenêtre :
 		window.display();
 	}
 	
 	return EXIT_SUCCESS;
-}
-
-catch(std::out_of_range& err)
-{
-	std::cerr << "[ER] Out Of Range : " << err.what() << std::endl;
 }
