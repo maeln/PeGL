@@ -37,16 +37,27 @@ PostProcessing::PostProcessing(GLsizei width, GLsizei height, std::string vertex
 	glBindTexture(GL_TEXTURE_2D, 0);
 	
 	// Depth Buffer.
+	/*
 	glGenRenderbuffers(1, &depth_buffer);
 	glBindRenderbuffer(GL_RENDERBUFFER, depth_buffer);
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
+	*/
+	glActiveTexture(GL_TEXTURE1);
+	glGenTextures(1, &depth_buffer);
+	glBindTexture(GL_TEXTURE_2D, depth_buffer);
+	glTexImage2D(GL_TEXTURE_2D, 0,GL_DEPTH_COMPONENT24, 1024, 768, 0,GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); 
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	
 	// FBO.
 	glGenFramebuffers(1, &fbo);
 	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fbo_texture, 0);
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depth_buffer);
+		//glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depth_buffer);
+		glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depth_buffer, 0);
 		GLenum status(glCheckFramebufferStatus(GL_FRAMEBUFFER));
 		if(status != GL_FRAMEBUFFER_COMPLETE)
 		{
@@ -93,10 +104,11 @@ void PostProcessing::resize_fbo(GLsizei nwidth, GLsizei nheight)
 	glBindTexture(GL_TEXTURE_2D, fbo_texture);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, nwidth, nheight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	
+	/*
 	glBindRenderbuffer(GL_RENDERBUFFER, depth_buffer);
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, nwidth, nheight);
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
+	*/
 }
 
 void PostProcessing::bindfb()
@@ -115,9 +127,13 @@ void PostProcessing::drawfb()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	glUseProgram(postproc.addr);
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, fbo_texture);
-	
 	glUniform1i(postproc.uniform["fbo_tex"], 0);
+	
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, depth_buffer);
+	glUniform1i(postproc.uniform["depth"], 1);
 	
 	glBindBuffer(GL_ARRAY_BUFFER, fbo_vertices);
 	glEnableVertexAttribArray(0);

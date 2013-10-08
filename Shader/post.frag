@@ -2,11 +2,13 @@
 
 in vec2 tex_coord;
 uniform sampler2D fbo_tex;
+uniform sampler2D depth;
 
 out vec4 color;
 
 void main()
 {
+	/*
 	// Based on : http://www.openjejej.com/2012/02/12/detection-de-contours-filtre-de-sobel-en-glsl/
 	ivec2 size = textureSize(fbo_tex, 0);
 	float dx = 1.0/size.x;
@@ -41,4 +43,6 @@ void main()
 		color = texture2D(fbo_tex, tex_coord);
 	else
 		color = vec4(0.f, 0.f, 0.f, 1.f);
+		*/
+		color = vec4(texture2D( depth, tex_coord ).rgb, 1.0);
 }
