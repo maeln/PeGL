@@ -42,10 +42,12 @@ void MatrixStack::pop()
 	else
 		--position;
 }
+
 void MatrixStack::push()
 {
 	push(stack[position]);
 }
+
 void MatrixStack::push(glm::mat4 const& matrix)
 {
 	if((position + 1) == stack.size())

@@ -80,7 +80,6 @@ PeMesh MeshLoader::loadMesh(std::string filename)
 		glm::vec3 tmp1 = vertices[ib] - vertices[ia];
 		glm::vec3 tmp2 = vertices[ic] - vertices[ia];
 		glm::vec3 normal = glm::cross(tmp1, tmp2);
-		tmp = glm::normalize(tmp);
 		normals[ia] = normals[ib] = normals[ic] = normal;
 	}
 	

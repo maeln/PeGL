@@ -18,6 +18,7 @@
 // MA 02110-1301, USA.
 
 
+#define GLM_FORCE_RADIANS 
 #include "deps.hxx"
 
 #include "objectmanager.hxx"
@@ -105,6 +106,7 @@ int main(int argc, char **argv)
 	
 	cout << GL_MAX_TEXTURE_UNITS << endl;
 	
+	bool running(true);
 	while(window.isOpen())
 	{
 		sf::Event event;
@@ -120,6 +122,7 @@ int main(int argc, char **argv)
 				glDeleteShader(terrain.shaders.shader.front());
 				objmanager.clean_PeDW(terrain);
 				
+				running = false;
 				window.close();
 			}
 			
@@ -137,44 +140,47 @@ int main(int argc, char **argv)
 			}
 		}
 		
-		//Compteur de fps.
-		++delta_frame;
-		current_time = Time.getElapsedTime().asSeconds();
-		if(current_time > (delta_time+1.0))
+		if(running)
 		{
-			delta_time = current_time;
-			
-			fps = delta_frame;
-			
-			cout << fps << endl;
-			
+			//Compteur de fps.
+			++delta_frame;
 			current_time = Time.getElapsedTime().asSeconds();
-			delta_frame = 0;
-		}
+			if(current_time > (delta_time+1.0))
+			{
+				delta_time = current_time;
+				
+				fps = delta_frame;
+				
+				cout << fps << endl;
+				
+				current_time = Time.getElapsedTime().asSeconds();
+				delta_frame = 0;
+			}
 
-		
-		// On lave la fenêtre :
-		post.bindfb();
-		glClearColor(1.f, 1.f, 1.f, 1.f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-		// On initialise les données nécessaires à l'affichage du Suzanne.
-		if(rot_time+0.01 < Time.getElapsedTime().asSeconds())
-		{
-			m_stack.rotate((float)(M_PI/180.f)*5, 0, 1, 0);
-			rot_time = Time.getElapsedTime().asSeconds();
-		}
-		glm::mat4 normm(glm::transpose(projection));
-		glm::vec4 light(1, 1, 1, 1);
-		
-		objmanager.draw_PeDW(suzanne, light, m_stack.top(), projection, normm);
-		objmanager.draw_PeDW(terrain, light, terrain_stack.top(), projection, normm);
-		post.unbindfb();
-		
-		post.drawfb();
+			
+			// On lave la fenêtre :
+			post.bindfb();
+			glClearColor(1.f, 1.f, 1.f, 1.f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			
+			// On initialise les données nécessaires à l'affichage du Suzanne.
+			if(rot_time+0.01 < Time.getElapsedTime().asSeconds())
+			{
+				m_stack.rotate((float)(M_PI/180.f)*5, 0, 1, 0);
+				rot_time = Time.getElapsedTime().asSeconds();
+			}
+			glm::mat4 normm(glm::transpose(projection));
+			glm::vec4 light(1, 1, 1, 1);
+			
+			objmanager.draw_PeDW(suzanne, light, m_stack.top(), projection, normm);
+			objmanager.draw_PeDW(terrain, light, terrain_stack.top(), projection, normm);
+			post.unbindfb();
+			
+			post.drawfb();
 
-		// On affiche la fenêtre :
-		window.display();
+			// On affiche la fenêtre :
+			window.display();
+		}
 	}
 	
 	return EXIT_SUCCESS;
