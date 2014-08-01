@@ -38,7 +38,7 @@ MatrixStack::~MatrixStack()
 void MatrixStack::pop()
 {
 	if(position == 0)
-		std::cerr << "[ER] MatrixStack Empty." << std::endl;
+		std::cerr << "[ERR] MATRIX : MatrixStack Empty." << std::endl;
 	else
 		--position;
 }
@@ -51,7 +51,7 @@ void MatrixStack::push()
 void MatrixStack::push(glm::mat4 const& matrix)
 {
 	if((position + 1) == stack.size())
-		std::cerr << "[ER] Maximum size of the stack reached." << std::endl;
+		std::cerr << "[ERR] MATRIX : Maximum size of the stack reached." << std::endl;
 	else
 	{	
 		++position;

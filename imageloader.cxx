@@ -43,7 +43,7 @@ PeTexture ImageLoader::loadImage(std::string filename, unsigned int flags, GLuin
 	tex2d.unit = af_unit;
 	
 	std::cerr << "[DBG] SOIL : " << SOIL_last_result() << std::endl;
-	std::cerr << "[DBG] Assigned id : " << tex2d.addr << "to texture " << filename << std::endl;
+	std::cerr << "[DBG] IMG : Assigned id " << tex2d.addr << " to texture " << filename << std::endl;
 	
 	
 	return tex2d;

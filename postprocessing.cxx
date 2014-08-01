@@ -61,7 +61,7 @@ PostProcessing::PostProcessing(GLsizei width, GLsizei height, std::string vertex
 		GLenum status(glCheckFramebufferStatus(GL_FRAMEBUFFER));
 		if(status != GL_FRAMEBUFFER_COMPLETE)
 		{
-			std::cerr << "[ER] Framebuffer error : " << status << std::endl;
+			std::cerr << "[ERR] FB : " << status << std::endl;
 			throw std::runtime_error("framebuffer error");
 		}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);

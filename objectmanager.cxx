@@ -76,7 +76,7 @@ int ObjectManager::draw_PeDW(PeDW obj, glm::vec4 light_position, glm::mat4 world
 			or obj.shaders.uniform.find("light_dir") == obj.shaders.uniform.end()
 		)
 	{
-		std::cerr << "[ER] Uniform manquant." << std::endl;
+		std::cerr << "[ERR] OBJ : Uniform manquant." << std::endl;
 		return 1; // Erreur
 	}
 	

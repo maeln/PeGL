@@ -18,7 +18,6 @@
 // MA 02110-1301, USA.
 
 
-#define GLM_FORCE_RADIANS 
 #include "deps.hxx"
 
 #include "objectmanager.hxx"
@@ -47,10 +46,10 @@ int main(int argc, char **argv)
 	GLenum err = glewInit();
 	if (GLEW_OK != err) // Vérifie que Glew est bien initialisé, sinon, renvoi l'erreur.
 	{
-		cerr << "Erreur: " << glewGetErrorString(err) << endl;
+		cerr << "[ERR] MAIN : " << glewGetErrorString(err) << endl;
 	}
 
-	cout << "Info: Glew " << glewGetString(GLEW_VERSION) << " en cours d'utilisation." << endl;
+	cout << "[INF] MAIN : Glew " << glewGetString(GLEW_VERSION) << " en cours d'utilisation." << endl;
 	
 	/*
 	if (!glewIsSupported("GL_VERSION_3_3")) // On vérifie que OpenGL 3.3 est bien disponible sinon on ferme le programme.
@@ -151,7 +150,7 @@ int main(int argc, char **argv)
 				
 				fps = delta_frame;
 				
-				cout << fps << endl;
+				cout << "[INF] MAIN : " << fps << endl;
 				
 				current_time = Time.getElapsedTime().asSeconds();
 				delta_frame = 0;
