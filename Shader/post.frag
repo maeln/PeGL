@@ -8,6 +8,7 @@ out vec4 color;
 
 void main()
 {
+	color = vec4(texture2D(fbo_tex, tex_coord ).rgb, 1.0);
 	/*
 	// Based on : http://www.openjejej.com/2012/02/12/detection-de-contours-filtre-de-sobel-en-glsl/
 	ivec2 size = textureSize(fbo_tex, 0);
@@ -44,5 +45,6 @@ void main()
 	else
 		color = vec4(0.f, 0.f, 0.f, 1.f);
 		*/
-		color = vec4(texture2D( depth, tex_coord ).rgb, 1.0);
+		
+		//color = vec4(texture2D( depth, tex_coord ).rgb, 1.0);
 }

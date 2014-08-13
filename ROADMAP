@@ -1,0 +1,8 @@
+ROADMAP FOR PEGL :
+1/ Finish the Window class
+2/ Finish the Main Loop class
+3/ Make a configuration loader
+4/ Add text rendering & billboard
+5/ Use assimp to load mesh and a XML/Text file to associate the mesh with shaders.
+6/ Make use a scene file format
+7/ Make a packager with zlib/7z for assets

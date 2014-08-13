@@ -7,6 +7,7 @@ in vec4 result;
 out vec4 outputColor;
 
 uniform vec4 light_dir;
+uniform mat4 model;
 uniform mat4 world;
 
 uniform mat3 normalMatrix;
@@ -15,7 +16,7 @@ uniform sampler2D cloud_texture;
 
 vec4 celshad(vec4 color)
 {
-	vec4 light = light_dir * world;
+	vec4 light = light_dir * model * world;
 
 	vec3 lightVec = normalize(light.xyz - result.xyz);
 	vec3 reflectVec = reflect(-lightVec, tnorm);
@@ -24,6 +25,7 @@ vec4 celshad(vec4 color)
 
 	float light_calc = diffuse;
 
+/*
 	if(light_calc < 0.2)
 	{
 		light_calc = 0.2;
@@ -40,6 +42,7 @@ vec4 celshad(vec4 color)
 	{
 		light_calc = 1.0;
 	}
+*/
 
 	// Il faudrait adoucir légèrement le résultat.
 

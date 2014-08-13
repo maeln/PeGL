@@ -60,7 +60,7 @@ PeDW ObjectManager::load_PeDW(std::string meshfile, std::string imgfile, std::st
 	return dw;
 }
 
-int ObjectManager::draw_PeDW(PeDW obj, glm::vec4 light_position, glm::mat4 world, glm::mat4 perspective, glm::mat4 normal) 
+int ObjectManager::draw_PeDW(PeDW obj, glm::vec4 light_position, glm::mat4 model, glm::mat4 world, glm::mat4 perspective, glm::mat4 normal) 
 {
 	glUseProgram(obj.shaders.addr);
 	
@@ -70,7 +70,9 @@ int ObjectManager::draw_PeDW(PeDW obj, glm::vec4 light_position, glm::mat4 world
 	glBindTexture(GL_TEXTURE_2D, obj.texture.addr);
 	
 	// S'occuper des uniforms ici.
-	if 	( 	obj.shaders.uniform.find("world") == obj.shaders.uniform.end()
+	if(	
+			obj.shaders.uniform.find("model") == obj.shaders.uniform.end()
+			or obj.shaders.uniform.find("world") == obj.shaders.uniform.end()
 			or obj.shaders.uniform.find("perspective") == obj.shaders.uniform.end()
 			or obj.shaders.uniform.find("normalMatrix") == obj.shaders.uniform.end()
 			or obj.shaders.uniform.find("light_dir") == obj.shaders.uniform.end()
@@ -80,6 +82,7 @@ int ObjectManager::draw_PeDW(PeDW obj, glm::vec4 light_position, glm::mat4 world
 		return 1; // Erreur
 	}
 	
+	glUniformMatrix4fv(obj.shaders.uniform["model"], 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(obj.shaders.uniform["world"], 1, GL_FALSE, glm::value_ptr(world));
 	glUniformMatrix4fv(obj.shaders.uniform["perspective"], 1, GL_FALSE, glm::value_ptr(perspective));
 	glUniformMatrix3fv(obj.shaders.uniform["normalMatrix"], 1, GL_FALSE, glm::value_ptr(normal));
