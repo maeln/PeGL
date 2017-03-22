@@ -23,9 +23,9 @@
 namespace PeGL
 {
 
-MatrixStack::MatrixStack(size_t taille) : stack(taille), position(0)
+MatrixStack::MatrixStack() : position(0)
 {
-	push(glm::mat4(1.0f));
+	stack.push_back(glm::mat4(1.f));
 }
 
 
@@ -38,23 +38,15 @@ MatrixStack::~MatrixStack()
 void MatrixStack::pop()
 {
 	if(position == 0)
-		std::cerr << "[ER] MatrixStack Empty." << std::endl;
+		std::cerr << "[ERR] MATRIX : MatrixStack Empty." << std::endl;
 	else
 		--position;
 }
-void MatrixStack::push()
-{
-	push(stack[position]);
-}
+
 void MatrixStack::push(glm::mat4 const& matrix)
 {
-	if((position + 1) == stack.size())
-		std::cerr << "[ER] Maximum size of the stack reached." << std::endl;
-	else
-	{	
-		++position;
-		stack[position] = matrix;
-	}
+	++position;
+	stack.push_back(matrix);
 }
 
 void MatrixStack::set_matrix(glm::mat4 const& matrix)

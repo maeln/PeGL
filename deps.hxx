@@ -9,6 +9,8 @@
  * \date 09.07.2012
  */
 
+#define GLM_FORCE_RADIANS 
+
 #include <iostream>
 #include <fstream>
 #include <sstream>

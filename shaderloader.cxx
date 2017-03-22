@@ -40,7 +40,7 @@ PeShader ShaderLoader::loadShader(std::string filename, GLenum shader_type)
 	PeShader pshader;
 	
 	std::ifstream source_file(filename.c_str());
-	if(!source_file) { std::cerr << "Erreur: Impossible de lire le fichier : " << filename << std::endl; exit(EXIT_FAILURE); }
+	if(!source_file) { std::cerr << "[ERR] SHADER : Impossible de lire le fichier : " << filename << std::endl; exit(EXIT_FAILURE); }
 	std::string line;
 	while(getline(source_file, line)) // On lit le shader ligne par ligne.
 	{
@@ -59,7 +59,7 @@ PeShader ShaderLoader::loadShader(std::string filename, GLenum shader_type)
 	bool error(false);
 	GLuint tmp(glCreateShader(shader_type));
 	if(tmp == 0) {
-		std::cerr << "Erreur: Problème lors de la création d'un shader : " << filename << std::endl;
+		std::cerr << "[ERR] SHADER : Problème lors de la création d'un shader : " << filename << std::endl;
 		error = true;
 	}
 	
@@ -76,12 +76,12 @@ PeShader ShaderLoader::loadShader(std::string filename, GLenum shader_type)
 		log = new char[logSize+1];
 		if(log == NULL)
 		{
-			std::cerr << "Erreur: Impossible d'allouer la mémoire lors de la récupération du Log." << std::endl;
+			std::cerr << "[ERR] SHADER : Impossible d'allouer la mémoire lors de la récupération du Log." << std::endl;
 			error = true;
 		}
 		glGetShaderInfoLog(tmp, logSize, &logSize, log);
 		log[logSize] = '\0';
-		std::cerr << "Erreur: Impossible de compiler le Shader : " << filename << " : " << std::endl << log << std::endl;
+		std::cerr << "[ERR] SHADER : Impossible de compiler le Shader : " << filename << " : " << std::endl << log << std::endl;
 		delete(log);
 		glDeleteShader(tmp);
 		error = true;
@@ -89,7 +89,7 @@ PeShader ShaderLoader::loadShader(std::string filename, GLenum shader_type)
 	
 	if(error == false)
 	{
-		std::cout << "Info: Shader créer avec succès." << std::endl;
+		std::cout << "[INF] SHADER : Shader créer avec succès." << std::endl;
 		pshader.addr = tmp;
 		pshader.type = shader_type;
 	}
@@ -119,21 +119,21 @@ PeProgram ShaderLoader::createProgram(std::vector<PeShader> pshader)
 		{
 			glGetProgramiv(tmpProg, GL_INFO_LOG_LENGTH, &logSize);
 			log = new char[logSize+1];
-			if(log == NULL) { std::cerr << "Erreur: Impossible d'allouer la mémoire lors de la récupération du Log." << std::endl; exit(EXIT_FAILURE); }
+			if(log == NULL) { std::cerr << "[ERR] SHADER : Impossible d'allouer la mémoire lors de la récupération du Log." << std::endl; exit(EXIT_FAILURE); }
 			glGetProgramInfoLog(tmpProg, logSize, &logSize, log);
 			log[logSize] = '\0';
-			std::cerr << "Erreur: Impossible de lier le Program : " << log << std::endl;
+			std::cerr << "[ERR] SHADER : Impossible de lier le Program : " << log << std::endl;
 			delete(log);
 			glDeleteProgram(tmpProg);
 			error = true;
 		}
 	} else {
-		std::cerr << "Erreur: Pas de shader à lier au program." << std::endl;
+		std::cerr << "[ERR] SHADER : Pas de shader à lier au program." << std::endl;
 	}
 	
 	if(error == false)
 	{
-		std::cout << "Info: Program lié avec succès." << std::endl;
+		std::cout << "[INF] SHADER : Program lié avec succès." << std::endl;
 		oprogram.addr = tmpProg;
 		for(unsigned int i=0; i < pshader.size(); ++i)
 		{

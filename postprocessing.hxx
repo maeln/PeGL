@@ -1,4 +1,4 @@
-// imageloader.cxx
+// postprocessing.hxx
 // 
 // Copyright 2012 Mael N. <contact@maeln.com>
 // 
@@ -18,35 +18,32 @@
 // MA 02110-1301, USA.
 
 
-#include "imageloader.hxx"
+#ifndef POSTPROCESSING_HXX
+#define POSTPROCESSING_HXX
+
+#include "deps.hxx"
+#include "shaderloader.hxx"
 
 namespace PeGL
 {
-
-ImageLoader::ImageLoader()
-{
-	
+	class PostProcessing
+	{
+		public:
+			PostProcessing(GLsizei width, GLsizei height, std::string vertexs_path, std::string frags_path);
+			virtual ~PostProcessing();
+			
+			void resize_fbo(GLsizei nwidth, GLsizei nheight);
+			void bindfb();
+			void unbindfb();
+			void drawfb();
+		
+		private:
+			GLuint fbo;
+			GLuint fbo_texture;
+			GLuint depth_buffer;
+			GLuint fbo_vertices;
+			PeProgram postproc;
+	};
 }
 
-
-ImageLoader::~ImageLoader()
-{
-	
-}
-
-PeTexture ImageLoader::loadImage(std::string filename, unsigned int flags, GLuint af_unit)
-{
-	GLuint oglimg = SOIL_load_OGL_texture(filename.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, flags);
-	PeTexture tex2d;
-	
-	tex2d.addr = oglimg;
-	tex2d.unit = af_unit;
-	
-	std::cerr << "[DBG] SOIL : " << SOIL_last_result() << std::endl;
-	std::cerr << "[DBG] IMG : Assigned id " << tex2d.addr << " to texture " << filename << std::endl;
-	
-	
-	return tex2d;
-}
-
-}
+#endif /* POSTPROCESSING_HXX */ 

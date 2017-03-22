@@ -36,11 +36,10 @@ namespace PeGL
 	class MatrixStack
 	{
 		public:
-			MatrixStack(size_t taille);
+			MatrixStack();
 			virtual ~MatrixStack();
 			
 			void pop();
-			void push();
 			void push(glm::mat4 const& matrix);
 			
 			void set_matrix(glm::mat4 const& matrix);

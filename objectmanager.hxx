@@ -91,12 +91,13 @@ namespace PeGL
 			 * 
 			 * \param obj : L'objet PeDW à afficher.
 			 * \param light_position : Position de la lumière.
-			 * \param world : Matrice «Camera». Sert aussi de matrice de transformation.
+			 * \param model : Matrice de tranformation.
+			 * \param world : Matrice «Camera». 
 			 * \param perspective : Matrice de perspective ( frustum ).
 			 * \param normal : Matrice normal à la matrice de perspective.
 			 * \return Retourne 0 si aucune erreur ne c'est produite, 1 sinon.
 			 */
-			int draw_PeDW(PeDW obj, glm::vec4 light_position, glm::mat4 world, glm::mat4 perspective, glm::mat4 normal);
+			int draw_PeDW(PeDW obj, glm::vec4 light_position, glm::mat4 model, glm::mat4 world, glm::mat4 perspective, glm::mat4 normal);
 			
 			/*!
 			 * \brief Supprime un objet PeDW.

@@ -50,7 +50,7 @@ PeDW ObjectManager::load_PeDW(std::string meshfile, std::string imgfile, std::st
 	mesh = mshl.loadMesh(meshfile);
 	
 	ImageLoader imgl;
-	texture = imgl.loadImage(imgfile, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS);
+	texture = imgl.loadImage(imgfile, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS, 0);
 	
 	PeDW dw;
 	dw.mesh = mesh;
@@ -60,26 +60,29 @@ PeDW ObjectManager::load_PeDW(std::string meshfile, std::string imgfile, std::st
 	return dw;
 }
 
-int ObjectManager::draw_PeDW(PeDW obj, glm::vec4 light_position, glm::mat4 world, glm::mat4 perspective, glm::mat4 normal) 
+int ObjectManager::draw_PeDW(PeDW obj, glm::vec4 light_position, glm::mat4 model, glm::mat4 world, glm::mat4 perspective, glm::mat4 normal) 
 {
 	glUseProgram(obj.shaders.addr);
 	
 	glBindVertexArray(obj.mesh.vao);
 	
-	glActiveTexture(GL_TEXTURE0 + obj.texture.id);
+	glActiveTexture(GL_TEXTURE0 + obj.texture.unit);
 	glBindTexture(GL_TEXTURE_2D, obj.texture.addr);
 	
 	// S'occuper des uniforms ici.
-	if 	( 	obj.shaders.uniform.find("world") == obj.shaders.uniform.end()
+	if(	
+			obj.shaders.uniform.find("model") == obj.shaders.uniform.end()
+			or obj.shaders.uniform.find("world") == obj.shaders.uniform.end()
 			or obj.shaders.uniform.find("perspective") == obj.shaders.uniform.end()
 			or obj.shaders.uniform.find("normalMatrix") == obj.shaders.uniform.end()
 			or obj.shaders.uniform.find("light_dir") == obj.shaders.uniform.end()
 		)
 	{
-		std::cerr << "[ER] Uniform manquant." << std::endl;
+		std::cerr << "[ERR] OBJ : Uniform manquant." << std::endl;
 		return 1; // Erreur
 	}
 	
+	glUniformMatrix4fv(obj.shaders.uniform["model"], 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(obj.shaders.uniform["world"], 1, GL_FALSE, glm::value_ptr(world));
 	glUniformMatrix4fv(obj.shaders.uniform["perspective"], 1, GL_FALSE, glm::value_ptr(perspective));
 	glUniformMatrix3fv(obj.shaders.uniform["normalMatrix"], 1, GL_FALSE, glm::value_ptr(normal));
@@ -113,6 +116,7 @@ void ObjectManager::clean_mesh(PeMesh mesh)
 
 void ObjectManager::clean_image(PeTexture texture)
 {
+	
 	glDeleteTextures(1, &texture.addr);
 }
 
